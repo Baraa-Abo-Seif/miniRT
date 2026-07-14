@@ -1,2 +1,2 @@
 42 project
-welcome 🥲
+welcome 🥲🦦
