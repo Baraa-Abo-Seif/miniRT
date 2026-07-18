@@ -404,8 +404,13 @@
     Every Pixel
 
         ↓
+    defines
 
-    Generates
+        ↓
+    one viewing direction
+        ↓
+
+    Generates Primary Ray
 
         ↓
 
@@ -426,6 +431,7 @@
     # The screen is a flat window looking into a 3D world.
 
     # The camera does not see everything at once.
+        The camera only sees objects inside its Field Of View (FOV).
 
     # Every pixel independently asks:
         "What do I see?"
@@ -464,3 +470,6 @@
             ↓
         Draw Pixel
 */
+
+
+
