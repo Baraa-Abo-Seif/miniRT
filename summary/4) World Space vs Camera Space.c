@@ -288,6 +288,8 @@
 
         * Is it inside the Field Of View (FOV)?
 
+        * * How large does the object appear on the screen?
+
         * In which direction should
           a Primary Ray be generated?
 
@@ -406,6 +408,24 @@
 
     Different point of view.
 
+
+    //--------------------------------------------------
+    // Common Beginner Mistakes
+    //--------------------------------------------------
+
+    * Thinking that moving the camera changes the
+    object's position in World Space.
+
+    * Thinking that World Space and Camera Space
+    are two different worlds.
+
+    * Thinking that Camera Space stores a second
+    copy of every object.
+
+    * Forgetting that Camera Space is only another
+    description of the same scene.
+
+
     --------------------------------------------------
     ~ Why Is This Lesson Important?
     --------------------------------------------------
@@ -489,3 +509,17 @@
 
         Different reference frame.
 */
+
+/////////////////////////////////////////////////////
+
+//! 🏆 Golden Sentence
+
+/*
+    "The world never changes because the camera moves; 
+    only the camera's description of the world changes."
+*/
+
+
+
+
+
