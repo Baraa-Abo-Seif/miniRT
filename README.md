@@ -1,201 +1,481 @@
-42 project
-welcome 🥲🦦
+# 42 Project
 
+> **MiniRT Roadmap**
+>
+> Learning first. Understanding before coding.
+>
+> Goal: Build MiniRT from scratch while understanding every mathematical and architectural concept behind it.
 
+---
+
+# Overall Progress
+
+```text
 MiniRT
 │
-├── Milestone 0 (Foundations)     (we are here)
-├── Milestone 1 (Project Architecture)
-├── Milestone 2 (Libft + Math Library)
-├── Milestone 3 (Parser) + (MLX)
-├── Milestone 4 (Camera)
-├── Milestone 5 (Ray Generation)
-├── Milestone 6 (Intersections)
-├── Milestone 7 (Lighting)
-├── Milestone 8 (Rendering)
-├── Milestone 9 (Optimization)
-└── Milestone 10 (Bonus Integration)
+├── ✅ Milestone 0 (Foundations)
+│
+├── ⏳ Math Exercises
+│
+├── ⏳ Milestone 1 (Architecture)
+│
+├── ⏳ Milestone 2 (Math Library)
+│
+├── ⏳ Milestone 3 (Parser + MLX)
+│
+├── ⏳ Milestone 4 (Camera System)
+│
+├── ⏳ Milestone 5 (Ray Generation)
+│
+├── ⏳ Milestone 6 (Intersections)
+│
+├── ⏳ Milestone 7 (Lighting)
+│
+├── ⏳ Milestone 8 (Rendering)
+│
+├── ⏳ Milestone 9 (Optimization)
+│
+└── ⏳ Milestone 10 (Bonus Integration)
+```
 
+---
 
-Remaining idea :
+# Progress
 
-1)  ⏳ Normalize
-2)  ⏳ Field Of View
-3)  ⏳ Perspective Projection
-4)  ⏳ Camera → Ray Generation
-5)  ⏳ Rendering Pipeline
-6)  ⏳ MiniRT Architecture
+| Stage | Status | Progress |
+|--------|--------|---------:|
+| ✅ Milestone 0 (Foundations) | 🟢 In Progress | **95%** |
+| Math Exercises | ⬜ | **0%** |
+| Architecture | ⬜ | **0%** |
+| Math Library | ⬜ | **0%** |
+| Parser + MLX | ⬜ | **0%** |
+| Camera System | ⬜ | **0%** |
+| Ray Generation | ⬜ | **0%** |
+| Intersections | ⬜ | **0%** |
+| Lighting | ⬜ | **0%** |
+| Rendering | ⬜ | **0%** |
+| Bonus Integration | ⬜ | **0%** |
+| Debug & Optimization | ⬜ | **0%** |
 
--------------------------------------
-ل نهاية شهر 8 نكون مخلصينه ان شاء الله 
+---
 
--------------------------------------------
+# Estimated Timeline
 
-الخطة الشاملة
-المرحلة الأولى — الأساس النظري (Milestone 0)
+| Stage | Estimated Time |
+|--------|---------------:|
+| Finish Milestone 0 | ~ Half Day |
+| Math Exercises | 1 Day |
+| Architecture | 4 Days |
+| Math Library | 1–2 Days |
+| Parser + MLX | 5 Days |
+| Camera System | 3 Days |
+| Ray Generation | 1 Day |
+| Intersections | 5 Days |
+| Lighting | 3 Days |
+| Rendering | 2 Days |
+| Bonus Integration | 4 Days |
+| Debug & Optimization | 2 Days |
 
-مدة: 3 أيام
+---
 
+# Remaining Theory
 
-اليوم الثاني
+Only a few concepts remain before finishing the theoretical foundation.
 
-الرياضيات الأساسية:
+```text
+⏳ Ray Equation
 
-Vector Length
-Normalize
-Dot Product
-Cross Product
-Angle
-Unit Vector
+⏳ Sphere Equation
 
+⏳ Plane Equation
 
-اليوم الثالث
+⏳ Camera Plane
 
-الهندسة الأساسية:
+⏳ Perspective Projection
 
-Ray Equation
-Plane Equation
-Sphere Equation
-Camera Plane
-FOV
-Mental Model النهائي
+⏳ Field Of View (FOV)
 
+⏳ Final Mental Model
+```
 
+After these lessons, **Milestone 0 will be complete.**
 
-ثم مراجعة كاملة.
+---
 
-المرحلة الثانية
-بناء المشروع (Architecture)
+# Milestone 0 — Foundations
 
-مدة: 4 أيام
+## Mathematics
 
-سنصمم المشروع كاملًا.
+- ✅ Point
+- ✅ Position
+- ✅ Vector
+- ✅ Vector Representation
+- ✅ Point vs Vector
+- ✅ Vector From Two Points
+- ✅ Vector Length (Magnitude)
+- ✅ Normalize
+- ✅ Unit Vector
+- ✅ Dot Product
+- ✅ Cross Product
 
-بدون كتابة Ray Tracing.
+Remaining:
 
-سنبني:
+- ⏳ Ray Equation
+- ⏳ Sphere Equation
+- ⏳ Plane Equation
+- ⏳ Camera Plane
+- ⏳ Perspective Projection
+- ⏳ Field Of View
+- ⏳ Final Review
+
+---
+
+# Math Exercises
+
+**Duration:** ~1 Day
+
+Purpose:
+
+Become comfortable with vector mathematics before entering the real project.
+
+These exercises are **not part of MiniRT**.
+
+We will implement:
+
+```c
+vec_add();
+
+vec_sub();
+
+vec_scale();
+
+vec_dot();
+
+vec_cross();
+
+vec_length();
+
+normalize();
+```
+
+After this stage, vector math should become second nature.
+
+---
+
+# Milestone 1 — Architecture
+
+**Duration:** ~4 Days
+
+Goal:
+
+Design the entire project before writing the renderer.
+
+Topics:
+
+```text
+Folders
+
+Headers
 
 Structures
-Headers
+
 Modules
+
 Ownership
+
 Memory Flow
+
 Data Flow
 
-في نهاية هذه المرحلة ستكون تعرف المشروع كله.
+Initialization
 
-المرحلة الثالثة
-Parsing
+Destroy
 
-مدة: 5 أيام
+Project Layout
 
-سنكتب:
+Dependencies
 
+Initialization Order
+
+Rendering Flow
+```
+
+At the end of this milestone, the complete project architecture should be clear.
+
+---
+
+# Milestone 2 — Math Library
+
+**Duration:** 1–2 Days
+
+The first real code inside MiniRT.
+
+Functions:
+
+```c
+vec_add();
+
+vec_sub();
+
+vec_scale();
+
+vec_dot();
+
+vec_cross();
+
+vec_length();
+
+normalize();
+
+color_add();
+
+color_scale();
+
+color_clamp();
+```
+
+This library will be used everywhere else.
+
+---
+
+# Milestone 3 — Parser + MLX
+
+**Duration:** ~5 Days
+
+Topics:
+
+```text
 Lexer
+
+Tokenizer
+
 Split
+
 Validation
+
 Parser
-Error Handling
+
 Scene Builder
 
-مع دعم البونص من البداية.
+Error Handling
 
-المرحلة الرابعة
-Math Library
+MLX Initialization
 
-مدة: 4 أيام
+Window
 
-سنكتب:
+Image Buffer
 
-vec_add
-vec_sub
-vec_dot
-vec_cross
-normalize
-length
-color operations
+Pixel Drawing
 
-وهنا أول مرة سنكتب كود رياضي.
+Scene Loading
+```
 
-المرحلة الخامسة
-Camera System
+The parser will be designed with Bonus support from the beginning.
 
-مدة: 3 أيام
+---
 
-سنبني:
+# Milestone 4 — Camera System
+
+**Duration:** ~3 Days
+
+Topics:
+
+```text
+Camera
+
+Forward
+
+Right
+
+Up
+
+Viewport
+
+Camera Plane
+
+Camera Basis
+
+Camera Initialization
+```
+
+The camera becomes a complete local coordinate system.
+
+---
+
+# Milestone 5 — Ray Generation
+
+**Duration:** ~1 Day
+
+Topics:
+
+```text
+Primary Rays
+
+Pixel Coordinates
+
+Viewport Mapping
+
+Perspective Projection
+
+Ray Equation
+
+Generate One Ray Per Pixel
+```
+
+This is where the real ray tracing begins.
+
+---
+
+# Milestone 6 — Intersections
+
+**Duration:** ~5 Days
+
+Mandatory Objects:
+
+```text
+Sphere
+
+Plane
+
+Cylinder
+```
+
+Possible Bonus Extensions:
+
+```text
+Cone
+
+Triangle
+
+Cube
+```
+
+---
+
+# Milestone 7 — Lighting
+
+**Duration:** ~3 Days
+
+Topics:
+
+```text
+Ambient
+
+Diffuse
+
+Specular
+
+Shadow Rays
+
+Light Attenuation (if needed)
+```
+
+---
+
+# Milestone 8 — Rendering
+
+**Duration:** ~2 Days
+
+Everything comes together.
+
+Pipeline:
+
+```text
+Scene
+
+↓
 
 Camera
-Viewport
-Ray Generation
-Pixel Rays
-المرحلة السادسة
+
+↓
+
+Generate Rays
+
+↓
+
 Intersections
 
-مدة: 5 أيام
+↓
 
-سنكتب:
-
-Sphere
-Plane
-Cylinder
-
-ثم Bonus:
-
-Cone
-Triangle
-Cube (إذا أردنا التوسعة)
-المرحلة السابعة
 Lighting
 
-مدة: 3 أيام
+↓
 
-سنبني:
+Image Output
+```
 
-Ambient
-Diffuse
-Specular
-Shadow Rays
-المرحلة الثامنة
-Rendering
+The first complete rendered image will be produced here.
 
-مدة: 2 يوم
+---
 
-سنجمع كل شيء.
+# Milestone 9 — Bonus Integration
 
-المرحلة التاسعة
-Bonus الحقيقي
+**Duration:** ~4 Days
 
-مدة: 4 أيام
+Since the project is designed for extensibility from the beginning, Bonus becomes feature integration instead of rewriting.
 
+Possible additions:
 
-لكن...
-
-هنا يوجد شيء مختلف.
-
-نحن لن نبدأ البونص من الصفر.
-
-لأننا اتفقنا منذ البداية أن نبني المشروع بطريقة تجعل البونص جزءًا طبيعيًا منه.
-
-لذلك هذه الأيام ستكون لإضافة الميزات، وليس لإعادة كتابة المشروع.
-
-مثل:
-
+```text
 Multiple Lights
+
 Checkerboard
-Soft Shadows (إذا رغبت)
-Reflection (إذا كان الوقت يسمح)
-Camera movement
-Object selection
-Advanced parsing
-المرحلة العاشرة
-Debug + Optimization
 
-مدة: 2 يوم
+Camera Movement
 
-سنركز على:
+Object Selection
 
+Advanced Parsing
+
+Reflection
+
+Soft Shadows
+```
+
+---
+
+# Milestone 10 — Debug & Optimization
+
+**Duration:** ~2 Days
+
+Final polishing:
+
+```text
 Memory Leaks
-Segfaults
+
+Segmentation Faults
+
 Norminette
-الأداء
-مراجعة الكود
+
+Performance
+
+Code Cleanup
+
+Final Review
+```
+
+---
+
+# Overall Project Progress
+
+```text
+███████░░░░░░░░░░░░░░░░░░░░░░
+
+≈ 22%
+```
+
+---
+
+# Goal
+
+Finish MiniRT while fully understanding:
+
+- Mathematics
+- Ray Tracing
+- Computer Graphics
+- Project Architecture
+
+Rather than simply making the project work.
+
+The objective is not only to complete the project, but to understand every line of code that will be written.
+
