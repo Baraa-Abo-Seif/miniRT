@@ -1,2 +1,0 @@
-Rasterization و Ray Tracing
-

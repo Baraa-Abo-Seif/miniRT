@@ -4,7 +4,8 @@
 >
 > Learning first. Understanding before coding.
 >
-> Goal: Build MiniRT from scratch while understanding every mathematical and architectural concept behind it.
+> Goal: Build MiniRT from scratch while understanding every mathematical,
+> architectural, and rendering concept behind it.
 
 ---
 
@@ -44,7 +45,7 @@ MiniRT
 
 | Stage | Status | Progress |
 |--------|--------|---------:|
-| ✅ Milestone 0 (Foundations) | 🟢 In Progress | **95%** |
+| ✅ Milestone 0 (Foundations) | 🟢 Completed | **100%** |
 | Math Exercises | ⬜ | **0%** |
 | Architecture | ⬜ | **0%** |
 | Math Library | ⬜ | **0%** |
@@ -63,48 +64,34 @@ MiniRT
 
 | Stage | Estimated Time |
 |--------|---------------:|
-| Finish Milestone 0 | ~ Half Day |
-| Math Exercises | 1 Day |
-| Architecture | 4 Days |
+| Math Exercises | ~1 Day |
+| Architecture | ~4 Days |
 | Math Library | 1–2 Days |
-| Parser + MLX | 5 Days |
-| Camera System | 3 Days |
-| Ray Generation | 1 Day |
-| Intersections | 5 Days |
-| Lighting | 3 Days |
-| Rendering | 2 Days |
-| Bonus Integration | 4 Days |
-| Debug & Optimization | 2 Days |
+| Parser + MLX | ~5 Days |
+| Camera System | ~3 Days |
+| Ray Generation | ~1 Day |
+| Intersections | ~5 Days |
+| Lighting | ~3 Days |
+| Rendering | ~2 Days |
+| Bonus Integration | ~4 Days |
+| Debug & Optimization | ~2 Days |
 
 ---
 
-# Remaining Theory
+# Theoretical Foundations
 
-Only a few concepts remain before finishing the theoretical foundation.
+✅ Completed
 
-```text
-⏳ Ray Equation
-
-⏳ Sphere Equation
-
-⏳ Plane Equation
-
-⏳ Camera Plane
-
-⏳ Perspective Projection
-
-⏳ Field Of View (FOV)
-
-⏳ Final Mental Model
-```
-
-After these lessons, **Milestone 0 will be complete.**
+The remaining concepts will be introduced naturally during implementation
+whenever they become necessary.
 
 ---
 
 # Milestone 0 — Foundations
 
 ## Mathematics
+
+Completed Topics
 
 - ✅ Point
 - ✅ Position
@@ -117,30 +104,29 @@ After these lessons, **Milestone 0 will be complete.**
 - ✅ Unit Vector
 - ✅ Dot Product
 - ✅ Cross Product
-
-Remaining:
-
-- ⏳ Ray Equation
-- ⏳ Sphere Equation
-- ⏳ Plane Equation
-- ⏳ Camera Plane
-- ⏳ Perspective Projection
-- ⏳ Field Of View
-- ⏳ Final Review
+- ✅ Ray Equation
+- ✅ Sphere Equation
+- ✅ Plane Equation
+- ✅ Camera Plane
+- ✅ Field Of View (FOV)
+- ✅ Perspective Projection
+- ✅ Camera Fundamentals
 
 ---
 
 # Math Exercises
 
-**Duration:** ~1 Day
+**Estimated Time:** ~1 Day
 
-Purpose:
+## Goal
 
-Become comfortable with vector mathematics before entering the real project.
+Build confidence writing vector mathematics before using it inside MiniRT.
 
-These exercises are **not part of MiniRT**.
+This stage focuses only on implementation.
 
-We will implement:
+No new theory is introduced.
+
+Functions to implement:
 
 ```c
 vec_add();
@@ -155,18 +141,22 @@ vec_cross();
 
 vec_length();
 
+vec_distance();
+
 normalize();
+
+vec_reflect();
 ```
 
-After this stage, vector math should become second nature.
+After this stage, vector mathematics should become second nature.
 
 ---
 
 # Milestone 1 — Architecture
 
-**Duration:** ~4 Days
+**Estimated Time:** ~4 Days
 
-Goal:
+## Goal
 
 Design the entire project before writing the renderer.
 
@@ -198,17 +188,24 @@ Dependencies
 Initialization Order
 
 Rendering Flow
+
+Object Ownership
+
+Execution Pipeline
+
+Error Propagation
 ```
 
-At the end of this milestone, the complete project architecture should be clear.
+At the end of this milestone, the complete project architecture should be
+clear before writing any rendering code.
 
 ---
 
 # Milestone 2 — Math Library
 
-**Duration:** 1–2 Days
+**Estimated Time:** 1–2 Days
 
-The first real code inside MiniRT.
+The first real MiniRT code.
 
 Functions:
 
@@ -225,7 +222,11 @@ vec_cross();
 
 vec_length();
 
+vec_distance();
+
 normalize();
+
+vec_reflect();
 
 color_add();
 
@@ -234,13 +235,13 @@ color_scale();
 color_clamp();
 ```
 
-This library will be used everywhere else.
+This library becomes the mathematical foundation of the renderer.
 
 ---
 
 # Milestone 3 — Parser + MLX
 
-**Duration:** ~5 Days
+**Estimated Time:** ~5 Days
 
 Topics:
 
@@ -276,7 +277,7 @@ The parser will be designed with Bonus support from the beginning.
 
 # Milestone 4 — Camera System
 
-**Duration:** ~3 Days
+**Estimated Time:** ~3 Days
 
 Topics:
 
@@ -289,11 +290,17 @@ Right
 
 Up
 
+Camera Basis
+
 Viewport
 
 Camera Plane
 
-Camera Basis
+Aspect Ratio
+
+Viewport Size
+
+Pixel Size
 
 Camera Initialization
 ```
@@ -304,16 +311,20 @@ The camera becomes a complete local coordinate system.
 
 # Milestone 5 — Ray Generation
 
-**Duration:** ~1 Day
+**Estimated Time:** ~1 Day
 
 Topics:
 
 ```text
 Primary Rays
 
-Pixel Coordinates
+Pixel Center
 
-Viewport Mapping
+Normalized Device Coordinates (NDC)
+
+Viewport Coordinates
+
+World Coordinates
 
 Perspective Projection
 
@@ -322,15 +333,15 @@ Ray Equation
 Generate One Ray Per Pixel
 ```
 
-This is where the real ray tracing begins.
+This is where real ray tracing begins.
 
 ---
 
 # Milestone 6 — Intersections
 
-**Duration:** ~5 Days
+**Estimated Time:** ~5 Days
 
-Mandatory Objects:
+Mandatory Objects
 
 ```text
 Sphere
@@ -340,7 +351,17 @@ Plane
 Cylinder
 ```
 
-Possible Bonus Extensions:
+Core Concepts
+
+```text
+Nearest Hit
+
+Discard Negative t
+
+Hit Record
+```
+
+Possible Bonus Objects
 
 ```text
 Cone
@@ -354,7 +375,7 @@ Cube
 
 # Milestone 7 — Lighting
 
-**Duration:** ~3 Days
+**Estimated Time:** ~3 Days
 
 Topics:
 
@@ -365,6 +386,12 @@ Diffuse
 
 Specular
 
+Surface Normal
+
+View Direction
+
+Reflection Direction
+
 Shadow Rays
 
 Light Attenuation (if needed)
@@ -374,11 +401,11 @@ Light Attenuation (if needed)
 
 # Milestone 8 — Rendering
 
-**Duration:** ~2 Days
+**Estimated Time:** ~2 Days
 
 Everything comes together.
 
-Pipeline:
+Pipeline
 
 ```text
 Scene
@@ -397,7 +424,19 @@ Intersections
 
 ↓
 
+Nearest Hit
+
+↓
+
+Surface Normal
+
+↓
+
 Lighting
+
+↓
+
+Final Color
 
 ↓
 
@@ -410,9 +449,10 @@ The first complete rendered image will be produced here.
 
 # Milestone 9 — Bonus Integration
 
-**Duration:** ~4 Days
+**Estimated Time:** ~4 Days
 
-Since the project is designed for extensibility from the beginning, Bonus becomes feature integration instead of rewriting.
+Since the project is designed for extensibility from the beginning,
+Bonus becomes feature integration rather than rewriting.
 
 Possible additions:
 
@@ -421,22 +461,22 @@ Multiple Lights
 
 Checkerboard
 
+Reflection
+
+Soft Shadows
+
 Camera Movement
 
 Object Selection
 
 Advanced Parsing
-
-Reflection
-
-Soft Shadows
 ```
 
 ---
 
 # Milestone 10 — Debug & Optimization
 
-**Duration:** ~2 Days
+**Estimated Time:** ~2 Days
 
 Final polishing:
 
@@ -459,23 +499,39 @@ Final Review
 # Overall Project Progress
 
 ```text
-███████░░░░░░░░░░░░░░░░░░░░░░
+████████░░░░░░░░░░░░░░░░░░░░
 
-≈ 22%
+≈ 27%
 ```
 
 ---
 
-# Goal
+# Philosophy
+
+The project follows one strict rule:
+
+> **Understand first. Implement second.**
+
+Every equation is derived before it is coded.
+
+Every module is designed before it is implemented.
+
+The objective is not simply to finish MiniRT,
+but to understand why every line of code exists.
+
+---
+
+# Final Goal
 
 Finish MiniRT while fully understanding:
 
 - Mathematics
+- Geometry
 - Ray Tracing
 - Computer Graphics
 - Project Architecture
+- Memory Management
+- Rendering Pipeline
 
-Rather than simply making the project work.
-
-The objective is not only to complete the project, but to understand every line of code that will be written.
-
+The objective is not only to complete the project,
+but to understand every line of code that will be written.
