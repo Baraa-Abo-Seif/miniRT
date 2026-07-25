@@ -16,11 +16,11 @@ MiniRT
 │
 ├── ✅ Milestone 0 (Foundations)
 │
-├── ⏳ Math Exercises
+├── ✅ Core Math Library
 │
 ├── ⏳ Milestone 1 (Architecture)
 │
-├── ⏳ Milestone 2 (Math Library)
+├── ⏳ Milestone 2 (Project Math Integration)
 │
 ├── ⏳ Milestone 3 (Parser + MLX)
 │
@@ -34,9 +34,9 @@ MiniRT
 │
 ├── ⏳ Milestone 8 (Rendering)
 │
-├── ⏳ Milestone 9 (Optimization)
+├── ⏳ Milestone 9 (Bonus Integration)
 │
-└── ⏳ Milestone 10 (Bonus Integration)
+└── ⏳ Milestone 10 (Debug & Optimization)
 ```
 
 ---
@@ -46,9 +46,9 @@ MiniRT
 | Stage | Status | Progress |
 |--------|--------|---------:|
 | ✅ Milestone 0 (Foundations) | 🟢 Completed | **100%** |
-| Math Exercises | ⬜ | **0%** |
-| Architecture | ⬜ | **0%** |
-| Math Library | ⬜ | **0%** |
+| ✅ Core Math Library | 🟢 Completed | **100%** |
+| Milestone 1 — Architecture | ⬜ | **0%** |
+| Milestone 2 — Project Math Integration | ⬜ | **0%** |
 | Parser + MLX | ⬜ | **0%** |
 | Camera System | ⬜ | **0%** |
 | Ray Generation | ⬜ | **0%** |
@@ -64,9 +64,8 @@ MiniRT
 
 | Stage | Estimated Time |
 |--------|---------------:|
-| Math Exercises | ~1 Day |
-| Architecture | ~4 Days |
-| Math Library | 1–2 Days |
+| Milestone 1 — Architecture | ~4 Days |
+| Project Math Integration | ~1 Day |
 | Parser + MLX | ~5 Days |
 | Camera System | ~3 Days |
 | Ray Generation | ~1 Day |
@@ -82,8 +81,9 @@ MiniRT
 
 ✅ Completed
 
-The remaining concepts will be introduced naturally during implementation
-whenever they become necessary.
+All mathematical foundations required to begin the implementation phase have been completed.
+
+Future concepts will be introduced only when they naturally appear during implementation.
 
 ---
 
@@ -114,19 +114,11 @@ Completed Topics
 
 ---
 
-# Math Exercises
+# Core Math Library
 
-**Estimated Time:** ~1 Day
+**Status:** ✅ Completed
 
-## Goal
-
-Build confidence writing vector mathematics before using it inside MiniRT.
-
-This stage focuses only on implementation.
-
-No new theory is introduced.
-
-Functions to implement:
+## Implemented
 
 ```c
 vec_add();
@@ -135,20 +127,32 @@ vec_sub();
 
 vec_scale();
 
+vec_length();
+
+normalize();
+
 vec_dot();
 
 vec_cross();
 
-vec_length();
-
 vec_distance();
-
-normalize();
 
 vec_reflect();
 ```
 
-After this stage, vector mathematics should become second nature.
+## Validation
+
+Every function has been tested manually using:
+
+- Normal cases
+- Edge cases
+- Orthogonal vectors
+- Zero vectors
+- Reflection tests
+- Distance tests
+- Cross product validation
+
+The library is considered stable and ready to be integrated into MiniRT.
 
 ---
 
@@ -158,18 +162,18 @@ After this stage, vector mathematics should become second nature.
 
 ## Goal
 
-Design the entire project before writing the renderer.
+Design the complete project before writing the renderer.
 
-Topics:
+Topics
 
 ```text
 Folders
 
 Headers
 
-Structures
-
 Modules
+
+Structures
 
 Ownership
 
@@ -185,57 +189,56 @@ Project Layout
 
 Dependencies
 
+Execution Pipeline
+
 Initialization Order
 
 Rendering Flow
 
-Object Ownership
-
-Execution Pipeline
-
 Error Propagation
+
+Build System
+
+Makefile Organization
+
+Library Organization
 ```
 
-At the end of this milestone, the complete project architecture should be
-clear before writing any rendering code.
+At the end of this milestone, the complete architecture of MiniRT should be finalized before implementing any rendering logic.
 
 ---
 
-# Milestone 2 — Math Library
+# Milestone 2 — Project Math Integration
 
-**Estimated Time:** 1–2 Days
+**Estimated Time:** ~1 Day
 
-The first real MiniRT code.
+Goal
 
-Functions:
+Integrate the already-tested math library into the MiniRT project.
 
-```c
-vec_add();
+Topics
 
-vec_sub();
+```text
+Folder Organization
 
-vec_scale();
+Header Organization
 
-vec_dot();
+Compilation
 
-vec_cross();
+Public API
 
-vec_length();
+Static Functions
 
-vec_distance();
+Color Library
 
-normalize();
+color_add()
 
-vec_reflect();
+color_scale()
 
-color_add();
+color_clamp()
 
-color_scale();
-
-color_clamp();
+Integration with Project
 ```
-
-This library becomes the mathematical foundation of the renderer.
 
 ---
 
@@ -243,7 +246,7 @@ This library becomes the mathematical foundation of the renderer.
 
 **Estimated Time:** ~5 Days
 
-Topics:
+Topics
 
 ```text
 Lexer
@@ -271,7 +274,7 @@ Pixel Drawing
 Scene Loading
 ```
 
-The parser will be designed with Bonus support from the beginning.
+Parser will be designed with Bonus support from the beginning.
 
 ---
 
@@ -279,7 +282,7 @@ The parser will be designed with Bonus support from the beginning.
 
 **Estimated Time:** ~3 Days
 
-Topics:
+Topics
 
 ```text
 Camera
@@ -305,22 +308,20 @@ Pixel Size
 Camera Initialization
 ```
 
-The camera becomes a complete local coordinate system.
-
 ---
 
 # Milestone 5 — Ray Generation
 
 **Estimated Time:** ~1 Day
 
-Topics:
+Topics
 
 ```text
 Primary Rays
 
 Pixel Center
 
-Normalized Device Coordinates (NDC)
+Normalized Device Coordinates
 
 Viewport Coordinates
 
@@ -332,8 +333,6 @@ Ray Equation
 
 Generate One Ray Per Pixel
 ```
-
-This is where real ray tracing begins.
 
 ---
 
@@ -377,7 +376,7 @@ Cube
 
 **Estimated Time:** ~3 Days
 
-Topics:
+Topics
 
 ```text
 Ambient
@@ -394,7 +393,7 @@ Reflection Direction
 
 Shadow Rays
 
-Light Attenuation (if needed)
+Light Attenuation
 ```
 
 ---
@@ -402,8 +401,6 @@ Light Attenuation (if needed)
 # Milestone 8 — Rendering
 
 **Estimated Time:** ~2 Days
-
-Everything comes together.
 
 Pipeline
 
@@ -443,18 +440,13 @@ Final Color
 Image Output
 ```
 
-The first complete rendered image will be produced here.
-
 ---
 
 # Milestone 9 — Bonus Integration
 
 **Estimated Time:** ~4 Days
 
-Since the project is designed for extensibility from the beginning,
-Bonus becomes feature integration rather than rewriting.
-
-Possible additions:
+Possible additions
 
 ```text
 Multiple Lights
@@ -478,7 +470,7 @@ Advanced Parsing
 
 **Estimated Time:** ~2 Days
 
-Final polishing:
+Topics
 
 ```text
 Memory Leaks
@@ -499,16 +491,14 @@ Final Review
 # Overall Project Progress
 
 ```text
-████████░░░░░░░░░░░░░░░░░░░░
+███████████░░░░░░░░░░░░░░░░░
 
-≈ 27%
+≈ 35%
 ```
 
 ---
 
 # Philosophy
-
-The project follows one strict rule:
 
 > **Understand first. Implement second.**
 
@@ -535,3 +525,4 @@ Finish MiniRT while fully understanding:
 
 The objective is not only to complete the project,
 but to understand every line of code that will be written.
+
