@@ -10,6 +10,14 @@ typedef struct s_vec
 } t_vec;
 
 
+Hit Record
+
+├── Hit Point
+├── Normal
+├── t
+└── Object*
+
+
 
 
 #endif
