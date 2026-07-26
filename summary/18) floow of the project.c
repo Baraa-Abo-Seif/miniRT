@@ -1,262 +1,77 @@
-./miniRT scene.rt
-//! steps
+//! ============================================================================
+//! MiniRT Architecture
+//! ============================================================================
+
 /*
-    ~ 1) Read the scene file and parse its contents to extract information about the objects, lights, and camera settings.
-            User
-            ↓
-            scene.rt
-            ↓
-            Load Scene
 
+###############################################################################
+# The Big Picture
+###############################################################################
 
-    ~ 2) Initialize the rendering engine and set up the necessary data structures to hold the scene information.
+MiniRT is a rendering pipeline.
 
-            User
-            ↓
-            scene.rt
-            ↓
-            Load Scene
-            ↓
-            Parse Scene
-            ↓
-            Build Scene
+The entire project can be summarized as:
 
-    ~ 3) For each pixel in the output image, cast a ray from the camera through the pixel and into the scene to determine what object (if any) the ray intersects.
+        scene.rt
+            │
+            ▼
+        Parse Scene
+            │
+            ▼
+        Build Scene
+            │
+            ▼
+        Render Image
+            │
+            ▼
+        Display Window
 
-            User
-            ↓
-            scene.rt
-            ↓
-            Load Scene
-            ↓
-            Parse Scene
-            ↓
-            Build Scene
-            ↓
-            Camera
-            ↓
-            Generate Ray
-            ↓
-            Intersection
-            ↓
-            Lighting
-            ↓
-            Pixel Color
-            ↓
-            Image 
+Everything in the project belongs to one of these two phases.
 
+===============================================================================
+Phase 1 : Initialization
+===============================================================================
 
+scene.rt
 
-*/
+↓
 
+Parser
+
+↓
+
+Build Scene
+
+↓
 
 Scene
+
+The parser only reads the file.
+
+Its responsibility is:
+
+• Read the scene file.
+• Validate the input.
+• Create all scene objects.
+• Fill the Scene structure.
+
+Once parsing finishes...
+
+Its job is over.
+
+===============================================================================
+Phase 2 : Rendering
+===============================================================================
+
+Scene
+
+↓
+
+Renderer
 
 ↓
 
 Camera
-
-↓
-
-Ray
-
-↓
-
-Objects
-
-↓
-
-Light
-
-↓
-
-Pixel
-
-//////////////////////
-
-Parser
-
-↓
-
-Scene
-
-↓
-
-Renderer
-
-
-              scene.rt
-                  │
-                  ▼
-             ┌─────────┐
-             │ Parser  │
-             └─────────┘
-                  │
-                  ▼
-             ┌─────────┐
-             │  Scene  │
-             └─────────┘
-                  │
-                  ▼
-             ┌─────────┐
-             │Renderer │
-             └─────────┘
-          ┌─────┼─────┬──────┐
-          ▼     ▼     ▼      ▼
-      Camera Objects Lighting Image
-
-
-
-
-
-
-
-      Parser
-
-↓
-
-Build Scene
-
-↓
-
-Scene
-
-↓
-
-Renderer
-
-------------------
-
-main()
-
-↓
-
-Scene
-
-↓
-
-Parser fills it
-
-↓
-
-Renderer uses it
-
-↓
-
-Destroy Scene
-
-↓
-
-Exit
----------------
-Renderer
-
-↓
-
-Uses
-
-NOT
-
-Owns
-
-main()
-
-↓
-
-Create Scene
-
-↓
-
-Parser
-
-↓
-
-Fill Scene
-
-↓
-
-Renderer
-
-↓
-
-Read Scene
-
-↓
-
-Destroy Scene
-
-↓
-
-Exit
-------------------
-
-Parser
-Build Scene
-Renderer
-Use Scene
-Main
-Own Scene
-
-----------------
-المشروع عبارة عن Pipeline.
-
-✅ الـ Parser يبني الـ Scene.
-
-✅ الـ Renderer لا يملك الـ Scene.
-
-✅ الـ Renderer يستخدم الـ Scene فقط.
-
-✅ الـ Renderer لا يعرف تفاصيل الـ Sphere أو الـ Plane.
-
-✅ الـ Intersector سيكون مسؤولًا عن الاصطدامات.
-
-✅ الـ Main سيكون المالك الحقيقي للـ Scene.
------------------------------
-Math
-
-↓
-
-يعرف الأرقام.
-Parser
-
-↓
-
-يعرف الملف.
-Camera
-
-↓
-
-تعرف توليد Rays.
-Lighting
-
-↓
-
-تعرف حساب اللون.
-Renderer
-
-↓
-
-يعرف كيف ينسق بين الجميع.
-
--------------------------
-
-Phase 1
-
-Initialization
-
-↓
-
-Parse
-
-↓
-
-Build Scene
-
-──────────────────────────
-
-Phase 2
-
-Rendering
 
 ↓
 
@@ -272,158 +87,25 @@ Lighting
 
 ↓
 
-Pixels
-
------------------------
-                main()
-
-                   │
-
-        ┌──────────┴──────────┐
-
-        ▼                     ▼
-
- Initialization          Rendering
-
-(Parser)              (Renderer Engine)
-
-
-main()
-
-│
-
-▼
-
-Scene
-
-├──────────────┐
-│              │
-▼              ▼
-
-Camera      Lights
-
-│
-
-▼
-
-Objects
-
-│
-
-▼
-
-Object
-
-│
-
-▼
-
-Object
-
-│
-
-▼
-
-Object
-
-بدل أن نفكر في ملفات، فكر في أشخاص.
-
-👨‍💼 Parser
-
-"أنا أقرأ الملف فقط."
-
-📷 Camera
-
-"أنا أعرف كيف أُولد الأشعة فقط."
-
-💡 Lighting
-
-"أنا أعرف كيف أحسب الإضاءة فقط."
-
-⚪ Object
-
-"أنا فقط أخزن بياناتي."
-
-🎬 Renderer
-
-"أنا المدير... أطلب من كل شخص أن يقوم بوظيفته."
-
-              main()
-
-                 │
-
-                 ▼
-
-               Scene
-
-        ┌────────┼────────┐
-
-        ▼        ▼        ▼
-
-    Camera    Lights   Objects
-
-        ▲                  ▲
-        │                  │
-
-        └────── Renderer ──┘
-
-
-
-        File
+Pixel Color
 
 ↓
 
-Parser
+Image Buffer
 
 ↓
 
-Scene
+Window
 
-↓
+The renderer never reads the file.
 
-Renderer
+It only uses the already-built Scene.
 
+===============================================================================
+Overall Pipeline
+===============================================================================
 
-Renderer
-
-↓
-
-Read Camera
-
-↓
-
-Camera Setup
-
-↓
-
-for every Pixel
-
-    ↓
-
-Generate Ray
-
-    ↓
-
-Find Intersection
-
-    ↓
-
-Nearest Hit
-
-    ↓
-
-Lighting
-
-    ↓
-
-Write Pixel
-
-
-
-
-
-
-File
+scene.rt
 
 ↓
 
@@ -469,48 +151,245 @@ Image Buffer
 
 Window
 
+###############################################################################
+# Scene Ownership
+###############################################################################
 
-كل Module أصبح يعرف شيئًا واحدًا فقط.
+The Scene has only one owner.
+
+main()
+
+↓
+
+Create Scene
+
+↓
+
+Parser fills it
+
+↓
+
+Renderer uses it
+
+↓
+
+Destroy Scene
+
+↓
+
+Exit
+
+Important:
+
+• main() owns the Scene.
+• Parser builds the Scene.
+• Renderer only reads the Scene.
+
+The renderer never owns it.
+
+###############################################################################
+# Scene Structure
+###############################################################################
+
+                Scene
+
+        ┌────────┼────────┐
+        ▼        ▼        ▼
+
+    Camera    Lights   Objects
+
+The Scene is simply a container.
+
+It stores everything required to render the image.
+
+###############################################################################
+# Module Responsibilities
+###############################################################################
+
+Every module knows only one job.
 
 Parser
 
-يعرف:
+↓
 
 File
 
 ↓
 
 Scene
+
+----------------------------------------
+
 Camera
 
-تعرف:
+↓
 
-Generate Ray
+Generate Rays
+
+----------------------------------------
+
 Intersector
 
-يعرف:
+↓
 
 Ray
 
 ↓
 
-Hit
+Nearest Hit
+
+----------------------------------------
+
 Lighting
-
-يعرف:
-
-Hit
 
 ↓
 
-Color
+Hit Record
+
+↓
+
+Final Color
+
+----------------------------------------
+
 Renderer
 
-يعرف:
+↓
 
-كيف يجعل الجميع يعملون معًا.
+Coordinates everything
 
-وليس كيف ينفذ كل العمليات بنفسه.
+It does NOT perform every calculation itself.
 
+###############################################################################
+# Rendering Flow
+###############################################################################
 
+Renderer
 
+↓
+
+Read Camera
+
+↓
+
+Camera Setup
+
+↓
+
+for each Pixel
+
+↓
+
+Generate Ray
+
+↓
+
+Find Nearest Intersection
+
+↓
+
+Compute Lighting
+
+↓
+
+Write Pixel
+
+↓
+
+Next Pixel
+
+###############################################################################
+# Design Philosophy
+###############################################################################
+
+Think of the project as a team.
+
+👨‍💼 Parser
+
+"I only read the file."
+
+────────────────────────
+
+📷 Camera
+
+"I only generate rays."
+
+────────────────────────
+
+🎯 Intersector
+
+"I only find what the ray hits."
+
+────────────────────────
+
+💡 Lighting
+
+"I only compute the final color."
+
+────────────────────────
+
+⚪ Objects
+
+"We only store geometry."
+
+────────────────────────
+
+🎬 Renderer
+
+"I coordinate everyone."
+
+###############################################################################
+# Layered Architecture
+###############################################################################
+
+                main()
+
+                   │
+
+                   ▼
+
+                 Scene
+
+        ┌────────┼────────┐
+
+        ▼        ▼        ▼
+
+    Camera    Lights   Objects
+
+        ▲                  ▲
+        │                  │
+
+        └──── Renderer ────┘
+
+Renderer never owns Camera or Objects.
+
+It simply asks them to perform their jobs.
+
+###############################################################################
+# Golden Idea
+###############################################################################
+
+MiniRT is not one huge algorithm.
+
+It is a collection of small modules.
+
+Each module has exactly one responsibility.
+
+The renderer simply connects them together.
+
+###############################################################################
+# Key Takeaways
+###############################################################################
+
+• MiniRT is a rendering pipeline.
+• Parsing and Rendering are two separate phases.
+• The Parser builds the Scene.
+• The Renderer only uses the Scene.
+• main() owns the Scene.
+• Camera generates Rays.
+• Intersector finds intersections.
+• Lighting computes colors.
+• Renderer coordinates all modules.
+• Every module should have one clear responsibility.
+
+*/
