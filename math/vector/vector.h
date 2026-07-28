@@ -3,7 +3,18 @@
 
 #include <math.h>
 
+typedef struct s_vec
+{
+    double x;
+    double y;
+    double z;
+} t_vec;
+
+
+
 typedef struct s_vec t_vec;
+typedef struct s_point t_point;
+
 
 t_vec vec_add(t_vec a, t_vec b);
 t_vec vec_sub(t_vec a, t_vec b);

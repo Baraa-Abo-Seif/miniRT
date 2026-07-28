@@ -2,20 +2,23 @@
 #define CAMERA_H
 
 
+#include "../../math/vector/vector.h"
+#include "../../math/point/point.h"
 
 
-Camera
+typedef struct s_camera
+{
+    t_point position;
+    t_vec   forward;
+    double  fov;
+    t_vec   right;
+    t_vec   up;
+    double  viewport_width;
+    double  viewport_height;
+    double  pixel_size;
+}   t_camera;
 
-├── Position
-├── Forward
-├── Right
-├── Up
-├── FOV
-├── Aspect Ratio
-├── Viewport Width
-├── Viewport Height
-├── Pixel Size
-└── Camera Plane
+
 
 
 
