@@ -1,25 +1,126 @@
-scene.rt
+.rt File
+
+↓
+
+File Reader
+
+↓
+
+Lexer
+
+↓
+
+Parser
+
+↓
+
+Scene Builder
 
 ↓
 
 Scene
 
 
-أي أنه يأخذ الملف النصي ويحولّه إلى بيانات داخل الذاكرة.
+.rt
 
-هو لا يرسم.
+↓
 
-هو لا يولد Rays.
+Reader
 
-هو لا يحسب الإضاءة.
+↓
 
-هو فقط يبني الـ Scene.
+Lexer
+
+↓
+
+Validator
+
+↓
 
 Parser
 
-Input:
-scene.rt
+↓
 
-Output:
+Builder
+
+↓
+
 Scene
 
+
+reader/
+
+↓
+
+Read file
+
+----------------
+
+lexer/
+
+↓
+
+Split line
+
+----------------
+
+validator/
+
+↓
+
+Validate data
+
+----------------
+
+builder/
+
+↓
+
+Create Scene objects
+
+----------------
+
+core/
+
+↓
+
+Coordinate everything
+
+
+Reader
+
+File
+
+↓
+
+Lines
+
+----------------
+
+Lexer
+
+Lines
+
+↓
+
+Tokens
+
+----------------
+
+Validator
+
+Tokens
+
+↓
+
+Valid Tokens
+
+----------------
+
+Builder
+
+Tokens
+
+↓
+
+Objects

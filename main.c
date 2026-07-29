@@ -84,7 +84,7 @@ MiniRT
 
 
 
-       main()
+main()
 
 ↓
 
@@ -92,12 +92,58 @@ scene_create()
 
 ↓
 
-parse_scene(scene)
+parser_parse_scene()
 
 ↓
 
-render(scene)
+Renderer
 
 ↓
 
 scene_destroy()
+
+
+
+
+main()
+
+↓
+
+scene_create()
+
+↓
+
+parser_parse_scene()
+
+        │
+
+        ▼
+
+      core
+
+        │
+
+        ▼
+
+Reader
+
+↓
+
+Lexer
+
+↓
+
+Validator
+
+↓
+
+Builder
+
+↓
+
+Scene
+
+↓
+
+Renderer
+

@@ -1212,6 +1212,45 @@ The parser never performs rendering.
 
 ---
 
+```
+reader/
+
+├── Open File
+├── Read File
+├── Build Temporary List
+├── Convert List
+├── Destroy Temporary List
+├── Close File
+└── Return char **
+```
+
+
+create_node()
+
+does NOT duplicate line.
+
+Ownership of line is transferred
+to the created node.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## MLX
 
 Responsible for:
