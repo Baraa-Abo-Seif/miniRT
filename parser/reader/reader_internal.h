@@ -5,8 +5,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stddef.h>
 
-#include "../../minirt.h"
+#include "../../Libft/libft.h"
+#include "../../get_next_line/get_next_line.h"
+
 
 #include "./reader.h"
 
