@@ -12,7 +12,7 @@ char **list_to_array(t_line_node *list)
     index = 0;
     num_nodes = count_nodes(list);
     current = list;
-    arr = malloc((num_nodes + 1) * sizeof(char *));
+    arr = ft_calloc((num_nodes + 1), sizeof(char *));
     if (!arr)
         return (NULL);
     while(current)
@@ -20,7 +20,7 @@ char **list_to_array(t_line_node *list)
         arr[index] = ft_strdup(current->line);
         if (!arr[index])
         {
-            free_string_array(arr, index);
+            free_string_array(arr);
             return (NULL);
         }
         current = current->next;

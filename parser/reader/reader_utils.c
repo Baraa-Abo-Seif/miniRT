@@ -48,22 +48,6 @@ size_t	count_nodes(t_line_node *list)
 }
 
 
-void	free_string_array(char **array, size_t used)
-{
-    size_t i;
-
-    i = 0;
-    if (!array)
-	    return ;
-    while (i < used)
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
-}
-
-
 
 
 

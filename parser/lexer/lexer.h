@@ -3,10 +3,7 @@
 
 # include "token.h"
 
-t_token *lexer_tokenize(char **lines);
-
-void lexer_destroy_tokens(t_token *tokens);
+t_token	*tokenize(char **lines);
+void	destroy_token_list(t_token *list);
 
 #endif
-
-
