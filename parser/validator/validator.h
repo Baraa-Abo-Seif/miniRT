@@ -1,9 +1,9 @@
 #ifndef VALIDATOR_H
 # define VALIDATOR_H
 
-# include "../lexer/token.h"
+# include "../lexer/lexer.h"
 
-int validate_tokens(t_token *tokens);
+bool	validate_tokens(t_token *tokens);
 
 #endif
 
