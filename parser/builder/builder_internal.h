@@ -1,26 +1,21 @@
 #ifndef BUILDER_INTERNAL_H
 # define BUILDER_INTERNAL_H
 
-# include <stdlib.h>
-
 # include "../../Libft/libft.h"
-# include "../utils/parsing_utils.h"
+#include "../../scene/scene.h"
+#include "./objects/object_builder.h"
 
-# include "builder.h"
+t_scene	*create_scene(void);
 
-bool	build_ambient(t_scene *scene, t_token *token);
-bool	build_camera(t_scene *scene, t_token *token);
-bool	build_light(t_scene *scene, t_token *token);
-bool	build_object(t_scene *scene, t_token *token);
-bool	build_sphere(t_scene *scene, t_token *token);
-bool	build_plane(t_scene *scene, t_token *token);
-bool	build_cylinder(t_scene *scene, t_token *token);
-t_object	*create_object(t_object_type type);
-t_light	*create_light(void);
-void	append_object(t_object **list, t_object *new_object);
-void	append_light(t_light **list, t_light *new_light);
-t_point	parse_point(char *str);
-t_vec	parse_vec(char *str);
-t_color	parse_color(char *str);
+void	append_light(t_scene *scene, t_light *light);
+void	append_object(t_scene *scene, t_object *object);
+t_ambient	build_ambient(const t_token *token);
+t_camera	build_camera(const t_token *token);
+t_light	*build_light(const t_token *token);
+t_object	*create_object();
+t_object	*build_object(const t_token *token);
+bool	add_light_to_scene(t_scene *scene, const t_token *token);
+bool	add_object_to_scene(t_scene *scene, const t_token *token);
+
 
 #endif

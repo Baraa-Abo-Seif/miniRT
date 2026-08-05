@@ -3,9 +3,10 @@
 
 # include <stdbool.h>
 
-# include "../lexer/lexer.h"
-# include "../../scene/scence.h"
+# include "../validator/validator.h"
+# include "../../scene/scene.h"
 
-bool	build_scene(t_token *tokens, t_scene *scene);
+t_scene	*build_scene(t_token *tokens);
 
 #endif
+

@@ -1,58 +1,84 @@
 #include "builder_internal.h"
 
-t_object	*create_object(t_object_type type)
-{
-    t_object	*object;
 
-    object = malloc(sizeof(t_object));
-    if (!object)
+
+
+t_scene	*create_scene(void)
+{
+    t_scene	*scene;
+
+    scene = malloc(sizeof(t_scene));
+    if (!scene)
         return (NULL);
-    object->type = type;
-    object->next = NULL;
-    return (object);
+    ft_bzero(scene, sizeof(t_scene));
+    return (scene);
 }
 
-void	append_object(t_object **list, t_object *new_object)
-{
-    t_object	*current;
 
-    if (!list || !new_object)
-        return ;
-    if (!*list)
-    {
-        *list = new_object;
-        return ;
-    }
-    current = *list;
-    while (current->next)
-        current = current->next;
-    current->next = new_object;
-}
-
-t_light	*create_light(void)
-{
-    t_light	*light;
-
-    light = malloc(sizeof(t_light));
-    if (!light)
-        return (NULL);
-    light->next = NULL;
-    return (light);
-}
-
-void	append_light(t_light **list, t_light *new_light)
+void	append_light(t_scene *scene, t_light *light)
 {
     t_light	*current;
 
-    if (!list || !new_light)
+    if (!scene || !light)
         return ;
-    if (!*list)
+    if (!scene->lights)
     {
-        *list = new_light;
+        scene->lights = light;
         return ;
     }
-    current = *list;
+    current = scene->lights;
     while (current->next)
         current = current->next;
-    current->next = new_light;
+    current->next = light;
+}
+void	append_object(t_scene *scene, t_object *object)
+{
+    t_object	*current;
+
+    if (!scene || !object)
+        return ;
+    if (!scene->objects)
+    {
+        scene->objects = object;
+        return ;
+    }
+    current = scene->objects;
+    while (current->next)
+        current = current->next;
+    current->next = object;
+}
+
+
+ bool	add_light_to_scene(t_scene *scene, const t_token *token)
+{
+    t_light	*light;
+
+    if (!scene || !token)
+        return (false);
+    light = build_light(token);
+    if (!light)
+    {
+        destroy_scene(scene);
+        return (false);
+    }
+    append_light(scene, light);
+    return (true);
+}
+
+
+
+bool	add_object_to_scene(t_scene *scene, const t_token *token)
+{
+    t_object	*object;
+
+    if (!scene || !token)
+        return (false);
+    object = build_object(token);
+    if (!object)
+    {
+        destroy_scene(scene);
+        return (false);
+    }
+    append_object(scene, object);
+    return (true);
 }

@@ -3,8 +3,7 @@
 
 # include "../scene/scene.h"
 
-int parser_parse_scene(const char *filename, t_scene *scene);
-
+t_scene	*parse_scene(const char *filename);
 
 
 

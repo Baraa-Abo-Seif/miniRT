@@ -1,8 +1,11 @@
 #include "builder_internal.h"
 
-bool	build_ambient(t_scene *scene, t_token *token)
+t_ambient	build_ambient(const t_token *token)
 {
-    scene->ambient.ratio = ft_atof(token->args[0]);
-    scene->ambient.color = parse_color(token->args[1]);
-    return (true);
+    t_ambient	ambient;
+
+    ambient.ratio = ft_atof(token->args[0]);
+    ambient.color = parse_color(token->args[1]);
+    return (ambient);
 }
+
