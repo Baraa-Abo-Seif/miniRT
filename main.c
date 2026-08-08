@@ -1,149 +1,36 @@
-MiniRT
+#include "./mlx_engine/mlx_api.h"
 
-│
+int	main(void)
+{
+	t_window	*window;
+	t_image		*image;
 
-├── main
-│      │
-│      ├── Initialize
-│      ├── Parse Scene
-│      ├── Initialize Renderer
-│      ├── Start Rendering
-│      └── Cleanup
-│
-├── Scene
-│      │
-│      ├── Camera
-│      ├── Ambient
-│      ├── Lights
-│      └── Objects
-│
-├── Parser
-│      │
-│      ├── Read File
-│      ├── Validate
-│      ├── Parse Camera
-│      ├── Parse Ambient
-│      ├── Parse Lights
-│      ├── Parse Objects
-│      └── Build Scene
-│
-├── Camera
-│      │
-│      ├── Initialize Camera
-│      ├── Compute Camera Basis
-│      ├── Compute Viewport
-│      └── Generate Primary Ray
-│
-├── Objects
-│      │
-│      ├── Sphere
-│      ├── Plane
-│      ├── Cylinder
-│      ├── Object List
-│      └── Object Utilities
-│
-├── Math
-│      │
-│      ├── Vector
-│      ├── Point
-│      ├── Matrix (Future)
-│      ├── Color
-│      └── Utilities
-│
-├── Intersector
-│      │
-│      ├── Sphere Intersection
-│      ├── Plane Intersection
-│      ├── Cylinder Intersection
-│      ├── Find Nearest Hit
-│      └── Build Hit Record
-│
-├── Lighting
-│      │
-│      ├── Ambient
-│      ├── Diffuse
-│      ├── Specular
-│      ├── Shadow
-│      └── Final Color
-│
-├── Renderer
-│      │
-│      ├── Render Loop
-│      ├── Generate Ray
-│      ├── Ask Intersector
-│      ├── Ask Lighting
-│      └── Write Pixel
-│
-└── MLX
-       │
-       ├── Init
-       ├── Window
-       ├── Image Buffer
-       ├── Put Pixel
-       └── Display Image
+	window = mlx_window_create(800, 600, "MLX Integration Test");
+	if (!window)
+		return (1);
 
+	image = mlx_image_create(window->mlx, 800, 600);
+	if (!image)
+	{
+		mlx_window_destroy(window);
+		return (1);
+	}
 
+	if (mlx_image_data(image) != 0)
+	{
+		mlx_image_destroy(image);
+		mlx_window_destroy(window);
+		return (1);
+	}
 
-main()
+	mlx_image_pixel_put(image, 400, 300, 0x00FF0000);
 
-↓
+	mlx_display_image(window, image);
+	mlx_event_init(window);
+	mlx_event_loop(window);
 
-scene_create()
-
-↓
-
-parser_parse_scene()
-
-↓
-
-Renderer
-
-↓
-
-scene_destroy()
-
-
-
-
-main()
-
-↓
-
-scene_create()
-
-↓
-
-parser_parse_scene()
-
-        │
-
-        ▼
-
-      core
-
-        │
-
-        ▼
-
-Reader
-
-↓
-
-Lexer
-
-↓
-
-Validator
-
-↓
-
-Builder
-
-↓
-
-Scene
-
-↓
-
-Renderer
+	mlx_image_destroy(image);
+	mlx_window_destroy(window);
+	return (0);
+}
 
