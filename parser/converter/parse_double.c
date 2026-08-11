@@ -1,5 +1,7 @@
 
 
+#include "converter.h"
+#include "converter_internal.h"
 
 const char	*skip_spaces(const char *str)
 {
@@ -59,7 +61,14 @@ double	parse_fraction(const char **str)
 
 double	ft_atof(const char *str)
 {
-	return (parse_double(&str));
+    int		sign;
+    double	result;
+
+    str = skip_spaces(str);
+    sign = parse_sign(&str);
+    result = parse_integer(&str);
+    result += parse_fraction(&str);
+    return (result * sign);
 }
 
 

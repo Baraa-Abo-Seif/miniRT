@@ -1,6 +1,9 @@
 #ifndef CYLINDER_H
 #define CYLINDER_H
 
+#include "../../../math/point/point.h"
+#include "../../../math/vector/vector.h"
+
 
 typedef struct s_cylinder
 {

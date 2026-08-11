@@ -1,5 +1,6 @@
 
 #include "converter.h"
+#include "converter_internal.h"
 
 
 
@@ -7,10 +8,10 @@ t_vec	parse_vector(const char *str)
 {
     t_vec	vector;
 
-    vector.x = parse_double(&str);
+    vector.x = ft_atof(str);
     skip_comma(&str);
-    vector.y = parse_double(&str);
+    vector.y = ft_atof(str);
     skip_comma(&str);
-    vector.z = parse_double(&str);
+    vector.z = ft_atof(str);
     return (vector);
 }

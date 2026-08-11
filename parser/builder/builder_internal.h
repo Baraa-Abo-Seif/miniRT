@@ -2,8 +2,12 @@
 # define BUILDER_INTERNAL_H
 
 # include "../../Libft/libft.h"
-#include "../../scene/scene.h"
-#include "./objects/object_builder.h"
+# include "../lexer/token.h"
+# include "../converter/converter.h"
+# include "../../scene/scene.h"
+# include "./objects/object_builder.h"
+#include <stdbool.h>
+
 
 t_scene	*create_scene(void);
 

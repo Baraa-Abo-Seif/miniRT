@@ -3,10 +3,10 @@
 #define SCENE_H
 
 
-#include "./object/object.h"
+#include "./objects/object.h"
 #include "camera/camera.h"
 #include "ambient/ambient.h"
-#include "light/light.h"
+#include "lights/light.h"
 
 
 

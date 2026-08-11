@@ -1,6 +1,6 @@
 
 
-#include "math.h"
+#include "vector.h"
 
 double vec_distance(t_vec a, t_vec b)
 {

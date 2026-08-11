@@ -1,5 +1,5 @@
-#ifndef MINIART_H
-#define MINIART_H
+#ifndef MINIRT_H
+# define MINIRT_H
 
 /* Standard Library */
 #include <stdlib.h>
@@ -8,12 +8,13 @@
 #include <math.h>
 
 /* External Libraries */
-# include "libft/libft.h"
+# include "Libft/libft.h"
 # include "mlx/mlx.h"
 
 /* Project */
 
 # include "./math/vector/vector.h"
+# include "./math/point/point.h"
 # include "./math/color/color.h"
 
 # include "./scene/scene.h"
@@ -23,15 +24,5 @@
 # include "./renderer/renderer.h"
 
 # include "./intersector/intersector.h"
-
-
-#include "point/point.h"
-#include "vector/vector.h"
-#include "color/color.h"
-
-
-
-
-
 
 #endif

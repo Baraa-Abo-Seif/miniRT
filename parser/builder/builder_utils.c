@@ -49,7 +49,7 @@ void	append_object(t_scene *scene, t_object *object)
 }
 
 
- bool	add_light_to_scene(t_scene *scene, const t_token *token)
+bool	add_light_to_scene(t_scene *scene, const t_token *token)
 {
     t_light	*light;
 

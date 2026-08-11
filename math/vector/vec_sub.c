@@ -1,6 +1,6 @@
 
 
-#include "math.h"
+#include "vector.h"
 
 t_vec vec_sub(t_vec a, t_vec b)
 {

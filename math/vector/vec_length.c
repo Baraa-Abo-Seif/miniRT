@@ -1,6 +1,6 @@
 
 
-#include "math.h"
+#include "vector.h"
 
 double vec_length(t_vec v)
 {

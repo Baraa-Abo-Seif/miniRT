@@ -1,5 +1,5 @@
 
-#include "math.h"
+#include "vector.h"
 
 
 t_vec vec_reflect(t_vec incident, t_vec normal)

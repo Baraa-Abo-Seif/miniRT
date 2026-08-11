@@ -4,6 +4,7 @@ t_camera	build_camera(const t_token *token)
 {
     t_camera	camera;
 
+    ft_bzero(&camera, sizeof(camera));
     camera.position = parse_point(token->args[0]);
     camera.forward = parse_vector(token->args[1]);
     camera.fov = ft_atof(token->args[2]);

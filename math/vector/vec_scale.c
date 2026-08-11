@@ -1,6 +1,6 @@
 
 
-#include "math.h"
+#include "vector.h"
 
 t_vec vec_scale(t_vec a, double k)
 {

@@ -1,7 +1,7 @@
 
 
 
-#include "math.h"
+#include "vector.h"
 
 
 t_vec vec_normalize(t_vec v)
