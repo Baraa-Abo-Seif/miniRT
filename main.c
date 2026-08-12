@@ -3,13 +3,17 @@
 
 //for test :
 /*
- cc -Wall -Wextra -Werror main.c scene/camera/camera_create.c scene/camera/camera_destroy.c scene/camera/camera_init.c scene/camera/camera_build_basis.c scene/camera/camera_compute_viewport.c scene/camera/camera_compute_pixel_delta.c math/vector/vec_add.c math/vector/vec_sub.c math/vector/vec_scale.c math/vector/vec_dot.c math/vector/vec_cross.c math/vector/vec_length.c math/vector/vec_normalize.c math/vector/vec_distance.c math/vector/vec_reflect.c math/point/point_add_vec.c math/point/point_sub_vec.c math/point/point_sub_point.c -ILibft -Iscene/camera -Imath/vector -Imath/point -LLibft -lft -lm -o camera_test
- 
+ cc -Wall -Wextra -Werror main.c scene/camera/camera_create.c scene/camera/camera_destroy.c scene/camera/camera_init.c scene/camera/camera_build_basis.c scene/camera/camera_compute_viewport.c scene/camera/camera_compute_pixel_delta.c scene/camera/camera_ray.c math/ray/ray_create.c math/ray/ray_at.c math/vector/vec_add.c math/vector/vec_sub.c math/vector/vec_scale.c math/vector/vec_dot.c math/vector/vec_cross.c math/vector/vec_length.c math/vector/vec_normalize.c math/vector/vec_distance.c math/vector/vec_reflect.c math/point/point_add_vec.c math/point/point_sub_vec.c math/point/point_sub_point.c -ILibft -Iscene/camera -Imath/vector -Imath/point -Imath/ray -LLibft -lft -lm -o ray_test
+
 */
 
 int	main(void)
 {
 	t_camera	*camera;
+	t_ray		ray;
+	t_point		hit;
+	int			j;
+	int			i;
 
 	camera = camera_create();
 	if (!camera)
@@ -25,47 +29,32 @@ int	main(void)
 		return (1);
 	}
 
-	printf("=== Camera ===\n");
-	printf("Position      : %.3f %.3f %.3f\n",
-		camera->position.x,
-		camera->position.y,
-		camera->position.z);
+	printf("=== Ray Generation ===\n");
 
-	printf("Forward       : %.3f %.3f %.3f\n",
-		camera->forward.x,
-		camera->forward.y,
-		camera->forward.z);
+	j = 400;
+	i = 300;
+	ray = camera_ray_through_pixel(camera, j, i);
+	printf("Center pixel (400, 300):\n");
+	printf("  origin    : %.3f %.3f %.3f\n",
+		ray.origin.x, ray.origin.y, ray.origin.z);
+	printf("  direction : %.3f %.3f %.3f\n",
+		ray.direction.x, ray.direction.y, ray.direction.z);
+	printf("  len       : %.6f\n", vec_length(ray.direction));
 
-	printf("Right         : %.3f %.3f %.3f\n",
-		camera->right.x,
-		camera->right.y,
-		camera->right.z);
+	hit = ray_at(ray, 1.0);
+	printf("  P = O + 1*D : %.3f %.3f %.3f\n",
+		hit.x, hit.y, hit.z);
 
-	printf("Up            : %.3f %.3f %.3f\n",
-		camera->up.x,
-		camera->up.y,
-		camera->up.z);
+	ray = camera_ray_through_pixel(camera, 0, 0);
+	printf("Top-left pixel (0, 0):\n");
+	printf("  direction : %.3f %.3f %.3f\n",
+		ray.direction.x, ray.direction.y, ray.direction.z);
 
-	printf("Viewport      : %.6f x %.6f\n",
-		camera->viewport_width,
-		camera->viewport_height);
-
-	printf("Upper Left    : %.6f %.6f %.6f\n",
-		camera->viewport_upper_left.x,
-		camera->viewport_upper_left.y,
-		camera->viewport_upper_left.z);
-
-	printf("Pixel Delta X : %.6f %.6f %.6f\n",
-		camera->pixel_delta_x.x,
-		camera->pixel_delta_x.y,
-		camera->pixel_delta_x.z);
-
-	printf("Pixel Delta Y : %.6f %.6f %.6f\n",
-		camera->pixel_delta_y.x,
-		camera->pixel_delta_y.y,
-		camera->pixel_delta_y.z);
+	ray = camera_ray_through_pixel(camera, 799, 599);
+	printf("Bottom-right pixel (799, 599):\n");
+	printf("  direction : %.3f %.3f %.3f\n",
+		ray.direction.x, ray.direction.y, ray.direction.z);
 
 	camera_destroy(camera);
 	return (0);
 }
-

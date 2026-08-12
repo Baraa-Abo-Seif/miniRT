@@ -16,6 +16,7 @@
 # include "./math/vector/vector.h"
 # include "./math/point/point.h"
 # include "./math/color/color.h"
+# include "./math/ray/ray.h"
 
 # include "./scene/scene.h"
 
