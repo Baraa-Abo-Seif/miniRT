@@ -1,36 +1,71 @@
-#include "./mlx_engine/mlx_api.h"
+#include "./scene/camera/camera.h"
+#include <stdio.h>
+
+//for test :
+/*
+ cc -Wall -Wextra -Werror main.c scene/camera/camera_create.c scene/camera/camera_destroy.c scene/camera/camera_init.c scene/camera/camera_build_basis.c scene/camera/camera_compute_viewport.c scene/camera/camera_compute_pixel_delta.c math/vector/vec_add.c math/vector/vec_sub.c math/vector/vec_scale.c math/vector/vec_dot.c math/vector/vec_cross.c math/vector/vec_length.c math/vector/vec_normalize.c math/vector/vec_distance.c math/vector/vec_reflect.c math/point/point_add_vec.c math/point/point_sub_vec.c math/point/point_sub_point.c -ILibft -Iscene/camera -Imath/vector -Imath/point -LLibft -lft -lm -o camera_test
+ 
+*/
 
 int	main(void)
 {
-	t_window	*window;
-	t_image		*image;
+	t_camera	*camera;
 
-	window = mlx_window_create(800, 600, "MLX Integration Test");
-	if (!window)
+	camera = camera_create();
+	if (!camera)
 		return (1);
 
-	image = mlx_image_create(window->mlx, 800, 600);
-	if (!image)
+	camera->position = (t_point){0.0, 0.0, 0.0};
+	camera->forward = (t_vec){0.0, 0.0, -1.0};
+	camera->fov = 60.0;
+
+	if (camera_init(camera, 800, 600) != 0)
 	{
-		mlx_window_destroy(window);
+		camera_destroy(camera);
 		return (1);
 	}
 
-	if (mlx_image_data(image) != 0)
-	{
-		mlx_image_destroy(image);
-		mlx_window_destroy(window);
-		return (1);
-	}
+	printf("=== Camera ===\n");
+	printf("Position      : %.3f %.3f %.3f\n",
+		camera->position.x,
+		camera->position.y,
+		camera->position.z);
 
-	mlx_image_pixel_put(image, 400, 300, 0x00FF0000);
+	printf("Forward       : %.3f %.3f %.3f\n",
+		camera->forward.x,
+		camera->forward.y,
+		camera->forward.z);
 
-	mlx_display_image(window, image);
-	mlx_event_init(window);
-	mlx_event_loop(window);
+	printf("Right         : %.3f %.3f %.3f\n",
+		camera->right.x,
+		camera->right.y,
+		camera->right.z);
 
-	mlx_image_destroy(image);
-	mlx_window_destroy(window);
+	printf("Up            : %.3f %.3f %.3f\n",
+		camera->up.x,
+		camera->up.y,
+		camera->up.z);
+
+	printf("Viewport      : %.6f x %.6f\n",
+		camera->viewport_width,
+		camera->viewport_height);
+
+	printf("Upper Left    : %.6f %.6f %.6f\n",
+		camera->viewport_upper_left.x,
+		camera->viewport_upper_left.y,
+		camera->viewport_upper_left.z);
+
+	printf("Pixel Delta X : %.6f %.6f %.6f\n",
+		camera->pixel_delta_x.x,
+		camera->pixel_delta_x.y,
+		camera->pixel_delta_x.z);
+
+	printf("Pixel Delta Y : %.6f %.6f %.6f\n",
+		camera->pixel_delta_y.x,
+		camera->pixel_delta_y.y,
+		camera->pixel_delta_y.z);
+
+	camera_destroy(camera);
 	return (0);
 }
 
