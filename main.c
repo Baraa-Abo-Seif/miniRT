@@ -10,7 +10,24 @@
 
 #include "./mlx_engine/mlx_api.h"
 #include <math.h>
+static int	hit_sphere(t_point center, double radius, t_ray ray)
+{
+	t_vec	oc;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
 
+	oc = point_sub_point(ray.origin, center);
+
+	a = vec_dot(ray.direction, ray.direction);
+	b = 2.0 * vec_dot(oc, ray.direction);
+	c = vec_dot(oc, oc) - radius * radius;
+
+	discriminant = b * b - 4.0 * a * c;
+
+	return (discriminant >= 0.0);
+}
 static int	ray_direction_to_color(t_vec dir)
 {
 	int	r;
@@ -36,7 +53,6 @@ static int	ray_direction_to_color(t_vec dir)
 
 	return ((r << 16) | (g << 8) | b);
 }
-
 static void	render_test(t_image *image, t_camera *camera)
 {
 	int		x;
@@ -50,11 +66,13 @@ static void	render_test(t_image *image, t_camera *camera)
 		while (x < image->width)
 		{
 			ray = camera_generate_ray(camera, x, y);
-			mlx_image_pixel_put(
-				image,
-				x,
-				y,
-				ray_direction_to_color(ray.direction));
+
+			if (hit_sphere((t_point){0.0, 0.0, -1.0}, 0.5, ray))
+				mlx_image_pixel_put(image, x, y, 0x00FF0000);
+			else
+				mlx_image_pixel_put(image, x, y,
+					ray_direction_to_color(ray.direction));
+
 			x++;
 		}
 		y++;
