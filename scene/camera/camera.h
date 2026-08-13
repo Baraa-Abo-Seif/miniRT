@@ -4,7 +4,7 @@
 
 #include "../../math/vector/vector.h"
 #include "../../math/point/point.h"
-#include "../../math/ray/ray.h"
+#include "../ray/ray.h"
 #include "../../Libft/libft.h"
 #include <math.h>
 
@@ -47,6 +47,6 @@ void		camera_compute_viewport(t_camera *camera,int image_width,int image_height)
 
 void	camera_compute_pixel_delta(t_camera *camera,int image_width,int image_height);
 
-t_ray	camera_ray_through_pixel(t_camera *camera, int j, int i);
+t_ray	camera_generate_ray(t_camera *camera, int x, int y);
 
 #endif

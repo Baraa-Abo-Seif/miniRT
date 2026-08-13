@@ -1,8 +1,8 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include "../vector/vector.h"
-#include "../point/point.h"
+#include "../../math/vector/vector.h"
+#include "../../math/point/point.h"
 
 typedef struct s_ray
 {

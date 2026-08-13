@@ -7,54 +7,104 @@
 
 */
 
+
+#include "./mlx_engine/mlx_api.h"
+#include <math.h>
+
+static int	ray_direction_to_color(t_vec dir)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = (int)((dir.x + 1.0) * 127.5);
+	g = (int)((dir.y + 1.0) * 127.5);
+	b = (int)((-dir.z) * 255.0);
+
+	if (r < 0)
+		r = 0;
+	if (r > 255)
+		r = 255;
+	if (g < 0)
+		g = 0;
+	if (g > 255)
+		g = 255;
+	if (b < 0)
+		b = 0;
+	if (b > 255)
+		b = 255;
+
+	return ((r << 16) | (g << 8) | b);
+}
+
+static void	render_test(t_image *image, t_camera *camera)
+{
+	int		x;
+	int		y;
+	t_ray	ray;
+
+	y = 0;
+	while (y < image->height)
+	{
+		x = 0;
+		while (x < image->width)
+		{
+			ray = camera_generate_ray(camera, x, y);
+			mlx_image_pixel_put(
+				image,
+				x,
+				y,
+				ray_direction_to_color(ray.direction));
+			x++;
+		}
+		y++;
+	}
+}
+
+
+
+#define WIDTH 800
+#define HEIGHT 600
 int	main(void)
 {
+	t_window	*window;
+	t_image		*image;
 	t_camera	*camera;
-	t_ray		ray;
-	t_point		hit;
-	int			j;
-	int			i;
+
+	window = mlx_window_create(800, 600, "miniRT");
+	if (!window)
+		return (1);
+
+	image = mlx_image_create(window->mlx, 800, 600);
+	if (!image)
+		return (1);
+
+	if (mlx_image_data(image) != 0)
+		return (1);
 
 	camera = camera_create();
 	if (!camera)
 		return (1);
 
-	camera->position = (t_point){0.0, 0.0, 0.0};
-	camera->forward = (t_vec){0.0, 0.0, -1.0};
+	camera->position = (t_point){0, 0, 0};
+	camera->forward = (t_vec){0, 0, -1};
 	camera->fov = 60.0;
 
-	if (camera_init(camera, 800, 600) != 0)
-	{
-		camera_destroy(camera);
+	if (camera_init(camera, 800, 600))
 		return (1);
-	}
 
-	printf("=== Ray Generation ===\n");
+	render_test(image, camera);
 
-	j = 400;
-	i = 300;
-	ray = camera_ray_through_pixel(camera, j, i);
-	printf("Center pixel (400, 300):\n");
-	printf("  origin    : %.3f %.3f %.3f\n",
-		ray.origin.x, ray.origin.y, ray.origin.z);
-	printf("  direction : %.3f %.3f %.3f\n",
-		ray.direction.x, ray.direction.y, ray.direction.z);
-	printf("  len       : %.6f\n", vec_length(ray.direction));
+	mlx_display_image(window, image);
 
-	hit = ray_at(ray, 1.0);
-	printf("  P = O + 1*D : %.3f %.3f %.3f\n",
-		hit.x, hit.y, hit.z);
+	mlx_event_init(window);
 
-	ray = camera_ray_through_pixel(camera, 0, 0);
-	printf("Top-left pixel (0, 0):\n");
-	printf("  direction : %.3f %.3f %.3f\n",
-		ray.direction.x, ray.direction.y, ray.direction.z);
-
-	ray = camera_ray_through_pixel(camera, 799, 599);
-	printf("Bottom-right pixel (799, 599):\n");
-	printf("  direction : %.3f %.3f %.3f\n",
-		ray.direction.x, ray.direction.y, ray.direction.z);
+	mlx_event_loop(window);
 
 	camera_destroy(camera);
+	mlx_image_destroy(image);
+	mlx_window_destroy(window);
+
 	return (0);
 }
+
