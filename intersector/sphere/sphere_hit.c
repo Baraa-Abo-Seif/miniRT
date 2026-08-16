@@ -1,6 +1,6 @@
 #include "sphere_hit.h"
-#include <stdio.h>
 
+#include <stdio.h>
 
 bool	sphere_hit(t_sphere *sphere,t_ray ray,
     t_interval interval,t_hit_record *record)
@@ -9,6 +9,7 @@ bool	sphere_hit(t_sphere *sphere,t_ray ray,
 	double	a;
 	double	b;
 	double	c;
+    double	discriminant;
 
 	(void)interval;
 	(void)record;
@@ -17,13 +18,14 @@ bool	sphere_hit(t_sphere *sphere,t_ray ray,
 	a = vec_dot(ray.direction, ray.direction);
 	b = 2.0 * vec_dot(oc, ray.direction);
 	c = vec_dot(oc, oc) - (sphere->radius * sphere->radius);
+    discriminant = (b * b) - (4.0 * a * c);
 
-    // for test :
-    printf("a = %f\n", a);
-    printf("b = %f\n", b);
-    printf("c = %f\n", c);
+    printf("Discriminant = %f\n", discriminant);
 
-	return (false);
+    if (discriminant < 0.0)
+	    return (false);
+
+	return (true);
 }
 
 //! steps:
@@ -38,6 +40,26 @@ bool	sphere_hit(t_sphere *sphere,t_ray ray,
         c = (oc . oc) - r^2
     5) Compute discriminant = b^2 - 4ac
         discriminant = b^2 - 4ac
+
+        Compute a,b,c
+            │
+            ▼
+        Compute Δ
+            │
+             ▼
+        Is Δ < 0 ?
+            │
+     ┌──────┴──────┐
+     │             │
+    Yes           No
+     │             │
+     ▼             ▼
+    Return      Compute sqrt
+    false
+
+    note : The discriminant is computed first because it determines whether real roots exist. Only if Δ >= 0 does it make sense to compute sqrt(Δ) and continue solving for the intersection.
+
+
 */
 
 
