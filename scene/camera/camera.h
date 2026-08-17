@@ -2,8 +2,7 @@
 #define CAMERA_H
 
 
-#include "../../math/vector/vector.h"
-#include "../../math/point/point.h"
+#include "../../math/math.h"
 #include "../ray/ray.h"
 #include "../../Libft/libft.h"
 #include <math.h>

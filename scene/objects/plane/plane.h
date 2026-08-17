@@ -1,8 +1,7 @@
 #ifndef PLANE_H
 #define PLANE_H
 
-#include "../../../math/point/point.h"
-#include "../../../math/vector/vector.h"
+#include "../../../math/math.h"
 
 
 

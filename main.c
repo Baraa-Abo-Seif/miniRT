@@ -1,61 +1,52 @@
 #include <stdio.h>
+#include <math.h>
 
-#include "scene/camera/camera.h"
+#include "scene/objects/plane/plane.h"
 #include "scene/ray/ray.h"
-#include "scene/objects/sphere/sphere.h"
-#include "intersector/sphere/sphere_hit.h"
+#include "intersector/hit/hit_record.h"
 #include "intersector/hit/interval.h"
+#include "intersector/plane/plane_hit.h"
 
 int	main(void)
 {
-	t_camera		*camera;
+	t_plane			plane;
 	t_ray			ray;
-	t_sphere		sphere;
-	t_hit_record	record;
 	t_interval		interval;
-	bool			hit;
+	t_hit_record	record;
 
-	camera = camera_create();
-	if (!camera)
-		return (1);
+	/* Plane */
+	plane.point = (t_point){0.0, 0.0, -1.0};
+	plane.normal = (t_vec){0.0, 0.0, 1.0};
 
-	camera_init(camera, 800, 600);
+	/* Ray */
+	ray.origin = (t_point){0.0, 0.0, 0.0};
+	ray.direction = (t_vec){0.0, 0.0, -1.0};
 
-	ray = camera_generate_ray(camera, 400, 300);
-
-	sphere.center = (t_point){0.0, 0.0, -1.0};
-	sphere.radius = 0.5;
-
+	/* Interval */
 	interval.min = 0.001;
-	interval.max = 1000.0;
+	interval.max = INFINITY;
 
-	hit = sphere_hit(&sphere, ray, interval, &record);
-
-	printf("Hit: %s\n", hit ? "YES" : "NO");
-
-	if (hit)
+	if (plane_hit(&plane, ray, interval, &record))
 	{
+		printf("Hit: YES\n");
 		printf("t = %f\n", record.t);
-
 		printf("Point = (%f, %f, %f)\n",
 			record.point.x,
 			record.point.y,
 			record.point.z);
-
 		printf("Normal = (%f, %f, %f)\n",
 			record.normal.x,
 			record.normal.y,
 			record.normal.z);
-
 		printf("Front Face = %s\n",
 			record.front_face ? "true" : "false");
-
-		printf("Object Pointer = %p\n", record.object);
+		printf("Object Pointer = %p\n",
+			record.object);
 	}
-
-	camera_destroy(camera);
-
+	else
+	{
+		printf("Hit: NO\n");
+	}
 	return (0);
 }
-
 

@@ -1,7 +1,7 @@
 #ifndef AMBIENT_H
 #define AMBIENT_H
 
-#include "../../math/color/color.h"
+#include "../../math/math.h"
 
 
 typedef struct s_ambient

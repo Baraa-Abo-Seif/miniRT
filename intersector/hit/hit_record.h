@@ -3,8 +3,7 @@
 
 # include <stdbool.h>
 
-# include "../../math/point/point.h"
-# include "../../math/vector/vector.h"
+# include "../../math/math.h"
 # include "../../scene/ray/ray.h"
 
 typedef struct s_hit_record

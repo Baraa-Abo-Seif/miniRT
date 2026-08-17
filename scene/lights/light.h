@@ -2,10 +2,7 @@
 #define LIGHT_H
 
 
-#include "../../math/color/color.h"
-#include "../../math/point/point.h"
-
-
+#include "../../math/math.h"
 typedef struct s_light
 {
     t_point position;

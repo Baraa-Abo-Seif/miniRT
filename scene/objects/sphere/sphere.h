@@ -1,7 +1,7 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
-#include "../../../math/point/point.h"
+#include "../../../math/math.h"
 
 
 typedef struct s_sphere

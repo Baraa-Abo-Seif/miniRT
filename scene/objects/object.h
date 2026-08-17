@@ -5,7 +5,7 @@
 #include "sphere/sphere.h"
 #include "plane/plane.h"
 #include "cylinder/cylinder.h"
-#include "../../math/color/color.h"
+#include "../../math/math.h"
 
 
 

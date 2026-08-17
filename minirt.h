@@ -13,9 +13,8 @@
 
 /* Project */
 
-# include "./math/vector/vector.h"
-# include "./math/point/point.h"
-# include "./math/color/color.h"
+
+# include "./math/math.h"
 # include "./scene/ray/ray.h"
 
 # include "./scene/scene.h"

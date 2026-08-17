@@ -22,6 +22,7 @@ before moving to the next milestone.
 | MLX Integration         | ✅ Completed    |
 | Camera & Ray System     | ✅ Completed    |
 | Sphere Intersection     | ✅ Completed    |
+| Plane Intersection      | ✅ Completed    |
 | Remaining Intersections | 🟡 In Progress |
 | Lighting                | ⏳ Pending      |
 | Rendering Pipeline      | ⏳ Pending      |
@@ -33,7 +34,7 @@ before moving to the next milestone.
 ## Overall Completion
 
 ```text
-███████████████████████░░░░░░░ 70%
+█████████████████████████░░░░░ 75%
 ```
 
 ---
@@ -45,35 +46,38 @@ before moving to the next milestone.
 The complete camera and primary ray generation pipeline has been fully
 implemented and validated.
 
-The first complete object intersection system has now been successfully
-implemented.
+The renderer now supports complete ray-object intersection for the first
+two geometric primitives.
 
 The project currently provides:
 
-* Camera creation and destruction
-* Camera orthonormal basis construction
-* Viewport computation
-* Pixel delta computation
-* Camera initialization
-* Ray abstraction
-* Ray constructor
-* Ray position evaluation (`ray_at`)
-* Primary ray generation for every pixel
-* Complete sphere-ray intersection
-* Quadratic equation solver
-* Root validation using intervals
-* Hit record generation
-* Surface normal computation
-* Front-face detection
-* Camera and ray mathematical validation
-* Mathematical sphere intersection validation
-* Visual validation using MLX
+- Camera creation and destruction
+- Camera orthonormal basis construction
+- Viewport computation
+- Pixel delta computation
+- Camera initialization
+- Ray abstraction
+- Ray constructor
+- Ray position evaluation (`ray_at`)
+- Primary ray generation for every pixel
+- Complete sphere-ray intersection
+- Complete plane-ray intersection
+- Quadratic equation solver
+- Interval-based root validation
+- Hit record generation
+- Surface normal computation
+- Front-face detection
+- Camera and ray mathematical validation
+- Mathematical sphere intersection validation
+- Mathematical plane intersection validation
+- Visual validation using MLX
 
 The renderer is now capable of generating mathematically correct primary
-rays and performing complete sphere intersection tests.
+rays and accurately intersecting both spheres and planes.
 
-The remaining work in this milestone focuses on implementing the remaining
-geometric primitives and the generic object intersection interface.
+The remaining work in this milestone focuses on implementing cylinder
+intersections, followed by the generic object dispatch system and the
+closest-hit search used by the renderer.
 
 ---
 
@@ -81,23 +85,24 @@ geometric primitives and the generic object intersection interface.
 
 | Milestone               | Estimated Duration | Status |
 | ----------------------- | -----------------: | ------ |
-| Foundations             |          Completed | ✅      |
-| Core Math Library       |          Completed | ✅      |
-| Architecture            |          Completed | ✅      |
-| Core Engine Foundation  |          Completed | ✅      |
-| Parser                  |          Completed | ✅      |
-| MLX Integration         |          Completed | ✅      |
-| Camera & Ray System     |          Completed | ✅      |
-| Sphere Intersection     |          Completed | ✅      |
-| Remaining Intersections |            ~3 Days | 🟡     |
-| Lighting                |            ~3 Days | ⏳      |
-| Rendering Pipeline      |            ~2 Days | ⏳      |
-| Bonus                   |            ~4 Days | ⏳      |
-| Validation              |            ~2 Days | ⏳      |
+| Foundations             |          Completed | ✅ |
+| Core Math Library       |          Completed | ✅ |
+| Architecture            |          Completed | ✅ |
+| Core Engine Foundation  |          Completed | ✅ |
+| Parser                  |          Completed | ✅ |
+| MLX Integration         |          Completed | ✅ |
+| Camera & Ray System     |          Completed | ✅ |
+| Sphere Intersection     |          Completed | ✅ |
+| Plane Intersection      |          Completed | ✅ |
+| Remaining Intersections |            ~2 Days | 🟡 |
+| Lighting                |            ~3 Days | ⏳ |
+| Rendering Pipeline      |            ~2 Days | ⏳ |
+| Bonus                   |            ~4 Days | ⏳ |
+| Validation              |            ~2 Days | ⏳ |
 
 ---
 
-Approximately **12–14 working days** remain in the current roadmap.
+Approximately **11–13 working days** remain in the current roadmap.
 
 This estimation assumes a steady development pace and may change as the
 project evolves.
@@ -115,7 +120,7 @@ The current development sequence is:
 Sphere Intersection        ✅
         │
         ▼
-Plane Intersection
+Plane Intersection         ✅
         │
         ▼
 Cylinder Intersection
@@ -130,14 +135,13 @@ Closest Visible Hit
 Lighting
 ```
 
-The sphere intersection implementation has been fully completed and
-validated.
+Both sphere and plane intersections have now been fully implemented,
+tested, and mathematically validated.
 
-The next development cycle will focus on implementing plane intersections,
-followed by cylinders, before building the generic object-dispatch system
-that will allow the renderer to query every object uniformly.
+The next development cycle will focus on implementing cylinder
+intersections before building the generic object-dispatch system that
+allows every scene object to be queried through a unified interface.
 
 Once the complete intersection system has been implemented and verified,
 the project will move to the **Lighting** milestone.
-
 
