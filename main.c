@@ -18,8 +18,10 @@ int	main(void)
 
 	/* Ray */
 
-	ray.origin = (t_point){0.0, 0.0, -5.0};
-	ray.direction = vec_normalize((t_vec){0.0, 0.0, 1.0});
+	// ray.origin = (t_point){0.0, 0.0, -5.0};
+	// ray.direction = vec_normalize((t_vec){0.0, 0.0, 1.0});
+    ray.origin = (t_point){0.0, 3.0, 0.0};
+    ray.direction = vec_normalize((t_vec){0.0, -1.0, 0.0});
 
 	/* Interval */
 
