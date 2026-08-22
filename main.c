@@ -17,16 +17,22 @@ int	main(void)
 	cylinder.height = 2.0;
 
 	/* Ray */
-
+    //? Body
 	// ray.origin = (t_point){0.0, 0.0, -5.0};
 	// ray.direction = vec_normalize((t_vec){0.0, 0.0, 1.0});
+    //? Top Cap
     // ray.origin = (t_point){0.0, 3.0, 0.0};
+    // ray.direction = vec_normalize((t_vec){0.0, -1.0, 0.0});
+    //? Bottom Cap
+    // ray.origin = (t_point){0.0, -3.0, 0.0};
+    // ray.direction = vec_normalize((t_vec){0.0, 1.0, 0.0});
+    //? Miss
+    // ray.origin = (t_point){2.0, 3.0, 0.0};
     // ray.direction = vec_normalize((t_vec){0.0, -1.0, 0.0});
 
 
-    ray.origin = (t_point){0.0, -3.0, 0.0};
-    ray.direction = vec_normalize((t_vec){0.0, 1.0, 0.0});
 
+    
 	/* Interval */
 
 	interval.min = 0.001;

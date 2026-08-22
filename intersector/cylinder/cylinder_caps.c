@@ -1,5 +1,6 @@
 #include "cylinder_hit.h"
 #include <math.h>
+#include <stdio.h>
 
 
 
@@ -24,13 +25,17 @@ t_vec cap_normal,double *root)
 	double	numerator;
 
 	denom = vec_dot(ctx->ray.direction,cap_normal);
+	printf("denom = %f\n", denom);
 	if (fabs(denom) < EPSILON)
 		return (false);
 	center_to_origin = point_sub_point(
 	cap_center,ctx->ray.origin);
 	numerator = vec_dot(
 		center_to_origin,cap_normal);
-		*root = numerator / denom;
+	printf("numerator = %f\n", numerator);
+	*root = numerator / denom;
+
+	printf("root = %f\n", *root);
 
 	if (*root <= ctx->interval.min || *root >= ctx->interval.max)
 		return (false);
@@ -51,6 +56,7 @@ bool	check_single_cap(
 	get_cap_data(cylinder,side,&cap_center,&cap_normal);
 	if (!find_cap_root(ctx,cap_center,cap_normal,&root))
 		return (false);
+	printf("root before ray_at = %f\n", root);
 	hit_point = ray_at(ctx->ray,root);
 	offset = point_sub_point(hit_point,cap_center);
 	if (vec_dot(offset, offset)

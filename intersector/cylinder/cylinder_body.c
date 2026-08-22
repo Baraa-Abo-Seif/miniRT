@@ -53,6 +53,9 @@ bool	find_body_root(
 	t_cylinder *cylinder,t_ray ray,
 	t_quadratic_data *eq,t_interval interval)
 {
+	if (fabs(eq->a) < EPSILON)
+		return (false);
+
 	if (eq->discriminant < 0.0)
 		return (false);
 
