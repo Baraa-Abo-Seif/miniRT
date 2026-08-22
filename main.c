@@ -16,23 +16,11 @@ int	main(void)
 	cylinder.radius = 1.0;
 	cylinder.height = 2.0;
 
-	/* Ray */
-    //? Body
-	// ray.origin = (t_point){0.0, 0.0, -5.0};
-	// ray.direction = vec_normalize((t_vec){0.0, 0.0, 1.0});
-    //? Top Cap
-    // ray.origin = (t_point){0.0, 3.0, 0.0};
-    // ray.direction = vec_normalize((t_vec){0.0, -1.0, 0.0});
-    //? Bottom Cap
-    // ray.origin = (t_point){0.0, -3.0, 0.0};
-    // ray.direction = vec_normalize((t_vec){0.0, 1.0, 0.0});
-    //? Miss
-    // ray.origin = (t_point){2.0, 3.0, 0.0};
-    // ray.direction = vec_normalize((t_vec){0.0, -1.0, 0.0});
+	/* Ray : MISS */
 
+	ray.origin = (t_point){2.0, 3.0, 0.0};
+	ray.direction = vec_normalize((t_vec){0.0, -1.0, 0.0});
 
-
-    
 	/* Interval */
 
 	interval.min = 0.001;
@@ -46,14 +34,12 @@ int	main(void)
 
 		printf("t = %f\n", record.t);
 
-		printf(
-			"Point : (%f, %f, %f)\n",
+		printf("Point : (%f, %f, %f)\n",
 			record.point.x,
 			record.point.y,
 			record.point.z);
 
-		printf(
-			"Normal : (%f, %f, %f)\n",
+		printf("Normal : (%f, %f, %f)\n",
 			record.normal.x,
 			record.normal.y,
 			record.normal.z);
