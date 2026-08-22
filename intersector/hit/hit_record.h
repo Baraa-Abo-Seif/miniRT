@@ -20,4 +20,19 @@ typedef struct s_hit_record
 
 void	hit_record_set_face_normal(t_hit_record *record,t_ray ray,t_vec outward_normal);
 
+
+
+typedef struct s_quadratic
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+	double	sqrtd;
+	double	root;
+}	t_quadratic_data;
+
+
+
+
 #endif

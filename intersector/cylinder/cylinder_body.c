@@ -1,86 +1,132 @@
 #include "cylinder_hit.h"
 #include <math.h>
 
-void	compute_body_eq(t_cylinder *cyl, t_ray ray, t_cyl_quad *eq)
-{
-	t_vec	oc;
-	t_vec	w;
-	t_vec	u;
 
-	oc = point_sub_point(ray.origin, cyl->center);
-	w = vec_sub(oc, vec_scale(cyl->axis, vec_dot(oc, cyl->axis)));
-	u = vec_sub(ray.direction,
-			vec_scale(cyl->axis, vec_dot(ray.direction, cyl->axis)));
-	eq->a = vec_dot(u, u);
-	eq->b = 2.0 * vec_dot(w, u);
-	eq->c = vec_dot(w, w) - cyl->radius * cyl->radius;
+void	compute_body_eq(
+	t_quadratic_data *eq,
+	t_cylinder *cylinder,
+	t_ray ray)
+{
+	t_vec	w;
+	t_vec	m;
+	t_vec	n;
+	double	proj_w;
+	t_vec	proj_vec_w;
+	double	proj_d;
+	t_vec	proj_vec_d;
+
+	w = point_sub_point(ray.origin, cylinder->center);
+	proj_w = vec_dot(w, cylinder->axis);
+	proj_vec_w = vec_scale(cylinder->axis, proj_w);
+	m = vec_sub(w, proj_vec_w);
+	proj_d = vec_dot(ray.direction, cylinder->axis);
+	proj_vec_d = vec_scale(cylinder->axis, proj_d);
+	n = vec_sub(ray.direction, proj_vec_d);
+	eq->a = vec_dot(n, n);
+	eq->b = 2.0 * vec_dot(m, n);
+	eq->c = vec_dot(m, m) - cylinder->radius * cylinder->radius;
 	eq->discriminant = eq->b * eq->b - 4.0 * eq->a * eq->c;
 }
 
-bool	root_in_bounds(t_cylinder *cyl, t_ray ray,
-			double t, t_interval interval)
+bool	is_valid_body_root(
+	t_cylinder *cylinder,t_ray ray,
+	double root,t_interval interval)
 {
-	t_point	hit;
-	t_vec	proj;
+	t_point	hit_point;
+	t_vec	h;
+	double	height;
 
-	if (t <= interval.min || t >= interval.max)
+	if (root <= interval.min || root >= interval.max)
 		return (false);
-	hit = ray_at(ray, t);
-	proj = point_sub_point(hit, cyl->center);
-	if (fabs(vec_dot(proj, cyl->axis)) > cyl->height / 2.0 + EPSILON)
+	hit_point = ray_at(ray, root);
+	h = point_sub_point(hit_point, cylinder->center);
+
+	height = vec_dot(h, cylinder->axis);
+
+	if (fabs(height) > cylinder->height / 2.0)
 		return (false);
+
 	return (true);
 }
 
-bool	find_body_root(t_cylinder *cyl, t_ray ray,
-			t_cyl_quad *eq, t_interval interval)
+bool	find_body_root(
+	t_cylinder *cylinder,t_ray ray,
+	t_quadratic_data *eq,t_interval interval)
 {
-	if (eq->a < EPSILON || eq->discriminant < 0.0)
+	if (eq->discriminant < 0.0)
 		return (false);
+
 	eq->sqrtd = sqrt(eq->discriminant);
-	eq->root = (-eq->b - eq->sqrtd) / (2.0 * eq->a);
-	if (root_in_bounds(cyl, ray, eq->root, interval))
+
+	eq->root = (-eq->b - eq->sqrtd)
+		/ (2.0 * eq->a);
+
+	if (is_valid_body_root(cylinder, ray, eq->root, interval))
 		return (true);
-	eq->root = (-eq->b + eq->sqrtd) / (2.0 * eq->a);
-	if (root_in_bounds(cyl, ray, eq->root, interval))
+
+	eq->root = (-eq->b + eq->sqrtd)
+		/ (2.0 * eq->a);
+
+	if (is_valid_body_root(cylinder, ray, eq->root, interval))
 		return (true);
+
 	return (false);
 }
 
-void	fill_body_record(t_cylinder *cyl, t_ray ray,
-			t_cyl_quad *eq, t_hit_record *record)
+void	fill_body_record(
+	t_cylinder *cylinder,t_ray ray,
+	t_quadratic_data *eq,t_hit_record *record)
 {
-	t_vec	proj;
-	t_point	center_proj;
+	t_vec	center_to_hit;
+	t_point	axis_point;
 	t_vec	outward_normal;
 
 	record->t = eq->root;
 	record->point = ray_at(ray, eq->root);
-	proj = point_sub_point(record->point, cyl->center);
-	center_proj = point_add_vec(cyl->center,
-			vec_scale(cyl->axis, vec_dot(proj, cyl->axis)));
+	center_to_hit = point_sub_point(
+		record->point,cylinder->center);
+	axis_point = point_add_vec(
+		cylinder->center,vec_scale(cylinder->axis,
+			vec_dot(center_to_hit,cylinder->axis)));
+
+	outward_normal = point_sub_point(
+		record->point,axis_point);
 	outward_normal = vec_scale(
-			point_sub_point(record->point, center_proj),
-			1.0 / cyl->radius);
-	hit_record_set_face_normal(record, ray, outward_normal);
-	record->object = cyl;
+		outward_normal,1.0 / cylinder->radius);
+	hit_record_set_face_normal(record,ray,outward_normal);
+	record->object = cylinder;
 }
 
-bool	cylinder_hit(t_cylinder *cyl, t_ray ray,
-			t_interval interval, t_hit_record *record)
+
+bool	cylinder_hit(
+	t_cylinder *cylinder,
+	t_ray ray,
+	t_interval interval,
+	t_hit_record *record)
 {
-	t_cyl_quad		eq;
-	t_hit_record	temp;
-	t_interval		tight;
+	t_quadratic_data	eq;
+	t_cap_context		ctx;
+	bool	hit;
 
-	tight = interval;
-	compute_body_eq(cyl, ray, &eq);
-	if (find_body_root(cyl, ray, &eq, tight))
+	hit = false;
+	ctx.ray = ray;
+	ctx.interval = interval;
+	ctx.record = record;
+	compute_body_eq(&eq, cylinder, ray);
+
+	if (find_body_root(cylinder, ray, &eq, interval))
 	{
-		fill_body_record(cyl, ray, &eq, record);
-		tight.max = record->t;
+		fill_body_record(cylinder,ray,&eq,record);
+		ctx.interval.max = record->t;
+		hit = true;
 	}
-	if (check_caps(cyl, ray, tight, &temp))
-		*record = temp;
-	return (record->t < interval.max);
+	if (check_caps(cylinder, &ctx))
+		hit = true;
+
+	return (hit);
 }
+
+
+
+
+

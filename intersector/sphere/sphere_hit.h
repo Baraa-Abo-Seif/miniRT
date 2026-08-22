@@ -7,17 +7,6 @@
 #include "../hit/hit_record.h"
 #include "../hit/interval.h"
 
-typedef struct s_quadratic
-{
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-	double	sqrtd;
-	double	root;
-}	t_quadratic_data;
-
-
 
 void	calculate_equation(t_sphere *sphere,t_ray ray,t_quadratic_data *eq);
 bool	find_root(t_quadratic_data *eq,t_interval interval);
