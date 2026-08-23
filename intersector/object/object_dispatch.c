@@ -1,7 +1,5 @@
 #include "object_dispatch.h"
-#include "sphere/sphere_hit.h"
-#include "plane/plane_hit.h"
-#include "cylinder/cylinder_hit.h"
+
 
 bool	object_hit(t_object *object, t_ray ray,
 			t_interval interval, t_hit_record *record)

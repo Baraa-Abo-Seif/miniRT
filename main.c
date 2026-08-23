@@ -18,9 +18,8 @@ int	main(void)
 
 	/* Ray : MISS */
 
-	ray.origin = (t_point){2.0, 3.0, 0.0};
-	ray.direction = vec_normalize((t_vec){0.0, -1.0, 0.0});
-
+ray.origin = (t_point){0.5, 3.0, 0.0};
+ray.direction = vec_normalize((t_vec){0.0, -1.0, 0.0});
 	/* Interval */
 
 	interval.min = 0.001;

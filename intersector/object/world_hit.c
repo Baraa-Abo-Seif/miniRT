@@ -1,7 +1,7 @@
-#include "closest_hit.h"
+#include "world_hit.h"
 #include "object_dispatch.h"
 
-bool	scene_closest_hit(t_scene *scene, t_ray ray,
+bool	world_hit(t_scene *scene, t_ray ray,
 			t_interval interval, t_hit_record *record)
 {
 	t_object	*current;

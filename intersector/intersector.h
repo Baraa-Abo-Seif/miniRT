@@ -6,8 +6,8 @@
 #include "./sphere/sphere_hit.h"
 #include "./plane/plane_hit.h"
 #include "./cylinder/cylinder_hit.h"
-#include "./object_dispatch.h"
-#include "./closest_hit.h"
+#include "./object/object_dispatch.h"
+#include "./object/world_hit.h"
 
 
 
