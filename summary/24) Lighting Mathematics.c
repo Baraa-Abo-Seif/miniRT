@@ -505,5 +505,600 @@ The final diffuse contribution is
 */
 
 
+//! **************************************************************************
+//!                           Ambient Lighting
+//! **************************************************************************
+
+/*
+===============================================================================
+CONCEPT
+===============================================================================
+
+Ambient lighting represents the constant background illumination present in
+the entire scene.
+
+Unlike direct lighting, ambient light does not depend on:
+
+    • Surface Normal
+
+    • Light Direction
+
+    • Camera Direction
+
+Every visible point receives the same ambient contribution.
+
+-------------------------------------------------------------------------------
+Formula
+-------------------------------------------------------------------------------
+
+Ambient Contribution
+
+=
+
+Object Color
+
+×
+
+Ambient Color
+
+×
+
+Ambient Ratio
+
+-------------------------------------------------------------------------------
+Algorithm
+-------------------------------------------------------------------------------
+
+Object Color
+
+        ×
+
+Ambient Color
+
+        ↓
+
+Scale by Ambient Ratio
+
+        ↓
+
+Final Ambient Contribution
+
+-------------------------------------------------------------------------------
+Purpose
+-------------------------------------------------------------------------------
+
+Ambient lighting prevents objects from becoming completely black in areas
+where no direct light reaches them.
+
+It provides the minimum illumination visible in the scene.
+
+-------------------------------------------------------------------------------
+Key Idea
+-------------------------------------------------------------------------------
+
+Ambient lighting is the simplest lighting component.
+
+It is constant for every visible point and serves as the base layer of the
+final rendered color.
+
+===============================================================================
+*/
+
+//! **************************************************************************
+//!                    Diffuse Lighting — Fundamental Idea
+//! **************************************************************************
+
+/*
+===============================================================================
+CONCEPT
+===============================================================================
+
+Diffuse lighting simulates the amount of light reaching a surface depending
+on the angle between the incoming light and the surface.
+
+Unlike ambient lighting, diffuse lighting is NOT constant.
+
+Every point on the object receives a different amount of light.
+
+-------------------------------------------------------------------------------
+Principle
+-------------------------------------------------------------------------------
+
+• Light hitting the surface perpendicularly produces the strongest
+  illumination.
+
+• As the angle increases, the illumination decreases.
+
+• When the light reaches 90 degrees, no diffuse light remains.
+
+• When the light is behind the surface, it contributes nothing.
+
+-------------------------------------------------------------------------------
+Required Directions
+-------------------------------------------------------------------------------
+
+Diffuse lighting compares two normalized vectors:
+
+    • Surface Normal
+
+    • Light Direction
+
+-------------------------------------------------------------------------------
+Mathematical Tool
+-------------------------------------------------------------------------------
+
+The comparison is performed using the Dot Product.
+
+The dot product measures how well the two directions align.
+
+Result
+
+    1  → Maximum illumination
+
+    0  → No illumination
+
+   <0  → Light is behind the surface
+
+-------------------------------------------------------------------------------
+Key Idea
+-------------------------------------------------------------------------------
+
+Diffuse lighting depends entirely on the angle between the surface normal
+and the incoming light direction.
+
+This is why the Dot Product is the core of Lambertian Reflection.
+
+===============================================================================
+*/
+
+//! **************************************************************************
+//!                     Lambert's Cosine Law
+//! **************************************************************************
+
+/*
+===============================================================================
+CONCEPT
+===============================================================================
+
+Diffuse lighting follows Lambert's Cosine Law.
+
+The amount of light received by a surface depends on the cosine of the angle
+between the surface normal and the incoming light direction.
+
+-------------------------------------------------------------------------------
+Formula
+-------------------------------------------------------------------------------
+
+Light Intensity
+
+∝
+
+cos(θ)
+
+where
+
+    θ = angle between
+
+        • Surface Normal
+
+        • Light Direction
+
+-------------------------------------------------------------------------------
+Special Cases
+-------------------------------------------------------------------------------
+
+θ = 0°
+
+    cos = 1
+
+    Maximum illumination
+
+---------------------------------------
+
+θ = 45°
+
+    cos ≈ 0.707
+
+    Partial illumination
+
+---------------------------------------
+
+θ = 90°
+
+    cos = 0
+
+    No diffuse lighting
+
+---------------------------------------
+
+θ > 90°
+
+    cos < 0
+
+    Light is behind the surface
+
+    Diffuse contribution becomes zero.
+
+-------------------------------------------------------------------------------
+Connection with the Dot Product
+-------------------------------------------------------------------------------
+
+When both vectors are normalized,
+
+    N · L = cos(θ)
+
+Therefore,
+
+the renderer never computes the angle directly.
+
+Instead, it computes
+
+    dot(N, L)
+
+which immediately provides the cosine required by Lambert's Law.
+
+-------------------------------------------------------------------------------
+Key Idea
+-------------------------------------------------------------------------------
+
+The Dot Product is used because, for normalized vectors, it directly equals
+the cosine of the angle between the surface normal and the light direction.
+
+This makes diffuse lighting both mathematically correct and computationally
+efficient.
+
+===============================================================================
+*/
+
+//! **************************************************************************
+//!                 Diffuse Lighting — Step 1 (Light Direction)
+//! **************************************************************************
+
+/*
+===============================================================================
+CONCEPT
+===============================================================================
+
+Before computing diffuse lighting, the renderer must determine the direction
+from the surface point toward the light source.
+
+-------------------------------------------------------------------------------
+Formula
+-------------------------------------------------------------------------------
+
+Light Direction
+
+=
+
+Light Position
+
+-
+
+Hit Point
+
+-------------------------------------------------------------------------------
+Normalization
+-------------------------------------------------------------------------------
+
+The resulting vector must always be normalized.
+
+Only normalized vectors allow the dot product to directly represent
+
+    cos(theta)
+
+used by Lambert's Cosine Law.
+
+-------------------------------------------------------------------------------
+Why the Hit Point?
+-------------------------------------------------------------------------------
+
+Lighting is computed for every visible point independently.
+
+Different points on the same object have different directions toward the
+light source.
+
+Therefore, the light direction is always computed from the hit point,
+not from the object's center.
+
+-------------------------------------------------------------------------------
+Key Idea
+-------------------------------------------------------------------------------
+
+The first step of diffuse lighting is simply constructing a normalized
+vector pointing from the hit point toward the light source.
+
+===============================================================================
+*/
+
+//! **************************************************************************
+//!              Diffuse Lighting — Step 2 (Light Intensity)
+//! **************************************************************************
+
+/*
+===============================================================================
+CONCEPT
+===============================================================================
+
+Diffuse lighting strength is determined by the alignment between the surface
+normal and the light direction.
+
+-------------------------------------------------------------------------------
+Formula
+-------------------------------------------------------------------------------
+
+Intensity
+
+=
+
+dot(N, L)
+
+where
+
+    N = Surface Normal
+
+    L = Light Direction
+
+Both vectors must be normalized.
+
+-------------------------------------------------------------------------------
+Meaning
+-------------------------------------------------------------------------------
+
+dot = 1
+
+    Maximum illumination
+
+---------------------------------------
+
+dot = 0
+
+    No illumination
+
+---------------------------------------
+
+dot < 0
+
+    Light is behind the surface
+
+-------------------------------------------------------------------------------
+Clamping
+-------------------------------------------------------------------------------
+
+Negative light intensity has no physical meaning.
+
+Therefore,
+
+    Intensity = max(0, dot(N, L))
+
+-------------------------------------------------------------------------------
+Result
+-------------------------------------------------------------------------------
+
+The final intensity is always between
+
+    0
+
+and
+
+    1
+
+This value will later scale the light contribution.
+
+-------------------------------------------------------------------------------
+Key Idea
+-------------------------------------------------------------------------------
+
+The dot product directly measures how much of the incoming light reaches the
+surface.
+
+It becomes the diffuse light intensity after clamping negative values to zero.
+
+===============================================================================
+*/
+//! **************************************************************************
+//!                  Diffuse Lighting — Final Formula
+//! **************************************************************************
+
+/*
+===============================================================================
+CONCEPT
+===============================================================================
+
+Diffuse lighting computes the light reflected from a surface according to
+Lambert's Cosine Law.
+
+The reflected light depends on:
+
+    • Surface Color
+
+    • Light Color
+
+    • Angle between the Normal and the Light Direction
+
+-------------------------------------------------------------------------------
+Algorithm
+-------------------------------------------------------------------------------
+
+1.
+
+Compute the normalized light direction.
+
+        L = normalize(Light Position - Hit Point)
+
+---------------------------------------
+
+2.
+
+Compute the diffuse intensity.
+
+        intensity = dot(N, L)
+
+---------------------------------------
+
+3.
+
+Clamp negative values.
+
+        intensity = max(0, intensity)
+
+---------------------------------------
+
+4.
+
+Apply the lighting equation.
+
+        Diffuse
+
+        =
+
+        Object Color
+
+        ×
+
+        Light Color
+
+        ×
+
+        intensity
+
+-------------------------------------------------------------------------------
+Key Idea
+-------------------------------------------------------------------------------
+
+Diffuse lighting first computes how much light reaches the surface using the
+dot product, then scales the object's reflected light by that amount.
+
+===============================================================================
+*/
+
+//! **************************************************************************
+//!                  Final Lighting Composition
+//! **************************************************************************
+
+/*
+===============================================================================
+CONCEPT
+===============================================================================
+
+Each lighting component is computed independently.
+
+The renderer combines these components to produce the final pixel color.
+
+-------------------------------------------------------------------------------
+Formula
+-------------------------------------------------------------------------------
+
+Final Color
+
+=
+
+Ambient Contribution
+
++
+
+Diffuse Contribution
+
+-------------------------------------------------------------------------------
+Algorithm
+-------------------------------------------------------------------------------
+
+Compute Ambient
+
+        ↓
+
+Compute Diffuse
+
+        ↓
+
+Add Both Contributions
+
+        ↓
+
+Final Pixel Color
+
+-------------------------------------------------------------------------------
+Architecture
+-------------------------------------------------------------------------------
+
+render_ambient()
+
+    Computes only ambient lighting.
+
+---------------------------------------
+
+render_diffuse()
+
+    Computes only diffuse lighting.
+
+---------------------------------------
+
+Renderer
+
+    Combines both contributions into the final color.
+
+-------------------------------------------------------------------------------
+Key Idea
+-------------------------------------------------------------------------------
+
+Lighting components remain independent.
+
+The renderer is responsible for combining them to obtain the final color
+displayed on the screen.
+
+===============================================================================
+*/
+
+//! ************************************************************************** //
+//!                     Diffuse Brightness Scaling
+//! ************************************************************************** //
+
+/*
+===============================================================================
+CONCEPT
+===============================================================================
+
+The Lambert term only describes how much light reaches the surface because
+of the angle between the surface normal and the light direction.
+
+It does NOT describe how strong the light source is.
+
+-------------------------------------------------------------------------------
+Diffuse Intensity
+-------------------------------------------------------------------------------
+
+Diffuse Intensity
+
+=
+
+Lambert
+
+×
+
+Light Brightness
+
+-------------------------------------------------------------------------------
+Implementation
+-------------------------------------------------------------------------------
+
+intensity = dot(normal, light_direction);
+
+if (intensity < 0.0)
+	intensity = 0.0;
+
+intensity *= light->brightness;
+
+-------------------------------------------------------------------------------
+Why?
+-------------------------------------------------------------------------------
+
+Lambert controls the angle.
+
+Brightness controls the power of the light source.
+
+Both are required to produce the final diffuse illumination.
+
+===============================================================================
+*/
+
 
 

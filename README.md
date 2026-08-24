@@ -8,76 +8,90 @@ The project prioritises understanding over speed, ensuring that every algorithm,
 
 ## Current Progress
 
-| Area                    | Status         |
-| ----------------------- | -------------- |
-| Mathematics             | ✅ Completed    |
-| Core Math Library       | ✅ Completed    |
-| Architecture Design     | ✅ Completed    |
-| Core Engine Foundation  | ✅ Completed    |
-| Parser                  | ✅ Completed    |
-| MLX Integration         | ✅ Completed    |
-| Camera & Ray System     | ✅ Completed    |
-| Sphere Intersection     | ✅ Completed    |
-| Plane Intersection      | ✅ Completed    |
-| Cylinder Intersection   | ✅ Completed    |
-| Generic Object Dispatch | ✅ Completed    |
-| Closest Visible Hit     | ✅ Completed    |
-| Lighting                | 🟡 In Progress |
-| Rendering Pipeline      | ⏳ Pending      |
-| Bonus Features          | ⏳ Pending      |
-| Final Validation        | ⏳ Pending      |
+| Area                     | Status |
+| ------------------------ | ------ |
+| Mathematics              | ✅ Completed |
+| Core Math Library        | ✅ Completed |
+| Architecture Design      | ✅ Completed |
+| Core Engine Foundation   | ✅ Completed |
+| Parser                   | ✅ Completed |
+| MLX Integration          | ✅ Completed |
+| Camera & Ray System      | ✅ Completed |
+| Sphere Intersection      | ✅ Completed |
+| Plane Intersection       | ✅ Completed |
+| Cylinder Intersection    | ✅ Completed |
+| Generic Object Dispatch  | ✅ Completed |
+| Closest Visible Hit      | ✅ Completed |
+| Lighting                 | ✅ Completed |
+| Rendering Pipeline       | 🟡 In Progress |
+| Bonus Features           | ⏳ Pending |
+| Final Validation         | ⏳ Pending |
 
 ---
 
 ## Overall Completion
 
 ```text
-█████████████████████████████░ 82%
+█████████████████████████████████░░ 88%
 ```
 
 ---
 
 ## Current Stage
 
-**Milestone 7 — Lighting**
+**Milestone 8 — Rendering Pipeline**
 
-The complete camera and primary ray generation pipeline has been fully implemented and validated.
+The complete visibility and lighting framework has now been fully implemented and validated.
 
-The renderer now supports a complete visibility pipeline for every mandatory geometric primitive.
+The renderer currently supports:
 
-The project currently provides:
+### Geometry
 
-* Camera creation and destruction
-* Camera orthonormal basis construction
-* Viewport computation
-* Pixel delta computation
-* Camera initialization
-* Ray abstraction
-* Ray constructor
-* Ray position evaluation (`ray_at`)
-* Primary ray generation for every pixel
-* Complete sphere-ray intersection
-* Complete plane-ray intersection
-* Complete cylinder-ray intersection
-* Cylinder body intersection
-* Cylinder cap intersection
-* Unified cylinder intersection pipeline
-* Generic object dispatch system
-* Scene-wide closest-hit search
-* Quadratic equation solver
-* Interval-based root validation
-* Hit record generation
-* Surface normal computation
-* Front-face detection
-* Camera and ray mathematical validation
-* Mathematical sphere intersection validation
-* Mathematical plane intersection validation
-* Mathematical cylinder intersection validation
-* Visual validation using MLX
+- Camera creation and destruction
+- Camera orthonormal basis construction
+- Viewport computation
+- Pixel delta computation
+- Camera initialization
+- Ray abstraction
+- Ray constructor
+- Ray position evaluation (`ray_at`)
+- Primary ray generation
 
-The renderer is now capable of generating mathematically correct primary rays, intersecting every mandatory primitive, dispatching intersections through a unified interface, and selecting the closest visible object inside the scene.
+### Intersections
 
-With the complete intersection framework finished, development now moves to the lighting stage.
+- Complete sphere-ray intersection
+- Complete plane-ray intersection
+- Complete cylinder-ray intersection
+- Cylinder body intersection
+- Cylinder cap intersection
+- Unified cylinder intersection pipeline
+- Generic object dispatch system
+- Scene-wide closest-hit search
+- Quadratic equation solver
+- Interval-based root validation
+- Hit record generation
+- Surface normal computation
+- Front-face detection
+
+### Lighting
+
+- Ambient lighting
+- Lambert diffuse lighting
+- Multiple light support
+- Shadow rays
+- Shadow acne prevention (epsilon offset)
+- Light visibility testing
+- Color accumulation
+- Color clamping
+
+### Validation
+
+- Mathematical validation for all primitives
+- Visual validation using MLX test scenes
+
+The renderer now possesses a complete geometric visibility system together with a complete mandatory lighting model.
+
+The next development phase focuses on connecting every subsystem into the final rendering loop capable of producing the complete image pixel by pixel.
 
 ---
 
@@ -85,26 +99,26 @@ With the complete intersection framework finished, development now moves to the 
 
 | Milestone               | Estimated Duration | Status |
 | ----------------------- | -----------------: | ------ |
-| Foundations             |          Completed | ✅      |
-| Core Math Library       |          Completed | ✅      |
-| Architecture            |          Completed | ✅      |
-| Core Engine Foundation  |          Completed | ✅      |
-| Parser                  |          Completed | ✅      |
-| MLX Integration         |          Completed | ✅      |
-| Camera & Ray System     |          Completed | ✅      |
-| Sphere Intersection     |          Completed | ✅      |
-| Plane Intersection      |          Completed | ✅      |
-| Cylinder Intersection   |          Completed | ✅      |
-| Generic Object Dispatch |          Completed | ✅      |
-| Closest Visible Hit     |          Completed | ✅      |
-| Lighting                |            ~3 Days | 🟡     |
-| Rendering Pipeline      |            ~2 Days | ⏳      |
-| Bonus                   |            ~4 Days | ⏳      |
-| Validation              |            ~2 Days | ⏳      |
+| Foundations             | Completed | ✅ |
+| Core Math Library       | Completed | ✅ |
+| Architecture            | Completed | ✅ |
+| Core Engine Foundation  | Completed | ✅ |
+| Parser                  | Completed | ✅ |
+| MLX Integration         | Completed | ✅ |
+| Camera & Ray System     | Completed | ✅ |
+| Sphere Intersection     | Completed | ✅ |
+| Plane Intersection      | Completed | ✅ |
+| Cylinder Intersection   | Completed | ✅ |
+| Generic Object Dispatch | Completed | ✅ |
+| Closest Visible Hit     | Completed | ✅ |
+| Lighting                | Completed | ✅ |
+| Rendering Pipeline      | ~2 Days | 🟡 |
+| Bonus                   | ~4 Days | ⏳ |
+| Validation              | ~2 Days | ⏳ |
 
 ---
 
-Approximately **8–10 working days** remain in the current roadmap.
+Approximately **6–8 working days** remain in the current roadmap.
 
 This estimation assumes a steady development pace and may change as the project evolves.
 
@@ -112,39 +126,52 @@ This estimation assumes a steady development pace and may change as the project 
 
 ## Current Objective
 
-The immediate objective is to implement the complete lighting model.
+The immediate objective is to implement the complete rendering pipeline.
 
-The renderer now possesses a complete visibility system capable of determining the closest object intersected by every primary ray.
+All mandatory mathematical and lighting components are now operational.
 
-The next development phase focuses on transforming geometric intersections into visible images through physically correct lighting calculations, beginning with ambient illumination, diffuse shading (Lambert), and shadow rays.
+The remaining work is to connect every subsystem into the renderer so that each pixel:
+
+1. Generates a primary ray.
+2. Finds the closest visible object.
+3. Computes ambient illumination.
+4. Computes diffuse illumination.
+5. Tests shadow visibility.
+6. Produces the final pixel color.
+7. Writes the pixel into the MLX image.
 
 ```text
-Sphere Intersection         ✅
-        │
-        ▼
-Plane Intersection          ✅
-        │
-        ▼
-Cylinder Intersection       ✅
-        │
-        ▼
-Generic Object Dispatch     ✅
-        │
-        ▼
-Closest Visible Hit         ✅
-        │
-        ▼
-Lighting
-        │
-        ▼
-Rendering Pipeline
-        │
-        ▼
-Bonus Features
-        │
-        ▼
-Final Validation
+Primary Ray Generation          ✅
+            │
+            ▼
+World Intersection              ✅
+            │
+            ▼
+Closest Visible Hit             ✅
+            │
+            ▼
+Ambient Lighting                ✅
+            │
+            ▼
+Diffuse Lighting                ✅
+            │
+            ▼
+Shadow Rays                     ✅
+            │
+            ▼
+Rendering Pipeline              🟡
+            │
+            ▼
+MLX Image Output                🟡
+            │
+            ▼
+Bonus Features                  ⏳
+            │
+            ▼
+Final Validation                ⏳
 ```
 
-With the visibility pipeline complete, the project has entered its final major implementation phase. The remaining work focuses on converting the mathematically correct ray tracer into a complete renderer capable of producing fully shaded scenes.
+With the complete lighting system finished, the project has entered its final implementation phase.
+
+The remaining work focuses on integrating the renderer, generating the final image, polishing the engine, and completing the bonus features before final validation.
 
