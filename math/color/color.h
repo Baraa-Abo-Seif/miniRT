@@ -10,5 +10,13 @@ typedef struct s_color
 }	t_color;
 
 
+t_color	color_add(t_color a, t_color b);
+
+t_color	color_scale(t_color color, double k);
+
+t_color	color_multiply(t_color a, t_color b);
+
+
+
 #endif
 
