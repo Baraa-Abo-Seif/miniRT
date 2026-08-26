@@ -1,5 +1,5 @@
 #include "reader_internal.h"
-
+#include "../utils/parsing_utils.h"
 
 
 char **list_to_array(t_line_node *list)

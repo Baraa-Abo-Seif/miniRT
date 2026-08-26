@@ -1,6 +1,6 @@
 #include "mlx_display.h"
-#include "mlx_window.h"
-#include "mlx_image.h"
+#include "../Window/mlx_window.h"
+#include "../Image/mlx_image.h"
 
 
 

@@ -4,7 +4,7 @@
 
 #include "../../lexer/token.h"
 #include "../../converter/converter.h"
-#include "../../scene/scene.h"
+#include "../../../scene/scene.h"
 
 
 t_object	*create_object(void);

@@ -17,6 +17,6 @@ t_color	shade_hit(t_hit_record *record, t_scene *scene)
 		final_color = color_add(final_color, diffuse);
 		light = light->next;
 	}
-	final_color = color_clamp(final_color);
+	final_color = color_clamp_rgb(final_color);
 	return (final_color);
 }

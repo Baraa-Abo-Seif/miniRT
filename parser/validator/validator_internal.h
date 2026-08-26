@@ -4,6 +4,7 @@
 
 # include "validator.h"
 #include <stdbool.h>
+#include "../../utils/error.h"
 
 typedef struct s_scene_counts
 {

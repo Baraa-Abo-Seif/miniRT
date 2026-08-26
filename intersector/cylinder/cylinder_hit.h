@@ -1,7 +1,7 @@
 #ifndef CYLINDER_HIT_H
 # define CYLINDER_HIT_H
 
-# include "../../scene/objects/cylinder/cylinder.h"
+#include "../../scene/objects/cylinder.h"
 # include "../../scene/ray/ray.h"
 # include "../hit/hit_record.h"
 # include "../hit/interval.h"

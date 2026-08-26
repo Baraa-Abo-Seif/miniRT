@@ -1,6 +1,7 @@
 
 
 #include "parsing_utils.h"
+#include "../../Libft/libft.h"
 
 char	**copy_args(char **words)
 {
@@ -14,7 +15,7 @@ char	**copy_args(char **words)
     args_count = 1;
     while (words[args_count])
         args_count++;
-    copy = ft_calloc((args_count) * sizeof(char *));
+    copy = ft_calloc((args_count) , sizeof(char *));
     if (!copy)
         return (NULL);
     while (words[index])

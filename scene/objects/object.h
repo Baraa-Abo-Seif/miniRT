@@ -2,9 +2,9 @@
 #define OJ_OBJECT_H
 
 
-#include "./sphere/sphere.h"
-#include "./plane/plane.h"
-#include "./cylinder/cylinder.h"
+#include "./sphere.h"
+#include "./plane.h"
+#include "./cylinder.h"
 #include "../math/math.h"
 
 

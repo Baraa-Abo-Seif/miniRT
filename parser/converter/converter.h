@@ -1,7 +1,7 @@
 #ifndef CONVERTER_H
 # define CONVERTER_H
 
-# include "../../scene/scene.h"
+#include "../../scene/scene.h"
 
 
 double		ft_atof(const char *str);

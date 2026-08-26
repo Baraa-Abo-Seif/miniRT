@@ -1,4 +1,10 @@
 #include "parser.h"
+#include "reader/reader.h"
+#include "lexer/lexer.h"
+#include "validator/validator.h"
+#include "builder/builder.h"
+#include "utils/parsing_utils.h"
+
 t_scene	*parse_scene(const char *filename)
 {
 	char	**lines;

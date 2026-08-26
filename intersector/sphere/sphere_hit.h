@@ -1,7 +1,8 @@
 #ifndef SPHERE_HIT_H
 #define SPHERE_HIT_H
 
-#include "../../scene/objects/sphere/sphere.h"
+#include "../../scene/objects/sphere.h"
+
 #include "../../scene/ray/ray.h"
 
 #include "../hit/hit_record.h"

@@ -51,34 +51,34 @@ void	append_object(t_scene *scene, t_object *object)
 
 bool	add_light_to_scene(t_scene *scene, const t_token *token)
 {
-    t_light	*light;
+	t_light	*light;
 
-    if (!scene || !token)
-        return (false);
-    light = build_light(token);
-    if (!light)
-    {
-        destroy_scene(scene);
-        return (false);
-    }
-    append_light(scene, light);
-    return (true);
+	if (!scene || !token)
+		return (false);
+
+	light = build_light(token);
+	if (!light)
+		return (false);
+
+	append_light(scene, light);
+	return (true);
 }
+
 
 
 
 bool	add_object_to_scene(t_scene *scene, const t_token *token)
 {
-    t_object	*object;
+	t_object	*object;
 
-    if (!scene || !token)
-        return (false);
-    object = build_object(token);
-    if (!object)
-    {
-        destroy_scene(scene);
-        return (false);
-    }
-    append_object(scene, object);
-    return (true);
+	if (!scene || !token)
+		return (false);
+
+	object = build_object(token);
+	if (!object)
+		return (false);
+
+	append_object(scene, object);
+	return (true);
 }
+

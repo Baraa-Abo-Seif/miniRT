@@ -1,7 +1,7 @@
 #ifndef PLANE_HIT_H
 # define PLANE_HIT_H
 
-# include "../../scene/objects/plane/plane.h"
+#include "../../scene/objects/plane.h"
 # include "../../scene/ray/ray.h"
 # include "../hit/hit_record.h"
 # include "../hit/interval.h"
