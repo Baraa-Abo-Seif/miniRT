@@ -8,6 +8,7 @@ t_color	shade_hit(t_hit_record *record, t_scene *scene)
 	t_color		diffuse;
 
 	object = (t_object *)record->object;
+	
 	light = scene->lights;
 	final_color = render_ambient(object->color, scene->ambient);
 
@@ -18,5 +19,7 @@ t_color	shade_hit(t_hit_record *record, t_scene *scene)
 		light = light->next;
 	}
 	final_color = color_clamp_rgb(final_color);
+
 	return (final_color);
 }
+

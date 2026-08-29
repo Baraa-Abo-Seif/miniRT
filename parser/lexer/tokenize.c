@@ -10,8 +10,11 @@ t_token	*tokenize(char **lines)
     line_number = 0;
     while (lines && lines[line_number])
     {
-        //! TODO: Handle empty or whitespace-only lines.
-        //! Decision deferred until validator design is finalized.     
+        if (is_blank_line(lines[line_number]))
+        {
+            line_number++;
+            continue;
+        }   
         new_token = tokenize_line(lines[line_number], line_number + 1);
         if (!new_token)
         {

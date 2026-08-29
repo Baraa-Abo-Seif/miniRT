@@ -1,5 +1,5 @@
 #include "mlx_pixel.h"
-#include "mlx_image.h"
+#include "../Image/mlx_image.h"
 
 void	mlx_image_pixel_put(t_image *image, int x, int y, int color)
 {

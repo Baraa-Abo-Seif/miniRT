@@ -5,7 +5,7 @@
 NAME		= miniRT
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Wno-cast-function-type
 
 RM			= rm -f
 
@@ -134,6 +134,7 @@ RENDERER_SRC = \
 	renderer/render.c \
 	renderer/ray_color.c \
 	renderer/run_renderer.c \
+	renderer/is_in_shadow.c \
 	renderer/shade_hit.c
 
 MLX_ENGINE_SRC = \

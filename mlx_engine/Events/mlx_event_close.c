@@ -1,5 +1,5 @@
-#include "mlx_event.h"
-#include "mlx_window.h"
+#include "./mlx_event.h"
+#include "../Window/mlx_window.h"
 
 int	mlx_event_close(void *param)
 {

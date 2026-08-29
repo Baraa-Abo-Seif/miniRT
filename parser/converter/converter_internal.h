@@ -8,6 +8,7 @@ int	parse_sign(const char **str);
 double	parse_fraction(const char **str);
 void	skip_comma(const char **str);
 void	normalize_color(t_color *color);
+double parse_double(const char **str);
 
 //////////
 

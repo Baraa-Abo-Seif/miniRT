@@ -6,11 +6,12 @@ t_color	parse_color(const char *str)
 {
     t_color	color;
 
-    color.r = ft_atof(str);
+    str = skip_spaces(str);
+    color.r = parse_double(&str);
     skip_comma(&str);
-    color.g = ft_atof(str);
+    color.g = parse_double(&str);
     skip_comma(&str);
-    color.b = ft_atof(str);
+    color.b = parse_double(&str);
     normalize_color(&color);
     return (color);
 }

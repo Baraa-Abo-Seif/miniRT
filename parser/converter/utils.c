@@ -13,3 +13,17 @@ void	normalize_color(t_color *color)
 	color->g /= 255.0;
 	color->b /= 255.0;
 }
+
+double parse_double(const char **str)
+{
+    double value;
+
+    *str = skip_spaces(*str);
+
+    value = ft_atof(*str);
+
+    while (**str && **str != ',')
+        (*str)++;
+
+    return (value);
+}

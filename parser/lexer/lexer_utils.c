@@ -35,7 +35,17 @@ void	append_token(t_token **list, t_token *new_token)
     
 }
 
-
+bool	is_blank_line(const char *line)
+{
+	while (*line)
+	{
+		if (*line != ' ' && *line != '\t'
+			&& *line != '\n' && *line != '\r')
+			return (false);
+		line++;
+	}
+	return (true);
+}
 
 
 

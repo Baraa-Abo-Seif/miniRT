@@ -58,19 +58,17 @@ double	parse_fraction(const char **str)
     }
     return (result);
 }
-
 double	ft_atof(const char *str)
 {
-    int		sign;
-    double	result;
+	int		sign;
+	double	result;
 
-    str = skip_spaces(str);
-    sign = parse_sign(&str);
-    result = parse_integer(&str);
-    result += parse_fraction(&str);
-    return (result * sign);
+	str = skip_spaces(str);
+	sign = parse_sign(&str);
+	result = parse_integer(&str);
+	result += parse_fraction(&str);
+	return (result * sign);
 }
-
 
 
 

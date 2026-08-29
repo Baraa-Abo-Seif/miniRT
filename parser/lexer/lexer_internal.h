@@ -13,6 +13,6 @@ t_token	*create_token(const char *raw_line, size_t line_number, char **words);
 t_token	*cleanup_token(t_token *token);
 void	append_token(t_token **list, t_token *new_token);
 t_token	*tokenize_line(const char *line, size_t line_number);
-
+bool	is_blank_line(const char *line);
 #endif
 

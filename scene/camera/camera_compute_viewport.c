@@ -16,8 +16,10 @@ t_camera *camera,int image_width,int image_height)
 
     camera->viewport_height = 2.0 * tan(fov_rad / 2.0);
     camera->viewport_width = camera->viewport_height * aspect_ratio;
-    viewport_center = point_add_vec(camera->position, camera->forward);
-
+    viewport_center = point_add_vec(
+        camera->position,
+        vec_scale(camera->forward, 1.0)
+    );
 
     camera->viewport_upper_left = point_sub_vec(
             viewport_center,

@@ -1,5 +1,5 @@
 #include "mlx_event.h"
-#include "mlx_window.h"
+#include "../Window/mlx_window.h"
 
 void	mlx_event_init(t_window *window)
 {

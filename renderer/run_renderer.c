@@ -11,7 +11,10 @@ int	run_renderer(t_scene *scene)
 	t_window	*window;
 	t_image		*image;
 
-	(void)scene;
+	if (!scene)
+		return (-1);
+	if (camera_init(&scene->camera, WINDOW_WIDTH, WINDOW_HEIGHT) != 0)
+		return (-1);
 
 	window = mlx_window_create(
 			WINDOW_WIDTH,
@@ -37,7 +40,7 @@ int	run_renderer(t_scene *scene)
 		return (-1);
 	}
 
-	/* render(scene, image); */
+	render(scene, image); 
 
 	mlx_display_image(window, image);
 

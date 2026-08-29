@@ -5,11 +5,12 @@ t_point	parse_point(const char *str)
 {
     t_point	point;
 
-    point.x = ft_atof(str);
+    str = skip_spaces(str);
+    point.x = parse_double(&str);
     skip_comma(&str);
-    point.y = ft_atof(str);
+    point.y = parse_double(&str);
     skip_comma(&str);
-    point.z = ft_atof(str);
+    point.z = parse_double(&str);
     return (point);
 }
 

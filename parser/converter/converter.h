@@ -2,6 +2,7 @@
 # define CONVERTER_H
 
 #include "../../scene/scene.h"
+#include "converter_internal.h"
 
 
 double		ft_atof(const char *str);
