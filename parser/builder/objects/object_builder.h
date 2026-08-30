@@ -5,6 +5,9 @@
 #include "../../lexer/token.h"
 #include "../../converter/converter.h"
 #include "../../../scene/scene.h"
+#include "../math/vector/vector.h"
+#include "../math/color/color.h"
+#include "../../check/check.h"
 
 
 t_object	*create_object(void);

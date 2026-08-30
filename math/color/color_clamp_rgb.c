@@ -7,3 +7,4 @@ t_color	color_clamp_rgb(t_color color)
 	color.b = color_clamp(color.b);
 	return (color);
 }
+

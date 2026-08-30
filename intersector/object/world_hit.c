@@ -14,9 +14,12 @@ bool	world_hit(t_scene *scene, t_ray ray,
 	{
 		if (object_hit(current, ray, interval, &temp))
 		{
-			interval.max = temp.t;
-			*record = temp;
-			hit_any = true;
+			if (temp.t < interval.max)
+			{
+				interval.max = temp.t;
+				*record = temp;
+				hit_any = true;
+			}
 		}
 		current = current->next;
 	}

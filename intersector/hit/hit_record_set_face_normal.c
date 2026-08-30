@@ -2,14 +2,16 @@
 
 void	hit_record_set_face_normal(t_hit_record *record,t_ray ray,t_vec outward_normal)
 {
+    double	dot;
+
     if (!record)
         return;
 
-    record->front_face = (vec_dot(ray.direction, outward_normal) < 0);
+    dot = vec_dot(ray.direction, outward_normal);
+    record->front_face = (dot < 0.0);
 
-    if ( record->front_face)
+    if (record->front_face)
         record->normal = outward_normal;
-
     else
         record->normal = vec_scale(outward_normal, -1.0);
 }

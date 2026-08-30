@@ -5,6 +5,7 @@
 # include "../../scene/ray/ray.h"
 # include "../hit/hit_record.h"
 # include "../hit/interval.h"
+#include "../../scene/objects/object.h"
 
 
 typedef struct s_cap_context
@@ -22,7 +23,7 @@ bool	find_cap_root(
 	double *root);
 
 bool	cylinder_hit(
-	t_cylinder *cylinder,
+	t_object *object,
 	t_ray ray,
 	t_interval interval,
 	t_hit_record *record);
@@ -34,6 +35,7 @@ bool	find_body_root(
 void	fill_body_record(
 	t_cylinder *cylinder,t_ray ray,
 	t_quadratic_data *eq,t_hit_record *record);
+
 
 void	compute_body_eq( t_quadratic_data *eq,t_cylinder *cylinder,t_ray ray);
 

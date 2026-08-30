@@ -15,7 +15,7 @@ t_scene	*build_scene(t_token *tokens)
 	{
 		if (current->type == TOKEN_AMBIENT)
 			scene->ambient = build_ambient(current);
-
+		
 		else if (current->type == TOKEN_CAMERA)
 			scene->camera = build_camera(current);
 

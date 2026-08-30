@@ -1,4 +1,5 @@
 #include "sphere_hit.h"
+#include "../../scene/objects/object.h"
 
 void	calculate_equation(t_sphere *sphere,t_ray ray,t_quadratic_data *eq)
 {
@@ -27,27 +28,36 @@ bool	find_root(t_quadratic_data *eq,t_interval interval)
 }
 
 
-void	fill_hit_record(t_sphere *sphere,t_ray ray,t_quadratic_data *eq, t_hit_record *record)
+
+void fill_body_record_sphere(
+    t_object *object,
+    t_ray ray,
+    t_quadratic_data *eq,
+    t_hit_record *record)
 {
 	t_vec	outward_normal;
 
 	record->t = eq->root;
 	record->point = ray_at(ray, eq->root);
 	outward_normal = vec_scale(
-		point_sub_point(record->point, sphere->center),
-		1.0 / sphere->radius);
+		point_sub_point(record->point, object->data.sphere.center),
+		1.0 / object->data.sphere.radius);
 	hit_record_set_face_normal(record, ray, outward_normal);
-	record->object = sphere;
+	
 }
 
-bool	sphere_hit(t_sphere *sphere,t_ray ray,t_interval interval,t_hit_record *record)
+bool	sphere_hit(t_object *object, t_ray ray, t_interval interval, t_hit_record *record)
 {
 	t_quadratic_data	eq;
+	t_sphere			*sphere;
 
+	sphere = &object->data.sphere;
+	record->object = object;
 	calculate_equation(sphere, ray, &eq);
+
 	if (!find_root(&eq, interval))
 		return (false);
-	fill_hit_record(sphere, ray, &eq, record);
+	fill_body_record_sphere(object, ray, &eq, record);
 	return (true);
 }
 

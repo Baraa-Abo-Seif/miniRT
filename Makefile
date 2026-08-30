@@ -126,8 +126,14 @@ PARSER_SRC = \
 	parser/validator/validator_utils.c \
 	parser/Cleanup/destroy_light_list.c \
 	parser/Cleanup/destroy_object_list.c \
-	parser/Cleanup/destroy_scene.c
+	parser/Cleanup/destroy_scene.c \
+	parser/check/check_ratio.c \
+	parser/check/check_positive.c \
+	parser/check/check_fov.c \
+	parser/check/check_normal.c \
+	parser/check/check_color.c
 
+	
 RENDERER_SRC = \
 	renderer/ambient.c \
 	renderer/diffuse.c \

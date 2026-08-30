@@ -102,7 +102,7 @@ void	fill_body_record(
 
 
 bool	cylinder_hit(
-	t_cylinder *cylinder,
+	t_object *object,
 	t_ray ray,
 	t_interval interval,
 	t_hit_record *record)
@@ -115,20 +115,18 @@ bool	cylinder_hit(
 	ctx.ray = ray;
 	ctx.interval = interval;
 	ctx.record = record;
-	compute_body_eq(&eq, cylinder, ray);
+	compute_body_eq(&eq, &object->data.cylinder, ray);
 
-	if (find_body_root(cylinder, ray, &eq, interval))
+	if (find_body_root(&object->data.cylinder, ray, &eq, interval))
 	{
-		fill_body_record(cylinder,ray,&eq,record);
-		ctx.interval.max = record->t;
+		fill_body_record(&object->data.cylinder, ray, &eq, record);
 		hit = true;
-	}
-	if (check_caps(cylinder, &ctx))
+	}	
+	if (check_caps(&object->data.cylinder, &ctx))
 		hit = true;
 
 	return (hit);
 }
-
 
 
 
