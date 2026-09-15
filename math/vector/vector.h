@@ -20,7 +20,10 @@ double	vec_dot(t_vec a, t_vec b);
 
 t_vec	vec_cross(t_vec a, t_vec b);
 double	vec_distance(t_vec a, t_vec b);
-t_vec	vec_reflect(t_vec incident, t_vec normal);
 
 #endif
+
+
+
+// t_vec	vec_reflect(t_vec incident, t_vec normal);
 

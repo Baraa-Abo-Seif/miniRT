@@ -8,6 +8,7 @@ t_token_type	get_token_type(const char *identifier)
     if (!identifier)
         return (TOKEN_UNKNOWN);
     
+
     if (ft_strncmp(identifier, "A" , 2) == 0)
         return (TOKEN_AMBIENT);
     if (ft_strncmp(identifier, "C" , 2) == 0)

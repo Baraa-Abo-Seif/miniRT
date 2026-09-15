@@ -15,6 +15,7 @@ t_token	*create_token(const char *raw_line, size_t line_number, char **words)
     if (!words || !words[0])
         return (cleanup_token(token));
     token->type = get_token_type(words[0]);
+    // printf("" , token->type);
     token->args = copy_args(words);
     if (!token->args)
         return (cleanup_token(token));

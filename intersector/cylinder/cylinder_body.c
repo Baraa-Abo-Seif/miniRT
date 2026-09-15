@@ -124,7 +124,8 @@ bool	cylinder_hit(
 	}	
 	if (check_caps(&object->data.cylinder, &ctx))
 		hit = true;
-
+	if (hit)
+		record->object = object;
 	return (hit);
 }
 

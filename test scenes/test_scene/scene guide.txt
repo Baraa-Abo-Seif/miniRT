@@ -1,0 +1,58 @@
+example: The Classic Centered View (Looking Straight Ahead)
+Camera: Placed back at $(0, 0, 0)$ looking straight ahead along $+Z$ (0, 0, 1).
+Objects: A red sphere sitting directly in the middle at $(0, 0, 10)$, a light 
+slightly above and to the left, and a floor plane below.
+What you should see: A single red sphere right in the center of 
+the screen sitting on a gray floor.
+
+Example 1: Three Spheres Side-by-Side (Testing Left vs. Right)
+Camera: Positioned at $(0, 0, -5)$ looking along +Z (0, 0, 1).
+Objects:Red sphere to the Left ($X = -3$)Green sphere in the Center ($X = 0$)
+Blue sphere to the Right ($X = +3$)
+What you should see: Three distinct spheres across your screen in standard 
+RGB order (Red, Green, Blue from left to right).
+
+Example 2: Looking Slightly Down from Above
+Camera: Lifted up at $(0, 5, -10)$ looking slightly down and forward (0, -0.4, 0.9).
+Objects: A yellow sphere sitting on a blue plane floor.
+What you should see: A 3D perspective view from above showing the floor 
+stretching out with the yellow sphere sitting on it.
+
+Example 3: Depth Test (Overlapping Spheres)Camera: At $(0, 0, 0)$ 
+looking straight ahead (0, 0, 1).
+Objects: A small green sphere closer to you ($Z = 6$), 
+partly blocking a larger red sphere behind it ($Z = 12$).
+What you should see: The green sphere clearly in front, 
+overlapping the top-right section of the red sphere behind it.
+
+Example 4: Scene 1: Upright Cylinder on a Floor (The Classic Test)
+Camera: Positioned at $(0, 2, -8)$ looking slightly down toward $(0, 1, 10)$ 
+along direction vector (0, -0.1, 1.0).
+Cylinder: Placed at $(0, 0, 10)$, standing vertically along axis (0, 1, 0)
+ (height 6, diameter 3).
+What you should see: A blue cylinder standing straight up on 
+a light gray floor, with the light coming from the top-left to 
+cast clear shading on its curved body and top cap.
+
+
+Example 5: Cylinder Comparison (Upright vs. Tilted)
+
+Camera: Placed at $(0, 0, -5)$ looking straight ahead (0, 0, 1).
+Objects:
+Left ($X = -3$): A red sphere for reference.
+Center ($X = 0$): A green cylinder standing straight up along (0, 1, 0).
+Right ($X = +3$): A purple cylinder tilted sideways along axis (1, 0, 0).
+
+What you should see: Three objects side-by-side. The middle cylinder looks 
+upright like a can; the right cylinder looks like a tube lying on its side 
+pointing right.
+
+Example 6: Shadow cast on other objects
+
+Sphere Shadow: The light sits high and to the left at (-8, 12, 0). 
+The red sphere suspended at (-2, 3, 6) will cast a round, dark shadow
+ onto the gray floor below and slightly to its right.
+
+Cylinder Shadow: The blue cylinder standing at (2.5, 0, 8) will cast 
+a long rectangular shadow stretching away from the light toward the right 
+side of the screen.

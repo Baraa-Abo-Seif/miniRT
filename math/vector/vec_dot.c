@@ -12,8 +12,3 @@ double vec_dot(t_vec a, t_vec b)
 }
 
 
-
-
-
-
-

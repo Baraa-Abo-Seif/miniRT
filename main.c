@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	if (!scene)
 		return (EXIT_FAILURE);
 		
-printf("PARSER OK\n");
+	printf("PARSER OK\n");
 
 	if (run_renderer(scene) == -1)
 	{

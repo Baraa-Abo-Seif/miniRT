@@ -13,8 +13,3 @@ double vec_distance(t_vec a, t_vec b)
 }
 
 
-
-
-
-
-

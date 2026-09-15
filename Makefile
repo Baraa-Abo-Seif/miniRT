@@ -5,7 +5,7 @@
 NAME		= miniRT
 
 CC			= cc
-CFLAGS = -Wall -Wextra -Werror -Wno-cast-function-type
+CFLAGS = -Wall -Wextra -Werror 
 
 RM			= rm -f
 
@@ -65,7 +65,6 @@ MATH_SRC = \
 	math/vector/vec_dot.c \
 	math/vector/vec_length.c \
 	math/vector/vec_normalize.c \
-	math/vector/vec_reflect.c \
 	math/vector/vec_scale.c \
 	math/vector/vec_sub.c	
 

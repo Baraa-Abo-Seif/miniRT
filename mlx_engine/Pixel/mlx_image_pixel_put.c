@@ -14,6 +14,6 @@ void	mlx_image_pixel_put(t_image *image, int x, int y, int color)
 	offset = (y * image->line_length)
 		+ (x * (image->bits_per_pixel / 8));
 	pixel = image->addr + offset;
-	*(unsigned int *)pixel = color;
+	*(unsigned int *)pixel = mlx_get_color_value(image->mlx, color);
 }
 
