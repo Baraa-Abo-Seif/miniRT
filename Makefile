@@ -55,6 +55,7 @@ MATH_SRC = \
 	math/color/color_multiply.c \
 	math/color/color_scale.c \
 	math/color/color_to_hex.c \
+	math/color/vec_reflect.c \
 	math/color/color_clamp_rgb.c \
 	math/point/point_add_vec.c \
 	math/point/point_sub_point.c \
