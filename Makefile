@@ -86,7 +86,8 @@ INTERSECTOR_SRC = \
 	intersector/sphere/sphere_hit.c \
 	intersector/plane/plane_hit.c \
 	intersector/cylinder/cylinder_body.c \
-	intersector/cylinder/cylinder_caps.c
+	intersector/cylinder/cylinder_caps.c \
+	intersector/triangle/triangle_hit.c
 
 PARSER_SRC = \
 	parser/parser.c \
@@ -100,6 +101,7 @@ PARSER_SRC = \
 	parser/builder/objects/build_cylinder.c \
 	parser/builder/objects/build_plane.c \
 	parser/builder/objects/build_sphere.c \
+	parser/builder/objects/build_triangle.c \
 	parser/converter/parse_color.c \
 	parser/converter/parse_double.c \
 	parser/converter/parse_point.c \

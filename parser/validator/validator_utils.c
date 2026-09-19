@@ -4,19 +4,21 @@
 
 int	get_expected_arg_count(t_token_type type)
 {
-	if (type == TOKEN_AMBIENT)
-		return (2);
-	if (type == TOKEN_CAMERA)
-		return (3);
-	if (type == TOKEN_LIGHT)
-		return (3);
-	if (type == TOKEN_SPHERE)
-		return (3);
-	if (type == TOKEN_PLANE)
-		return (3);
-	if (type == TOKEN_CYLINDER)
-		return (5);
-	return (-1);
+    if (type == TOKEN_AMBIENT)
+        return (2);
+    if (type == TOKEN_CAMERA)
+        return (3);
+    if (type == TOKEN_LIGHT)
+        return (3);
+    if (type == TOKEN_SPHERE)
+        return (3);
+    if (type == TOKEN_PLANE)
+        return (3);
+    if (type == TOKEN_CYLINDER)
+        return (5);
+    if (type == TOKEN_TRIANGLE)
+        return (4);
+    return (-1);
 }
 
 

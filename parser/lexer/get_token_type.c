@@ -21,6 +21,8 @@ t_token_type	get_token_type(const char *identifier)
         return (TOKEN_PLANE);
     if (ft_strncmp(identifier, "cy" , 3) == 0)
         return (TOKEN_CYLINDER);
+    if (ft_strncmp(identifier, "tr" , 3) == 0)
+        return (TOKEN_TRIANGLE);
         
     return (TOKEN_UNKNOWN);
 }

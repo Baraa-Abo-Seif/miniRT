@@ -14,6 +14,7 @@ t_object	*create_object(void);
 t_object	*build_sphere(const t_token *token);
 t_object	*build_plane(const t_token *token);
 t_object	*build_cylinder(const t_token *token);
+t_object	*build_triangle(const t_token *token);
 
 
 

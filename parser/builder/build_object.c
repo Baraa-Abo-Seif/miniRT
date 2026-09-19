@@ -10,6 +10,8 @@ t_object	*build_object(const t_token *token)
 		return (build_plane(token));
 	if (token->type == TOKEN_CYLINDER)
 		return (build_cylinder(token));
+	if (token->type == TOKEN_TRIANGLE)
+		return (build_triangle(token));
 	return (NULL);
 }
 

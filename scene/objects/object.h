@@ -5,6 +5,7 @@
 #include "./sphere.h"
 #include "./plane.h"
 #include "./cylinder.h"
+#include "./triangle.h"
 #include "../math/math.h"
 
 
@@ -13,7 +14,8 @@ typedef enum e_object_type
 {
     SPHERE,
     PLANE,
-    CYLINDER
+    CYLINDER,
+    TRIANGLE
 } t_object_type;
 
 typedef union u_object_data
@@ -21,6 +23,7 @@ typedef union u_object_data
     t_sphere    sphere;
     t_plane     plane;
     t_cylinder  cylinder;
+    t_triangle  triangle;
 }   t_object_data;
 
 

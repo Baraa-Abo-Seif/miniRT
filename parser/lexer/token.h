@@ -12,6 +12,7 @@ typedef enum e_token_type
     TOKEN_SPHERE,
     TOKEN_PLANE,
     TOKEN_CYLINDER,
+    TOKEN_TRIANGLE,
     TOKEN_UNKNOWN
 } t_token_type;
 
