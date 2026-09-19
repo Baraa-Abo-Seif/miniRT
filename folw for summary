@@ -1,8 +1,15 @@
-math/vector/
-math/point/
-math/color/
+shadow color
 
 
 
+------------------
+Ambient Light 
+A [lighting_ratio] [R,G,B]
 
+C [position] [orientation] [FOV]
 
+L [position] [brightness] [color]
+
+pl [point] [normal] [color]
+
+cy [center] [axis] [diameter] [height] [color]
