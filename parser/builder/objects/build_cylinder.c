@@ -24,7 +24,9 @@ t_object	*build_cylinder(const t_token *token)
 	object->data.cylinder.height = height;
 
 	object->color = parse_color(token->args[4]);
+	parse_object_bonus(object, token, 4);
 
 	return (object);
+
 }
 

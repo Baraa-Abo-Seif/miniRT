@@ -17,6 +17,9 @@ bool	is_in_shadow(t_hit_record *record,t_scene *scene,t_light *light);
 t_color	ray_color(t_ray ray, t_scene *scene);
 int	run_renderer(t_scene *scene);
 
-
+t_color	render_specular(t_object *object,
+			t_hit_record *record,
+			t_scene *scene,
+			t_light *light);
 
 #endif

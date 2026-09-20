@@ -55,7 +55,7 @@ MATH_SRC = \
 	math/color/color_multiply.c \
 	math/color/color_scale.c \
 	math/color/color_to_hex.c \
-	math/color/vec_reflect.c \
+	math/vector/vec_reflect.c \
 	math/color/color_clamp_rgb.c \
 	math/point/point_add_vec.c \
 	math/point/point_sub_point.c \
@@ -103,6 +103,7 @@ PARSER_SRC = \
 	parser/builder/objects/build_plane.c \
 	parser/builder/objects/build_sphere.c \
 	parser/builder/objects/build_triangle.c \
+	parser/builder/objects/parse_object_bonus.c \
 	parser/converter/parse_color.c \
 	parser/converter/parse_double.c \
 	parser/converter/parse_point.c \
@@ -143,7 +144,8 @@ RENDERER_SRC = \
 	renderer/ray_color.c \
 	renderer/run_renderer.c \
 	renderer/is_in_shadow.c \
-	renderer/shade_hit.c
+	renderer/shade_hit.c \
+	renderer/specular_bonus.c 
 
 MLX_ENGINE_SRC = \
 	mlx_engine/Display/mlx_display_image.c \

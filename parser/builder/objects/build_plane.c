@@ -15,7 +15,8 @@ t_object	*build_plane(const t_token *token)
 	check_normal(object->data.plane.normal);
 
 	object->color = parse_color(token->args[2]);
-	
+	parse_object_bonus(object, token, 2);
+
 	return (object);
 }
 

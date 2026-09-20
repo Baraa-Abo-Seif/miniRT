@@ -7,17 +7,22 @@ t_color	shade_hit(t_hit_record *record, t_scene *scene)
 	t_light		*light;
 	t_color		final_color;
 	t_color		diffuse;
+	t_color	specular;
 
 	object = (t_object *)record->object;
 	
 	light = scene->lights;
 	final_color = render_ambient(object->color, scene->ambient);
 
-
 	while (light)
 	{
 		diffuse = render_diffuse(object->color, record, scene, light);
+		specular = render_specular(object, record, scene, light);
+
+
 		final_color = color_add(final_color, diffuse);
+		final_color = color_add(final_color, specular);
+
 		light = light->next;
 	}
 	final_color = color_clamp_rgb(final_color);

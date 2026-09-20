@@ -1,721 +1,302 @@
-# MiniRT — Bonus Development Roadmap
 
-The Mandatory part of MiniRT has been fully implemented, integrated, tested, and validated.
+````md
+## Bonus Roadmap
 
-The project was designed with extensibility in mind, allowing the Bonus features to be implemented on top of the existing rendering engine without restructuring the completed Mandatory architecture.
+The Mandatory part has been fully implemented, tested, and stabilized.
 
-According to the official MiniRT specification, the Bonus phase focuses on five main extensions:
+The project architecture was designed with extensibility in mind, allowing the Bonus features to be added without breaking the existing Mandatory implementation.
 
-* Specular reflection for a complete Phong reflection model.
-* Checkerboard color disruption.
-* Colored and multi-spot lights.
-* An additional second-degree object.
-* Bump map textures.
+### Development Philosophy
 
-The Bonus phase will therefore extend the existing engine incrementally while preserving the correctness and stability of the Mandatory implementation.
+Each Bonus feature follows the same development workflow:
 
----
+> Theory → Mathematical Model → Architecture → Implementation → Integration → Testing → Visual Validation → Stability
 
-## Current Progress
-
-| Area                            | Status      |
-| ------------------------------- | ----------- |
-| Mathematics                     | ✅ Completed |
-| Core Math Library               | ✅ Completed |
-| Architecture Design             | ✅ Completed |
-| Core Engine Foundation          | ✅ Completed |
-| Parser                          | ✅ Completed |
-| MLX Integration                 | ✅ Completed |
-| Camera & Ray System             | ✅ Completed |
-| Sphere Intersection             | ✅ Completed |
-| Plane Intersection              | ✅ Completed |
-| Cylinder Intersection           | ✅ Completed |
-| Generic Object Dispatch         | ✅ Completed |
-| Closest Visible Hit             | ✅ Completed |
-| Ambient Lighting                | ✅ Completed |
-| Diffuse Lighting                | ✅ Completed |
-| Shadow Rays                     | ✅ Completed |
-| Multiple Light Support          | ✅ Completed |
-| Rendering Pipeline              | ✅ Completed |
-| Mandatory Validation            | ✅ Completed |
-| Bonus Architecture              | 🟢 Ready    |
-| Phong Specular Reflection       | ⏳ Pending   |
-| Checkerboard Pattern            | ⏳ Pending   |
-| Colored Lights                  | ⏳ Pending   |
-| Multi-Spot Lights               | ⏳ Pending   |
-| Additional Second-Degree Object | ⏳ Pending   |
-| Bump Map Textures               | ⏳ Pending   |
-| Bonus Validation                | ⏳ Pending   |
-| Final Audit                     | ⏳ Pending   |
+The goal is to understand and validate each feature before moving to the next one.
 
 ---
 
-## Overall Completion
+### Bonus Features
+
+#### 1. Phong Specular Reflection — COMPLETED
+
+Implemented the specular component of the Phong illumination model.
+
+The lighting model now supports:
+
+- Ambient lighting
+- Diffuse lighting
+- Specular reflection
+- Configurable material shininess
+- Light-dependent specular highlights
+- Shadow-aware specular contribution
+
+The material now supports an optional `shininess` parameter.
+
+Example:
 
 ```text
-██████████████████████████████████░░ 90%
-```
+sp 0,0,0 10 255,0,0 32
+````
 
-The Mandatory implementation is complete.
+If the shininess parameter is omitted, the object keeps the Mandatory behavior and produces no specular highlight.
 
-The remaining work consists of implementing, integrating, and validating the five official Bonus features, followed by final testing, memory validation, and project auditing.
+#### Validation
 
----
+The following cases were tested:
 
-# Bonus Development Philosophy
+* Reflection vector calculation
+* View direction calculation
+* Reflection/view dot product
+* Negative dot product clamping
+* Different shininess values
+* Specular highlight visibility
+* Specular behavior with shadows
+* Objects with and without specular highlights
+* Multiple objects with different shininess values
+* Parser support for optional shininess
+* Mandatory scene regression
 
-The Bonus implementation will follow the same methodology used throughout the project.
-
-Each feature will be developed through the following cycle:
-
-```text
-Theory
-   │
-   ▼
-Mathematical Model
-   │
-   ▼
-Architecture
-   │
-   ▼
-Implementation
-   │
-   ▼
-Integration
-   │
-   ▼
-Testing
-   │
-   ▼
-Visual Validation
-   │
-   ▼
-Stable Feature
-```
-
-A Bonus feature will only be considered complete once its mathematical behaviour, implementation, integration, and rendering behaviour have been validated.
+Visual comparison confirmed that higher shininess values produce smaller and more concentrated highlights.
 
 ---
 
-# Milestone 1 — Phong Specular Reflection
+#### 2. Checkerboard Pattern — NEXT
 
-The first Bonus extension is the addition of specular reflection in order to extend the existing ambient + diffuse lighting model into a complete Phong reflection model.
+Implement a procedural checkerboard pattern that can be applied to supported objects.
 
-### Objectives
-
-* Understand the Phong reflection model.
-* Implement the specular component mathematically.
-* Calculate the reflection direction of the incoming light.
-* Calculate the view direction.
-* Introduce a shininess/specular parameter.
-* Integrate specular contribution with the existing lighting system.
-* Preserve ambient and diffuse lighting.
-* Ensure specular contribution respects shadows where appropriate.
-* Clamp the final accumulated colour.
-
-### Target Lighting Pipeline
-
-```text
-Surface Hit
-     │
-     ├── Ambient
-     │
-     ├── Diffuse
-     │
-     └── Specular
-            │
-            ▼
-      Light Contribution
-            │
-            ▼
-      Final Surface Colour
-```
-
-### Validation
-
-* Matte surface.
-* Shiny surface.
-* Different viewing directions.
-* Different light directions.
-* Different shininess values.
-* Shadowed surfaces.
-* Multiple objects.
-
-### Status
-
-⏳ Pending
-
----
-
-# Milestone 2 — Checkerboard Pattern
-
-The second Bonus feature introduces colour disruption through a checkerboard pattern.
-
-### Objectives
-
-* Understand spatial pattern evaluation.
-* Implement alternating colour regions.
-* Determine the pattern from the appropriate surface coordinates.
-* Integrate the pattern with the existing material colour system.
-* Preserve the existing lighting model.
-* Support checkerboard behaviour on the relevant primitives.
-* Validate pattern boundaries and orientation.
-
-### Target Pipeline
+Planned pipeline:
 
 ```text
 Ray
- │
- ▼
+ ↓
 Intersection
- │
- ▼
-Surface Point
- │
- ▼
+ ↓
+Surface Position
+ ↓
 Pattern Evaluation
- │
- ├── Colour A
- │
- └── Colour B
- │
- ▼
+ ↓
+Base Color
+ ↓
 Lighting
- │
- ▼
-Final Colour
+ ↓
+Final Color
 ```
 
-### Validation
+The pattern system will be designed independently from the lighting system so that it can correctly interact with:
 
-* Sphere with checkerboard.
-* Plane with checkerboard.
-* Cylinder with checkerboard.
-* Different object positions.
-* Pattern boundaries.
-* Pattern under shadows.
-* Pattern combined with specular reflection.
+* Diffuse lighting
+* Specular reflection
+* Shadows
+* Different object types
 
-### Status
+Planned validation:
 
-⏳ Pending
+* Checkerboard on a plane
+* Checkerboard on a sphere
+* Checkerboard on a cylinder
+* Pattern boundaries
+* Pattern scaling/orientation
+* Checkerboard + specular reflection
+* Checkerboard + shadows
+* Mandatory regression
 
 ---
 
-# Milestone 3 — Colored and Multi-Spot Lights
+#### 3. Colored and Multiple Spot Lights — PLANNED
 
-The third Bonus feature extends the existing lighting system to support coloured and multiple spot lights.
+Extend the lighting system to support multiple colored light sources.
 
-The Mandatory implementation already contains the basic infrastructure for multiple lights, making this extension an evolution of the existing lighting system rather than a new lighting architecture.
-
-### Objectives
-
-* Support coloured light sources.
-* Preserve light intensity handling.
-* Calculate coloured diffuse contributions.
-* Support multiple simultaneous lights.
-* Accumulate contributions from all visible lights.
-* Perform shadow testing independently for each light.
-* Prevent colour overflow through final clamping.
-* Validate interaction between multiple coloured lights.
-
-### Target Architecture
+Planned architecture:
 
 ```text
-                 ┌── Light 1
-                 │
-Surface Hit ─────┼── Light 2
-                 │
-                 ├── Light 3
-                 │
-                 └── Light N
-                        │
-                        ▼
-                 Light Contributions
-                        │
-                        ▼
-                 Colour Accumulation
-                        │
-                        ▼
-                  Final Colour
+For each light:
+    Calculate visibility
+    Calculate diffuse contribution
+    Calculate specular contribution
+    Accumulate contribution
 ```
 
-### Validation
+Planned validation:
 
-* One coloured light.
-* Multiple lights with identical colours.
-* Multiple lights with different colours.
-* Different light intensities.
-* Overlapping light contributions.
-* Shadows from individual lights.
-* Coloured lights combined with specular reflection.
-* Coloured lights combined with checkerboard patterns.
-
-### Status
-
-⏳ Pending
+* Single white light
+* Single colored light
+* Multiple lights
+* Different light colors
+* Independent shadows
+* Colored light + specular reflection
+* Colored light + checkerboard
 
 ---
 
-# Milestone 4 — Additional Second-Degree Object
+#### 4. Additional Second-Degree Object — PLANNED
 
-The fourth Bonus feature introduces one additional second-degree geometric primitive.
+Add one additional second-degree object supported by the Bonus specification.
 
-The subject allows several choices:
+Candidate:
 
 * Cone
-* Hyperboloid
-* Paraboloid
 
-The final primitive will be selected according to the existing architecture and implementation complexity.
+Implementation will include:
 
-### Objectives
+* Mathematical equation
+* Ray/object intersection
+* Quadratic solution
+* Valid intersection interval
+* Surface normal calculation
+* Object dispatch
+* Shadow interaction
+* Lighting interaction
 
-* Derive the mathematical intersection equation.
-* Implement ray-object intersection.
-* Solve the resulting quadratic equation.
-* Validate the resulting roots against the object's bounds.
-* Implement surface normal calculation.
-* Integrate the primitive with generic object dispatch.
-* Integrate the primitive with the existing lighting system.
-* Support shadows.
-* Support the existing material/pattern system where applicable.
+Planned validation:
 
-### Target Geometry Pipeline
-
-```text
-Primary Ray
-     │
-     ▼
-Object Intersection
-     │
-     ▼
-Quadratic Solver
-     │
-     ▼
-Valid Roots
-     │
-     ▼
-Closest Hit
-     │
-     ▼
-Surface Normal
-     │
-     ▼
-Lighting
-```
-
-### Validation
-
-* Direct hit.
-* Miss.
-* Tangent hit.
-* Multiple intersections.
-* Object boundaries.
-* Inside-object rays.
-* Rotated object.
-* Translated object.
-* Shadows.
-* Interaction with existing primitives.
-
-### Status
-
-⏳ Pending
+* Hit
+* Miss
+* Tangent
+* Inside-object rays
+* Different orientations
+* Shadows
+* Lighting
+* Mandatory regression
 
 ---
 
-# Milestone 5 — Bump Map Textures
+#### 5. Bump Map Textures — PLANNED
 
-The fifth Bonus feature introduces bump map textures.
+Implement bump mapping without changing the actual geometry.
 
-The purpose is to modify the perceived surface detail through normal perturbation without changing the underlying geometric intersection.
-
-### Objectives
-
-* Understand bump mapping mathematically.
-* Introduce texture representation.
-* Map surface coordinates to texture coordinates.
-* Sample the bump map.
-* Calculate normal perturbation.
-* Integrate the perturbed normal into the lighting system.
-* Preserve the original geometric intersection.
-* Support bump mapping together with existing lighting.
-* Validate behaviour across different primitives.
-
-### Target Pipeline
+Planned pipeline:
 
 ```text
 Ray
- │
- ▼
-Geometric Intersection
- │
- ▼
-Surface Point
- │
- ▼
-Texture Coordinates
- │
- ▼
+ ↓
+Intersection
+ ↓
+Original Normal
+ ↓
 Bump Map Sampling
- │
- ▼
-Normal Perturbation
- │
- ▼
-Modified Surface Normal
- │
- ▼
-Lighting
- │
- ▼
-Final Colour
+ ↓
+Modified Normal
+ ↓
+Phong Lighting
+ ↓
+Final Color
 ```
 
-### Validation
+The implementation will include:
 
-* Surface without bump map.
-* Surface with a simple bump map.
-* Different bump intensities.
-* Different light directions.
-* Bump map under shadows.
-* Bump map combined with specular reflection.
-* Bump map combined with checkerboard/material features.
+* Texture representation
+* Texture loading
+* Texture sampling
+* Object coordinate mapping
+* Normal perturbation
+* Lighting integration
 
-### Status
+Planned validation:
 
-⏳ Pending
+* No bump map
+* Basic bump map
+* Strong bump map
+* Sphere
+* Cylinder
+* Bump map + specular reflection
+* Bump map + shadows
 
 ---
 
-# Milestone 6 — Bonus Integration
+## Bonus Integration
 
-After each individual feature has been implemented and validated, all Bonus systems will be tested together.
+After implementing all individual features, the Bonus implementation will be validated as a complete system.
 
-### Target Feature Interaction
+### Combined Feature Tests
 
-```text
-                    ┌── Phong Specular
-                    │
-                    ├── Checkerboard
-Scene ──► Objects ──┼── Colored Lights
-                    │
-                    ├── Additional Primitive
-                    │
-                    └── Bump Mapping
-                            │
-                            ▼
-                       Final Renderer
-```
+Test interactions between:
 
-### Integration Tests
-
-The final Bonus scenes will combine multiple features rather than testing each feature in isolation only.
-
-Examples:
-
-```text
-Checkerboard + Specular
-Checkerboard + Colored Lights
-Specular + Multiple Lights
-Bump Mapping + Specular
-Bump Mapping + Colored Lights
-Additional Object + Shadows
-Additional Object + Checkerboard
-All Bonus Features Combined
-```
-
-### Status
-
-⏳ Pending
+* Specular + Checkerboard
+* Specular + Multiple Lights
+* Checkerboard + Multiple Lights
+* Checkerboard + Shadows
+* Bump Mapping + Specular
+* Bump Mapping + Multiple Lights
+* Additional Object + Specular
+* Additional Object + Shadows
+* All compatible Bonus features together
 
 ---
 
-# Milestone 7 — Bonus Parser & Scene Format
+## Bonus Parser
 
-The subject explicitly allows modifications and additions to the scene description format when necessary to support Bonus features.
+The parser will be extended only when required by each Bonus feature.
 
-The parser will therefore be extended only after the underlying Bonus functionality has been implemented and validated internally.
-
-### Objectives
-
-* Define clear Bonus scene syntax.
-* Extend token recognition.
-* Validate Bonus-specific parameters.
-* Preserve all Mandatory syntax.
-* Handle invalid Bonus configurations.
-* Maintain clean parser error handling.
-* Document the extended scene format.
-
-### Development Principle
+Current parser extension:
 
 ```text
-Feature
-   │
-   ▼
-Internal Representation
-   │
-   ▼
-Renderer
-   │
-   ▼
-Testing
-   │
-   ▼
-Parser Support
-   │
-   ▼
-Scene Format Documentation
+Sphere:
+sp POSITION DIAMETER COLOR [SHININESS]
+
+Plane:
+pl POSITION NORMAL COLOR [SHININESS]
+
+Cylinder:
+cy POSITION ORIENTATION DIAMETER HEIGHT COLOR [SHININESS]
+
+Triangle:
+tr POINT_A POINT_B POINT_C COLOR [SHININESS]
 ```
 
-### Status
-
-⏳ Pending
+The Bonus parameters remain optional so existing Mandatory `.rt` scenes continue to work.
 
 ---
 
-# Milestone 8 — Bonus Testing
+## Testing Strategy
 
-Every Bonus feature will have dedicated tests.
-
-## Functional Tests
+Every Bonus feature must pass the following validation stages:
 
 ```text
-Valid Scene
-     │
-     ▼
-Feature Enabled
-     │
-     ▼
-Expected Behaviour
+[✓] Theory understood
+[✓] Formula understood
+[✓] Architecture decided
+[✓] Implementation complete
+[✓] Parser support
+[✓] Basic test
+[✓] Edge cases
+[✓] Visual test
+[✓] Mandatory regression
+[ ] Norminette
+[ ] Valgrind
+[ ] Git commit
 ```
 
-## Invalid Input Tests
-
-```text
-Missing Parameter
-Invalid Parameter
-Invalid Range
-Invalid Syntax
-Invalid Combination
-Unknown Identifier
-```
-
-## Mathematical Edge Cases
-
-```text
-Zero Values
-Negative Values
-Boundary Values
-Extreme Values
-Tangent Rays
-Parallel Rays
-Inside / Outside Objects
-```
-
-## Visual Tests
-
-Dedicated `.rt` scenes will be created for every Bonus feature.
-
-The test collection will contain both isolated feature scenes and combined Bonus scenes.
-
-### Status
-
-⏳ Pending
+For each new feature, the checklist is reset and completed independently before moving to the next feature.
 
 ---
 
-# Milestone 9 — Memory & Stability Validation
-
-Once all Bonus features are integrated, the complete program will undergo a final memory and stability audit.
-
-### Objectives
-
-* Verify all Bonus allocations are freed.
-* Verify texture cleanup.
-* Verify additional object cleanup.
-* Verify parser cleanup on invalid Bonus scenes.
-* Verify light cleanup.
-* Verify MLX resource cleanup.
-* Check for double frees.
-* Check for invalid memory access.
-* Check for leaks.
-* Verify repeated execution.
-
-### Required Conditions
+## Current Bonus Status
 
 ```text
-No Segmentation Fault
-No Double Free
-No Invalid Access
-No Memory Leak
-No Regression
+Bonus Progress
+
+[✓] 1. Phong Specular Reflection
+[ ] 2. Checkerboard Pattern
+[ ] 3. Colored and Multiple Spot Lights
+[ ] 4. Additional Second-Degree Object
+[ ] 5. Bump Map Textures
+[ ] 6. Bonus Integration
+[ ] 7. Final Bonus Parser Validation
+[ ] 8. Complete Bonus Test Suite
+[ ] 9. Memory & Stability Validation
+[ ] 10. Final Bonus Audit
 ```
 
-### Status
+### Current Milestone
 
-⏳ Pending
+**Milestone 1 — Phong Specular Reflection: COMPLETED**
 
----
+The project is now ready to proceed to:
 
-# Milestone 10 — Final Bonus Audit
+**Milestone 2 — Checkerboard Pattern**
 
-The final stage will compare the implementation directly against the official Bonus requirements.
-
-| Official Bonus                  | Implemented | Tested | Integrated | Validated |
-| ------------------------------- | ----------- | ------ | ---------- | --------- |
-| Phong Specular Reflection       | ☐           | ☐      | ☐          | ☐         |
-| Checkerboard Pattern            | ☐           | ☐      | ☐          | ☐         |
-| Colored Lights                  | ☐           | ☐      | ☐          | ☐         |
-| Multi-Spot Lights               | ☐           | ☐      | ☐          | ☐         |
-| Additional Second-Degree Object | ☐           | ☐      | ☐          | ☐         |
-| Bump Map Textures               | ☐           | ☐      | ☐          | ☐         |
-
-The final audit will also verify that:
-
-* Mandatory behaviour remains intact.
-* Bonus files follow the required project structure.
-* The `bonus` Makefile rule is correct.
-* Bonus code passes the Norm.
-* All allocated memory is released.
-* The README documents the Bonus functionality.
-* Test scenes are available for evaluation and defence.
-
----
-
-# Complete Bonus Roadmap
-
-```text
-MANDATORY COMPLETE
-        │
-        ▼
-Bonus Infrastructure
-        │
-        ▼
-Milestone 1
-Phong Specular Reflection
-        │
-        ▼
-Milestone 2
-Checkerboard Pattern
-        │
-        ▼
-Milestone 3
-Colored & Multi-Spot Lights
-        │
-        ▼
-Milestone 4
-Additional Second-Degree Object
-        │
-        ▼
-Milestone 5
-Bump Map Textures
-        │
-        ▼
-Milestone 6
-Bonus Integration
-        │
-        ▼
-Milestone 7
-Bonus Parser
-        │
-        ▼
-Milestone 8
-Bonus Testing
-        │
-        ▼
-Milestone 9
-Memory & Stability
-        │
-        ▼
-Milestone 10
-Final Audit
-        │
-        ▼
-BONUS COMPLETE
 ```
 
----
-
-# Development Rules
-
-The Bonus phase will continue following the project's original development philosophy.
-
-### 1. Understand Before Implementing
-
-Every mathematical model and rendering technique will be understood before implementation.
-
-### 2. One Feature at a Time
-
-Each Bonus feature will be completed and validated before moving to the next major feature.
-
-### 3. Preserve Mandatory Behaviour
-
-Bonus development must never compromise the completed Mandatory implementation.
-
-### 4. Separate Responsibilities
-
-Geometry, materials, lighting, textures, parsing, and rendering should remain independent wherever possible.
-
-### 5. Validate Mathematically and Visually
-
-Every feature will be verified through both mathematical reasoning and rendered test scenes.
-
-### 6. Test Interactions
-
-A feature is not considered fully complete until it works together with the existing renderer and other completed Bonus features.
-
-### 7. Maintain Memory Safety
-
-All Bonus allocations and error paths must remain leak-free and safe.
-
----
-
-# Current Objective
-
-The Mandatory part of MiniRT is complete and validated.
-
-The project has now entered the Bonus development phase.
-
-The immediate objective is to implement the official Bonus features incrementally, beginning with the extension of the existing lighting model and continuing through patterns, coloured and multiple lights, additional geometry, and bump mapping.
-
-The current development direction is:
-
-```text
-Mandatory Engine                  ✅
-        │
-        ▼
-Bonus Infrastructure              🟢
-        │
-        ▼
-Phong Specular Reflection         ⏳
-        │
-        ▼
-Checkerboard Pattern              ⏳
-        │
-        ▼
-Colored & Multi-Spot Lights       ⏳
-        │
-        ▼
-Additional Second-Degree Object   ⏳
-        │
-        ▼
-Bump Map Textures                 ⏳
-        │
-        ▼
-Bonus Integration                 ⏳
-        │
-        ▼
-Bonus Testing                     ⏳
-        │
-        ▼
-Memory & Stability                ⏳
-        │
-        ▼
-Final Audit                       ⏳
-        │
-        ▼
-BONUS COMPLETE
+**هذه هي النسخة التي أنصح بوضعها الآن**؛ وبعد إنهاء Checkerboard سنعود ونحدّث حالة Milestone 2 بنفس الأسلوب بدل تعديل الخطة كاملة كل مرة.
 ```
-
-The project has transitioned from **building and validating the Mandatory ray tracer** to **extending the completed engine with the official Bonus features while preserving mathematical correctness, architectural consistency, rendering quality, and memory safety**.

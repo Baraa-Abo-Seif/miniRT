@@ -82,6 +82,25 @@ bool	update_scene_counts( t_scene_counts *counts, t_token *token)
     return (true);
 }
 
+bool	is_valid_arg_count(t_token_type type, size_t actual_count)
+{
+	int	expected_count;
+
+	expected_count = get_expected_arg_count(type);
+	if (expected_count == -1)
+		return (false);
+	if (type == TOKEN_SPHERE
+		|| type == TOKEN_PLANE
+		|| type == TOKEN_CYLINDER
+		|| type == TOKEN_TRIANGLE)
+	{
+		if (actual_count == (size_t)expected_count
+			|| actual_count == (size_t)(expected_count + 1))
+			return (true);
+		return (false);
+	}
+	return (actual_count == (size_t)expected_count);
+}
 
 
 

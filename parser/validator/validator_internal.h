@@ -23,9 +23,9 @@ void	init_scene_counts(t_scene_counts *counts);
 bool	update_scene_counts( t_scene_counts *counts, t_token *token);
 bool	validate_required_scene_objects( t_scene_counts *counts);
 bool	validate_scene_rules(t_token *tokens);
+bool	is_valid_arg_count(t_token_type type, size_t actual_count);
 
-
-
+bool	is_valid_bonus_arg_count(t_token_type type, size_t actual_count);
 
 
 

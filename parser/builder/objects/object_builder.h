@@ -16,7 +16,10 @@ t_object	*build_plane(const t_token *token);
 t_object	*build_cylinder(const t_token *token);
 t_object	*build_triangle(const t_token *token);
 
+void	parse_object_bonus(t_object *object,
+			const t_token *token, size_t color_index);
 
+            
 
 #endif
 

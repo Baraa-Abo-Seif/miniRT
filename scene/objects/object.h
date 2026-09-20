@@ -31,6 +31,7 @@ typedef struct s_object
 {
     t_object_type      type; // object type
     t_color            color; // object color
+    double shininess;
     t_object_data      data; // object data (union of sphere, plane, cylinder, cone)
     struct s_object    *next; // pointer to the next object in the list
 } t_object;
