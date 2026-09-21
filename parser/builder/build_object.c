@@ -12,6 +12,8 @@ t_object	*build_object(const t_token *token)
 		return (build_cylinder(token));
 	if (token->type == TOKEN_TRIANGLE)
 		return (build_triangle(token));
+	if (token->type == TOKEN_PARABOLOID)
+		return (build_paraboloid(token));
 	return (NULL);
 }
 

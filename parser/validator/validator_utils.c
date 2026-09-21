@@ -18,6 +18,8 @@ int	get_expected_arg_count(t_token_type type)
         return (5);
     if (type == TOKEN_TRIANGLE)
         return (4);
+    if (type == TOKEN_PARABOLOID)
+        return (5);
     return (-1);
 }
 
@@ -92,7 +94,8 @@ bool	is_valid_arg_count(t_token_type type, size_t actual_count)
 	if (type == TOKEN_SPHERE
 		|| type == TOKEN_PLANE
 		|| type == TOKEN_CYLINDER
-		|| type == TOKEN_TRIANGLE)
+        || type == TOKEN_TRIANGLE
+        || type == TOKEN_PARABOLOID)
 	{
 		if (actual_count == (size_t)expected_count
 			|| actual_count == (size_t)(expected_count + 1))

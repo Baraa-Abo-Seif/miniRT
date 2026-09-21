@@ -23,6 +23,8 @@ t_token_type	get_token_type(const char *identifier)
         return (TOKEN_CYLINDER);
     if (ft_strncmp(identifier, "tr" , 3) == 0)
         return (TOKEN_TRIANGLE);
+    if (ft_strncmp(identifier, "pa" , 3) == 0)
+        return (TOKEN_PARABOLOID);
         
     return (TOKEN_UNKNOWN);
 }

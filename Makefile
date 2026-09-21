@@ -88,7 +88,8 @@ INTERSECTOR_SRC = \
 	intersector/plane/plane_hit.c \
 	intersector/cylinder/cylinder_body.c \
 	intersector/cylinder/cylinder_caps.c \
-	intersector/triangle/triangle_hit.c
+	intersector/triangle/triangle_hit.c \
+	intersector/paraboloid/paraboloid_hit.c
 
 PARSER_SRC = \
 	parser/parser.c \
@@ -103,6 +104,7 @@ PARSER_SRC = \
 	parser/builder/objects/build_plane.c \
 	parser/builder/objects/build_sphere.c \
 	parser/builder/objects/build_triangle.c \
+	parser/builder/objects/build_paraboloid.c \
 	parser/builder/objects/parse_object_bonus.c \
 	parser/converter/parse_color.c \
 	parser/converter/parse_double.c \
