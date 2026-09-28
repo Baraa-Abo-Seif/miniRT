@@ -17,9 +17,8 @@ bool	valid_root(t_paraboloid *paraboloid, t_ray ray,
 bool	build_quadratic(t_paraboloid *paraboloid,
 		t_ray ray, double coefficient, t_quadratic_data *equation);
 bool	paraboloid_find_root(t_paraboloid *paraboloid,
-		t_ray ray, t_interval interval, double *root);
+		t_ray ray, t_interval interval, double coefficient, double *root);
 t_vec	paraboloid_normal(t_paraboloid *paraboloid, t_point point,
 		double coefficient);
-
 
 #endif

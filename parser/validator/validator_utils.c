@@ -98,7 +98,9 @@ bool	is_valid_arg_count(t_token_type type, size_t actual_count)
         || type == TOKEN_PARABOLOID)
 	{
 		if (actual_count == (size_t)expected_count
-			|| actual_count == (size_t)(expected_count + 1))
+            || actual_count == (size_t)(expected_count + 1)
+            || actual_count == (size_t)(expected_count + 3)
+            || actual_count == (size_t)(expected_count + 4))
 			return (true);
 		return (false);
 	}

@@ -8,6 +8,7 @@
 #include "./triangle.h"
 #include "./paraboloid.h"
 #include "../math/math.h"
+#include "../../pattern/pattern.h"
 
 
 
@@ -37,6 +38,8 @@ typedef struct s_object
     double shininess;
     t_object_data      data; // object data (union of sphere, plane, cylinder, cone)
     struct s_object    *next; // pointer to the next object in the list
+    t_pattern            pattern;
+
 } t_object;
 
 

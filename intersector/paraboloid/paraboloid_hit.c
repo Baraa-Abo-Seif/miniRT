@@ -32,61 +32,34 @@ bool	valid_root(t_paraboloid *paraboloid, t_ray ray,
 	return (axis_distance >= 0.0 && axis_distance <= paraboloid->height);
 }
 
-bool	build_quadratic(t_paraboloid *paraboloid,
-		t_ray ray, double coefficient, t_quadratic_data *equation)
+bool	paraboloid_find_root(t_paraboloid *paraboloid, t_ray ray,
+		t_interval interval, double coefficient, double *root)
 {
 	t_vec	side;
 	t_vec	other_side;
 	t_vec	origin;
 	t_vec	direction;
+	t_quadratic_data	equation;
 
 	make_basis(paraboloid->axis, &side, &other_side);
 	origin = to_local(point_sub_point(ray.origin, paraboloid->vertex),
-			paraboloid->axis, side, other_side);
-	direction = to_local(ray.direction,
-			paraboloid->axis, side, other_side);
-	equation->a = direction.x * direction.x
-		+ direction.y * direction.y;
-	equation->b = 2.0 * (origin.x * direction.x
-			+ origin.y * direction.y)
+		paraboloid->axis, side, other_side);
+	direction = to_local(ray.direction, paraboloid->axis, side, other_side);
+	equation.a = direction.x * direction.x + direction.y * direction.y;
+	equation.b = 2.0 * (origin.x * direction.x + origin.y * direction.y)
 		- 2.0 * coefficient * direction.z;
-	equation->c = origin.x * origin.x
-		+ origin.y * origin.y
+	equation.c = origin.x * origin.x + origin.y * origin.y
 		- 2.0 * coefficient * origin.z;
-	equation->discriminant = equation->b * equation->b
-		- 4.0 * equation->a * equation->c;
-	if (fabs(equation->a) < EPSILON
-		|| equation->discriminant < 0.0)
-		return (false);
-	return (true);
-}
-
-bool	paraboloid_find_root(t_paraboloid *paraboloid,
-		t_ray ray, t_interval interval, double *root)
-{
-	t_quadratic_data	equation;
-	double			coefficient;
-
-	coefficient = paraboloid->radius * paraboloid->radius
-		/ (2.0 * paraboloid->height);
-	if (!build_quadratic(paraboloid, ray,
-			coefficient, &equation))
+	equation.discriminant = equation.b * equation.b
+		- 4.0 * equation.a * equation.c;
+	if (fabs(equation.a) < EPSILON || equation.discriminant < 0.0)
 		return (false);
 	equation.sqrtd = sqrt(equation.discriminant);
-	equation.root = (-equation.b - equation.sqrtd)
-		/ (2.0 * equation.a);
-	if (valid_root(paraboloid, ray, interval,
-			equation.root))
-	{
-		*root = equation.root;
+	*root = (-equation.b - equation.sqrtd) / (2.0 * equation.a);
+	if (valid_root(paraboloid, ray, interval, *root))
 		return (true);
-	}
-	equation.root = (-equation.b + equation.sqrtd)
-		/ (2.0 * equation.a);
-	if (!valid_root(paraboloid, ray, interval, equation.root))
-		return (false);
-	*root = equation.root;
-	return (true);
+	*root = (-equation.b + equation.sqrtd) / (2.0 * equation.a);
+	return (valid_root(paraboloid, ray, interval, *root));
 }
 
 t_vec	paraboloid_normal(t_paraboloid *paraboloid, t_point point,
@@ -113,7 +86,7 @@ bool	paraboloid_hit(t_object *object, t_ray ray,
 	paraboloid = &object->data.paraboloid;
 	coefficient = paraboloid->radius * paraboloid->radius
 		/ (2.0 * paraboloid->height);
-	if (!paraboloid_find_root(paraboloid, ray, interval, &root))
+	if (!paraboloid_find_root(paraboloid, ray, interval, coefficient, &root))
 		return (false);
 	record->t = root;
 	record->point = ray_at(ray, root);

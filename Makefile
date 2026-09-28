@@ -67,7 +67,21 @@ MATH_SRC = \
 	math/vector/vec_length.c \
 	math/vector/vec_normalize.c \
 	math/vector/vec_scale.c \
-	math/vector/vec_sub.c	
+	math/vector/vec_sub.c	\
+	math/matrix/matrix_identity.c \
+	math/matrix/matrix_point.c \
+	math/matrix/matrix_vector.c \
+	math/matrix/matrix_multiply.c \
+	math/matrix/matrix_translation.c \
+	math/matrix/matrix_scaling.c \
+	math/matrix/matrix_rotation.c \
+	math/matrix/matrix_submatrix.c \
+	math/matrix/matrix_determinant_2x2.c \
+	math/matrix/matrix_determinant_3x3.c\
+	math/matrix/matrix_minor.c\
+	math/matrix/matrix_cofactor.c
+
+
 
 SCENE_SRC = \
 	scene/camera/camera_build_basis.c \
@@ -162,6 +176,12 @@ MLX_ENGINE_SRC = \
 	mlx_engine/Window/mlx_window_create.c \
 	mlx_engine/Window/mlx_window_destroy.c
 
+
+PATTERN = \
+	pattern/checker.c \
+	pattern/pattern.c
+
+
 SRC = \
 	$(MAIN_SRC) \
 	$(UTILS_SRC) \
@@ -171,9 +191,13 @@ SRC = \
 	$(INTERSECTOR_SRC) \
 	$(PARSER_SRC) \
 	$(RENDERER_SRC) \
-	$(MLX_ENGINE_SRC)
+	$(MLX_ENGINE_SRC) \
+	$(PATTERN)
 
 OBJ = $(SRC:.c=.o)
+DEP = $(OBJ:.o=.d)
+
+-include $(DEP)
 
 # **************************************************************************** #
 #                                    Rules                                     #
@@ -191,7 +215,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MP $(INCLUDES) -c $< -o $@
 
 
 # **************************************************************************** #
@@ -199,7 +223,7 @@ $(NAME): $(OBJ)
 # **************************************************************************** #
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(DEP)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
 
