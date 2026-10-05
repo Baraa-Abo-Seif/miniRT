@@ -8,7 +8,8 @@ void	get_cap_data(
 	t_cylinder *cylinder,int side,
 	t_point *cap_center,t_vec *cap_normal)
 {
-	*cap_normal = vec_scale(cylinder->axis,side);
+	// *cap_normal = vec_scale(cylinder->axis,side);
+	*cap_normal = vec_normalize(vec_scale(cylinder->axis, (double)side));
 
 	*cap_center = point_add_vec(cylinder->center,
 		vec_scale(cylinder->axis,side * (cylinder->height / 2.0)));

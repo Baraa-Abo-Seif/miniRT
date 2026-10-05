@@ -19,9 +19,17 @@ typedef struct s_pattern
 
 
 
-t_color	pattern_at(t_pattern *pattern, t_point point);
-t_color	checker_at(t_pattern *pattern, t_point point);
-t_color	sphere_checker_at(t_pattern *pattern, t_point point);
+// t_color	pattern_at(t_pattern *pattern, t_point point);
+// t_color	checker_at(t_pattern *pattern, t_point point);
+// t_color	sphere_checker_at(t_pattern *pattern, t_point point);
+
+
+t_color sphere_checker_at(t_pattern *pattern, t_point point);
+t_color cylinder_checker_at(t_pattern *pattern, t_point point);
+t_color plane_checker_at(t_pattern *pattern, t_point point);
+t_color triangle_checker_at(t_pattern *pattern, t_point point);
+t_color paraboloid_checker_at(t_pattern *pattern, t_point point);
+t_color pattern_at(t_pattern *pattern, t_point point);
 
 
 #endif
