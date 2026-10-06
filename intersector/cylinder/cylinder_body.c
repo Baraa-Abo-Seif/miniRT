@@ -120,8 +120,9 @@ bool	cylinder_hit(
 	if (find_body_root(&object->data.cylinder, ray, &eq, interval))
 	{
 		fill_body_record(&object->data.cylinder, ray, &eq, record);
-		hit = true;
-	}	
+    	hit = true;
+    	ctx.interval.max = record->t; // 'طب حسبي الله ونعم الوكيل'
+	}
 	if (check_caps(&object->data.cylinder, &ctx))
 		hit = true;
 	if (hit)
