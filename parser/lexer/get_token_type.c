@@ -15,6 +15,8 @@ t_token_type	get_token_type(const char *identifier)
         return (TOKEN_CAMERA);
     if (ft_strncmp(identifier, "L" , 2 ) == 0)
         return (TOKEN_LIGHT);
+    if (ft_strncmp(identifier, "l" , 2) == 0)
+        return (TOKEN_MULTI_LIGHT);
     if (ft_strncmp(identifier, "sp" , 3) == 0)
         return (TOKEN_SPHERE);
     if (ft_strncmp(identifier, "pl" , 3) == 0)

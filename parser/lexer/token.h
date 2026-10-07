@@ -9,6 +9,7 @@ typedef enum e_token_type
     TOKEN_AMBIENT,
     TOKEN_CAMERA,
     TOKEN_LIGHT,
+    TOKEN_MULTI_LIGHT,
     TOKEN_SPHERE,
     TOKEN_PLANE,
     TOKEN_CYLINDER,

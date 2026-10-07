@@ -8,7 +8,7 @@ int	get_expected_arg_count(t_token_type type)
         return (2);
     if (type == TOKEN_CAMERA)
         return (3);
-    if (type == TOKEN_LIGHT)
+    if (type == TOKEN_LIGHT || type == TOKEN_MULTI_LIGHT)
         return (3);
     if (type == TOKEN_SPHERE)
         return (3);

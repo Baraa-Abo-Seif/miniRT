@@ -19,7 +19,7 @@ t_scene	*build_scene(t_token *tokens)
 		else if (current->type == TOKEN_CAMERA)
 			scene->camera = build_camera(current);
 
-		else if (current->type == TOKEN_LIGHT)
+		else if (current->type == TOKEN_LIGHT ||current->type == TOKEN_MULTI_LIGHT )
 		{
 			if (!add_light_to_scene(scene, current))
 			{
