@@ -61,13 +61,26 @@ t_color	shade_hit(t_hit_record *record, t_scene *scene)
 		if (object->type == SPHERE)
 			base_color = sphere_checker_at(&object->pattern, local_p);
 		else if (object->type == CYLINDER)
-			base_color = cylinder_checker_at(&object->pattern, local_p);
+			base_color = cylinder_checker_at_axis(&object->pattern, local_p,
+					object->data.cylinder.axis,
+					object->data.cylinder.height);
 		else if (object->type == PLANE)
-			base_color = plane_checker_at(&object->pattern, local_p);
+			base_color = plane_checker_at(&object->pattern, local_p,
+					object->data.plane.normal);
 		else if (object->type == TRIANGLE)
-			base_color = triangle_checker_at(&object->pattern, local_p);
+		{
+			t_vec edge_one = point_sub_point(object->data.triangle.point_b,
+					object->data.triangle.point_a);
+			t_vec edge_two = point_sub_point(object->data.triangle.point_c,
+					object->data.triangle.point_a);
+			t_vec normal = vec_normalize(vec_cross(edge_one, edge_two));
+			base_color = triangle_checker_at_normal(&object->pattern, local_p,
+					normal);
+		}
 		else if (object->type == PARABOLOID)
-			base_color = paraboloid_checker_at(&object->pattern, local_p);
+			base_color = paraboloid_checker_at_axis(&object->pattern, local_p,
+					object->data.paraboloid.axis,
+					object->data.paraboloid.height);
 		else
 			base_color = pattern_at(&object->pattern, local_p);
 	}
@@ -90,4 +103,3 @@ t_color	shade_hit(t_hit_record *record, t_scene *scene)
 
 	return (final_color);
 }
-

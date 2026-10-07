@@ -24,6 +24,8 @@ t_color	render_specular(t_object *object,
 
 	light_direction = point_sub_point(light->position, record->point);
 	light_direction = vec_normalize(light_direction);
+	if (vec_dot(record->normal, light_direction) <= 0.0)
+		return (result);
 
 	incident = vec_scale(light_direction, -1.0);
 	reflection = vec_reflect(incident, record->normal);
@@ -42,6 +44,5 @@ t_color	render_specular(t_object *object,
 	result = color_scale(light->color, specular_factor);
 	return (result);
 }
-
 
 
