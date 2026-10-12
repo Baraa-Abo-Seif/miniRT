@@ -1,302 +1,267 @@
+# miniRT
 
-````md
-## Bonus Roadmap
+## Project Overview
+
+`miniRT` is a 3D ray-tracing project written in C. It renders 3D scenes containing geometric objects, lighting, shadows, and camera perspectives using the MiniLibX graphics library.
 
 The Mandatory part has been fully implemented, tested, and stabilized.
 
-The project architecture was designed with extensibility in mind, allowing the Bonus features to be added without breaking the existing Mandatory implementation.
+Development is focused on completing and validating the Bonus features through a structured, incremental workflow.
+
+---
+
+## Mandatory Part — COMPLETED
+
+The Mandatory requirements have been implemented and are working as expected.
+
+---
+
+## Bonus Roadmap
+
+Bonus features are developed incrementally. Each feature is studied, implemented, integrated, and validated before moving to the next one.
 
 ### Development Philosophy
 
-Each Bonus feature follows the same development workflow:
+Each Bonus feature follows this workflow:
 
 > Theory → Mathematical Model → Architecture → Implementation → Integration → Testing → Visual Validation → Stability
 
-The goal is to understand and validate each feature before moving to the next one.
+The objective is to understand and validate each feature before proceeding to the next one.
 
 ---
 
-### Bonus Features
+### 1. Phong Specular Reflection — COMPLETED
 
-#### 1. Phong Specular Reflection — COMPLETED
+The specular reflection component has been implemented as part of the lighting system.
 
-Implemented the specular component of the Phong illumination model.
+Final combined-feature validation remains part of the Bonus integration phase.
 
-The lighting model now supports:
+### 2. Checkerboard Pattern — COMPLETED
 
-- Ambient lighting
-- Diffuse lighting
-- Specular reflection
-- Configurable material shininess
-- Light-dependent specular highlights
-- Shadow-aware specular contribution
+Checkerboard patterns have been implemented for supported geometric surfaces.
 
-The material now supports an optional `shininess` parameter.
+Individual checkerboard tests have been executed successfully. Combined-feature and regression testing remain part of the final validation phase.
 
-Example:
+### 3. Colored and Multiple Lights — IMPLEMENTED
 
-```text
-sp 0,0,0 10 255,0,0 32
-````
+Colored and multiple-light support has been implemented.
 
-If the shininess parameter is omitted, the object keeps the Mandatory behavior and produces no specular highlight.
+Final validation must confirm that light contributions, shadows, and interactions with the other Bonus features behave correctly in combined scenes.
 
-#### Validation
+### 4. Additional Second-Degree Object: Paraboloid — IMPLEMENTED
 
-The following cases were tested:
+A paraboloid has been implemented as the additional second-degree object.
 
-* Reflection vector calculation
-* View direction calculation
-* Reflection/view dot product
-* Negative dot product clamping
-* Different shininess values
-* Specular highlight visibility
-* Specular behavior with shadows
-* Objects with and without specular highlights
-* Multiple objects with different shininess values
-* Parser support for optional shininess
-* Mandatory scene regression
+#### Implementation
 
-Visual comparison confirmed that higher shininess values produce smaller and more concentrated highlights.
+- Implemented ray-paraboloid intersection calculations.
+- Solved the quadratic equation and selected valid intersection roots.
+- Handled misses, tangent intersections, and rays originating behind or outside the valid surface region.
+- Calculated surface normals.
+- Integrated the object into object dispatch.
+- Integrated the object into scene construction and parsing.
+- Added a dedicated paraboloid test program.
 
----
+#### Validation Completed
 
-#### 2. Checkerboard Pattern — NEXT
+- Axis-parallel ray.
+- Ray crossing the paraboloid.
+- Ray missing the paraboloid.
+- Nearest valid root selection.
+- Rejection of intersections above the configured height.
+- Surface normal at the vertex.
+- Surface normal on the curved surface.
+- Tangent ray.
+- Intersection at the height boundary.
+- Rejection of intersections beyond the height limit.
+- Rejection of intersections behind the ray.
 
-Implement a procedural checkerboard pattern that can be applied to supported objects.
+**Current result:** All 11 dedicated paraboloid tests pass. The project builds successfully, and the paraboloid scene has been rendered successfully.
 
-Planned pipeline:
+#### Remaining Validation
 
-```text
-Ray
- ↓
-Intersection
- ↓
-Surface Position
- ↓
-Pattern Evaluation
- ↓
-Base Color
- ↓
-Lighting
- ↓
-Final Color
-```
-
-The pattern system will be designed independently from the lighting system so that it can correctly interact with:
-
-* Diffuse lighting
-* Specular reflection
-* Shadows
-* Different object types
-
-Planned validation:
-
-* Checkerboard on a plane
-* Checkerboard on a sphere
-* Checkerboard on a cylinder
-* Pattern boundaries
-* Pattern scaling/orientation
-* Checkerboard + specular reflection
-* Checkerboard + shadows
-* Mandatory regression
+- Confirm shadow behavior in combined scenes.
+- Validate diffuse and specular lighting.
+- Test different orientations and configurations.
+- Run regression tests on existing Mandatory scenes.
+- Validate interactions with all other Bonus features.
 
 ---
 
-#### 3. Colored and Multiple Spot Lights — PLANNED
+### 5. Bump Map Textures — PLANNED
 
-Extend the lighting system to support multiple colored light sources.
+Implement bump mapping to create the appearance of surface detail by perturbing surface normals without changing the underlying geometry.
 
-Planned architecture:
+The implementation will integrate with the existing lighting pipeline.
 
-```text
-For each light:
-    Calculate visibility
-    Calculate diffuse contribution
-    Calculate specular contribution
-    Accumulate contribution
-```
-
-Planned validation:
-
-* Single white light
-* Single colored light
-* Multiple lights
-* Different light colors
-* Independent shadows
-* Colored light + specular reflection
-* Colored light + checkerboard
-
----
-
-#### 4. Additional Second-Degree Object — PLANNED
-
-Add one additional second-degree object supported by the Bonus specification.
-
-Candidate:
-
-* Cone
-
-Implementation will include:
-
-* Mathematical equation
-* Ray/object intersection
-* Quadratic solution
-* Valid intersection interval
-* Surface normal calculation
-* Object dispatch
-* Shadow interaction
-* Lighting interaction
-
-Planned validation:
-
-* Hit
-* Miss
-* Tangent
-* Inside-object rays
-* Different orientations
-* Shadows
-* Lighting
-* Mandatory regression
-
----
-
-#### 5. Bump Map Textures — PLANNED
-
-Implement bump mapping without changing the actual geometry.
-
-Planned pipeline:
+#### Planned Pipeline
 
 ```text
 Ray
  ↓
 Intersection
  ↓
-Original Normal
+Original Surface Normal
  ↓
 Bump Map Sampling
  ↓
-Modified Normal
+Modified Surface Normal
  ↓
 Phong Lighting
  ↓
 Final Color
 ```
 
-The implementation will include:
+#### Planned Implementation
 
-* Texture representation
-* Texture loading
-* Texture sampling
-* Object coordinate mapping
-* Normal perturbation
-* Lighting integration
+- Define a representation for bump map data.
+- Determine how texture data will be loaded and stored.
+- Implement texture sampling.
+- Define coordinate mapping for supported objects.
+- Calculate the perturbation applied to surface normals.
+- Integrate modified normals into the lighting pipeline.
+- Preserve the original geometry and intersection calculations.
+- Handle scenes that do not use bump mapping.
+- Define and validate the parser syntax if new scene parameters are required.
 
-Planned validation:
+#### Planned Validation
 
-* No bump map
-* Basic bump map
-* Strong bump map
-* Sphere
-* Cylinder
-* Bump map + specular reflection
-* Bump map + shadows
+- Objects without a bump map.
+- Basic bump map sampling.
+- Different bump map intensities.
+- Texture mapping on supported objects.
+- Normal perturbation at different surface positions.
+- Bump mapping with diffuse lighting.
+- Bump mapping with specular reflection.
+- Bump mapping with shadows.
+- Visual comparison between mapped and unmapped surfaces.
 
 ---
 
-## Bonus Integration
+## Bonus Integration — PENDING
 
-After implementing all individual features, the Bonus implementation will be validated as a complete system.
+After the remaining feature work is completed, validate the Bonus implementation as a complete system.
 
 ### Combined Feature Tests
 
 Test interactions between:
 
-* Specular + Checkerboard
-* Specular + Multiple Lights
-* Checkerboard + Multiple Lights
-* Checkerboard + Shadows
-* Bump Mapping + Specular
-* Bump Mapping + Multiple Lights
-* Additional Object + Specular
-* Additional Object + Shadows
-* All compatible Bonus features together
+- Specular reflection and checkerboard patterns.
+- Specular reflection and multiple lights.
+- Checkerboard patterns and multiple lights.
+- Checkerboard patterns and shadows.
+- Bump mapping and specular reflection.
+- Bump mapping and multiple lights.
+- The paraboloid and specular reflection.
+- The paraboloid and shadows.
+- All compatible Bonus features together.
+
+The objective is to ensure that adding one feature does not break an existing feature.
 
 ---
 
-## Bonus Parser
+## Bonus Parser Validation — PENDING
 
-The parser will be extended only when required by each Bonus feature.
+The parser will be reviewed and extended wherever required by the Bonus features.
 
-Current parser extension:
+### Planned Validation
 
-```text
-Sphere:
-sp POSITION DIAMETER COLOR [SHININESS]
-
-Plane:
-pl POSITION NORMAL COLOR [SHININESS]
-
-Cylinder:
-cy POSITION ORIENTATION DIAMETER HEIGHT COLOR [SHININESS]
-
-Triangle:
-tr POINT_A POINT_B POINT_C COLOR [SHININESS]
-```
-
-The Bonus parameters remain optional so existing Mandatory `.rt` scenes continue to work.
+- Verify the syntax of each new object or parameter.
+- Validate argument counts and value ranges.
+- Handle invalid vectors, colors, and dimensions.
+- Reject malformed scene descriptions.
+- Ensure error messages identify invalid input clearly.
+- Confirm existing Mandatory `.rt` scenes remain compatible.
+- Test scenes containing multiple Bonus features.
 
 ---
 
-## Testing Strategy
+## Complete Bonus Test Suite — IN PROGRESS
 
-Every Bonus feature must pass the following validation stages:
+Each feature must be tested independently before the complete renderer is validated.
+
+### Testing Workflow
 
 ```text
-[✓] Theory understood
-[✓] Formula understood
-[✓] Architecture decided
-[✓] Implementation complete
-[✓] Parser support
-[✓] Basic test
-[✓] Edge cases
-[✓] Visual test
-[✓] Mandatory regression
-[ ] Norminette
-[ ] Valgrind
-[ ] Git commit
+[✓] Paraboloid implementation completed
+[✓] Paraboloid dedicated tests passed
+[✓] Paraboloid scene rendered successfully
+[ ] Remaining individual feature tests reviewed
+[ ] Parser integration fully validated
+[ ] Combined feature tests passed
+[ ] Mandatory regression tests passed
+[ ] Visual behavior validated across combined scenes
+[ ] Memory and stability checks completed
+[ ] Final audit completed
 ```
 
-For each new feature, the checklist is reset and completed independently before moving to the next feature.
+The checklist will be updated as each task is verified.
+
+---
+
+## Memory and Stability Validation — PENDING
+
+Validate the application after integrating the remaining Bonus features.
+
+### Planned Checks
+
+- Run available scenes and test cases.
+- Check for memory leaks using Valgrind where supported.
+- Check for invalid memory access.
+- Verify allocation and cleanup paths.
+- Test repeated rendering and window closure.
+- Confirm error handling does not leave allocated resources behind.
+- Build with the required compiler flags.
+- Run Norminette and address applicable issues.
+
+---
+
+## Final Bonus Audit — PENDING
+
+Before considering the Bonus complete, compare the implementation against the official project subject.
+
+### Final Checklist
+
+- [ ] All selected Bonus features are implemented.
+- [ ] The implementation matches the official subject.
+- [ ] The parser accepts valid scenes and rejects invalid ones.
+- [ ] Existing Mandatory scenes still work.
+- [ ] Individual feature tests pass.
+- [ ] Combined feature tests pass.
+- [ ] Visual output is validated.
+- [ ] Memory and stability checks are completed.
+- [ ] Norminette checks are completed.
+- [ ] Final code review is completed.
+- [ ] README documentation reflects the final implementation.
 
 ---
 
 ## Current Bonus Status
 
 ```text
-Bonus Progress
-
-[✓] 1. Phong Specular Reflection
-[ ] 2. Checkerboard Pattern
-[ ] 3. Colored and Multiple Spot Lights
-[ ] 4. Additional Second-Degree Object
+[✓] 1. Phong Specular Reflection — implemented
+[✓] 2. Checkerboard Pattern — implemented
+[✓] 3. Colored and Multiple Lights — implemented
+[✓] 4. Paraboloid — implemented and dedicated tests passed
 [ ] 5. Bump Map Textures
 [ ] 6. Bonus Integration
 [ ] 7. Final Bonus Parser Validation
 [ ] 8. Complete Bonus Test Suite
-[ ] 9. Memory & Stability Validation
+[ ] 9. Memory and Stability Validation
 [ ] 10. Final Bonus Audit
 ```
 
 ### Current Milestone
 
-**Milestone 1 — Phong Specular Reflection: COMPLETED**
+**Next: Bump Map Textures**
 
-The project is now ready to proceed to:
+The paraboloid implementation and its dedicated tests are complete. The next development milestone is to study the existing texture and lighting architecture, then design a bump mapping implementation that fits the project without breaking existing behavior.
 
-**Milestone 2 — Checkerboard Pattern**
+---
 
-```
+## Project Status
 
-**هذه هي النسخة التي أنصح بوضعها الآن**؛ وبعد إنهاء Checkerboard سنعود ونحدّث حالة Milestone 2 بنفس الأسلوب بدل تعديل الخطة كاملة كل مرة.
-```
+**Mandatory: COMPLETED**
+
+**Bonus: IN PROGRESS**
+

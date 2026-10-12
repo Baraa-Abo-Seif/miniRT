@@ -52,9 +52,21 @@ bool	paraboloid_find_root(t_paraboloid *paraboloid, t_ray ray,
 		- 2.0 * coefficient * origin.z;
 	equation.discriminant = equation.b * equation.b
 		- 4.0 * equation.a * equation.c;
-	if (fabs(equation.a) < EPSILON || equation.discriminant < 0.0)
+	
+	if (fabs(equation.a) < EPSILON)
+	{
+		if (fabs(equation.b) < EPSILON)
+			return (false);
+		*root = -equation.c / equation.b;
+		return (valid_root(paraboloid, ray, interval, *root));
+	}
+	if (equation.discriminant < 0.0)
 		return (false);
 	equation.sqrtd = sqrt(equation.discriminant);
+
+	// if (fabs(equation.a) < EPSILON || equation.discriminant < 0.0)
+	// 	return (false);
+	// equation.sqrtd = sqrt(equation.discriminant);
 	*root = (-equation.b - equation.sqrtd) / (2.0 * equation.a);
 	if (valid_root(paraboloid, ray, interval, *root))
 		return (true);
