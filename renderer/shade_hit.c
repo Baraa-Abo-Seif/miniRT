@@ -1,6 +1,7 @@
 #include "renderer.h"
 #include <stdio.h>
 #include "../pattern/pattern.h"
+#include "../texture/texture.h"
 
 static t_point	vec_to_pattern_point(t_vec value)
 {
@@ -54,6 +55,30 @@ t_color	shade_hit(t_hit_record *record, t_scene *scene)
 
 	object = (t_object *)record->object;
 	base_color = object->color;
+	if (object->color_texture.is_active)
+	{
+		t_uv	uv;
+
+		if (object->type == SPHERE)
+			uv = sphere_uv(record->point, object->data.sphere.center,
+					object->data.sphere.radius);
+		else if (object->type == PLANE)
+			uv = plane_uv(record->point, object->data.plane.point,
+					object->data.plane.normal);
+		else if (object->type == CYLINDER)
+			uv = cylinder_uv(record->point, object->data.cylinder.center,
+					object->data.cylinder.axis,
+					object->data.cylinder.height);
+		else if (object->type == TRIANGLE)
+			uv = triangle_uv(record->point, object->data.triangle.point_a,
+					object->data.triangle.point_b,
+					object->data.triangle.point_c);
+		else
+			uv = paraboloid_uv(record->point, object->data.paraboloid.vertex,
+					object->data.paraboloid.axis,
+					object->data.paraboloid.height);
+		texture_color_at(&object->color_texture.texture, uv, &base_color);
+	}
 	if (object->pattern.type == PATTERN_CHECKER)
 	{
 		t_point local_p = pattern_point(object, record->point);
@@ -84,6 +109,8 @@ t_color	shade_hit(t_hit_record *record, t_scene *scene)
 		else
 			base_color = pattern_at(&object->pattern, local_p);
 	}
+	if (object->bump_map.is_active)
+		apply_bump_mapping(object, record);
 
 	light = scene->lights;
 	final_color = render_ambient(base_color, scene->ambient);

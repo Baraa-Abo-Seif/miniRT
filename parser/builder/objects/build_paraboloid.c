@@ -18,6 +18,7 @@ t_object	*build_paraboloid(const t_token *token)
 	object->data.paraboloid.height = ft_atof(token->args[3]);
 	check_positive(object->data.paraboloid.height);
 	object->color = parse_color(token->args[4]);
+	object->bump_map.intensity = DEFAULT_BUMP_INTENSITY;
 	parse_object_bonus(object, token, 4);
 	return (object);
 }

@@ -25,4 +25,6 @@
 
 # include "./intersector/intersector.h"
 
+# include "./texture/texture.h"
+
 #endif

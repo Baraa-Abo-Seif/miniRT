@@ -16,10 +16,10 @@ t_object	*build_sphere(const t_token *token)
 	object->data.sphere.radius /= 2.0;
 
 	object->color = parse_color(token->args[2]);
+	object->bump_map.intensity = DEFAULT_BUMP_INTENSITY;
 	parse_object_bonus(object, token, 2);
 
 	return (object);
 }
-
 
 

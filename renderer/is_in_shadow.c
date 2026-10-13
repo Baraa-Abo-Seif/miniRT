@@ -10,12 +10,12 @@ bool	is_in_shadow(t_hit_record *record, t_scene *scene, t_light *light)
 	t_hit_record	shadow_hit;
 	t_interval		interval;
 
-	shadow_origin = point_add_vec(
-		record->point,
-		vec_scale(record->normal, SHADOW_EPSILON));
-	shadow_direction = point_sub_point(light->position, shadow_origin);
+	shadow_direction = point_sub_point(light->position, record->point);
 	light_distance = vec_length(shadow_direction);
 	shadow_direction = vec_normalize(shadow_direction);
+	shadow_origin = point_add_vec(
+		record->point,
+		vec_scale(shadow_direction, SHADOW_EPSILON));
 	shadow_ray = ray_create(shadow_origin, shadow_direction);
 	interval.min = SHADOW_EPSILON;
 	interval.max = light_distance - SHADOW_EPSILON;

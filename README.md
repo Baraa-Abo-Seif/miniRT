@@ -88,13 +88,17 @@ A paraboloid has been implemented as the additional second-degree object.
 
 ---
 
-### 5. Bump Map Textures — PLANNED
+### 5. Bump Map Textures — IMPLEMENTED
+
+Objects may use `bum:path/to/height.xpm,intensity` for normal
+perturbation and `txm:path/to/color.xpm` for the visible surface color.
+Both options can be used together.
 
 Implement bump mapping to create the appearance of surface detail by perturbing surface normals without changing the underlying geometry.
 
 The implementation will integrate with the existing lighting pipeline.
 
-#### Planned Pipeline
+#### Pipeline
 
 ```text
 Ray
@@ -112,7 +116,7 @@ Phong Lighting
 Final Color
 ```
 
-#### Planned Implementation
+#### Implementation
 
 - Define a representation for bump map data.
 - Determine how texture data will be loaded and stored.
@@ -124,7 +128,7 @@ Final Color
 - Handle scenes that do not use bump mapping.
 - Define and validate the parser syntax if new scene parameters are required.
 
-#### Planned Validation
+#### Validation
 
 - Objects without a bump map.
 - Basic bump map sampling.
@@ -264,4 +268,3 @@ The paraboloid implementation and its dedicated tests are complete. The next dev
 **Mandatory: COMPLETED**
 
 **Bonus: IN PROGRESS**
-

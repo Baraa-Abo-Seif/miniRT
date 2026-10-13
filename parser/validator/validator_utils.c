@@ -99,14 +99,15 @@ bool	is_valid_arg_count(t_token_type type, size_t actual_count)
 	{
 		if (actual_count == (size_t)expected_count
             || actual_count == (size_t)(expected_count + 1)
+            || actual_count == (size_t)(expected_count + 2)
             || actual_count == (size_t)(expected_count + 3)
-            || actual_count == (size_t)(expected_count + 4))
+            || actual_count == (size_t)(expected_count + 4)
+            || actual_count == (size_t)(expected_count + 5))
 			return (true);
 		return (false);
 	}
 	return (actual_count == (size_t)expected_count);
 }
-
 
 
 

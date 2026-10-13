@@ -181,6 +181,11 @@ PATTERN = \
 	pattern/checker.c \
 	pattern/pattern.c
 
+TEXTURE_SRC = \
+	texture/uv_mapping.c \
+	texture/tbn_basis.c \
+	texture/bump_map.c \
+	texture/texture_loader.c
 
 SRC = \
 	$(MAIN_SRC) \
@@ -192,12 +197,11 @@ SRC = \
 	$(PARSER_SRC) \
 	$(RENDERER_SRC) \
 	$(MLX_ENGINE_SRC) \
-	$(PATTERN)
+	$(PATTERN) \
+	$(TEXTURE_SRC)
 
 OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)
-
--include $(DEP)
 
 # **************************************************************************** #
 #                                    Rules                                     #
@@ -211,11 +215,13 @@ $(LIBFT):
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -MMD -MP $(INCLUDES) -c $< -o $@
+
+-include $(DEP)
 
 
 # **************************************************************************** #

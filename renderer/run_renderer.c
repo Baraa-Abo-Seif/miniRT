@@ -22,6 +22,14 @@ int	run_renderer(t_scene *scene)
 			WINDOW_TITLE);
 	if (!window)
 		return (-1);
+	if (load_bump_maps(window->mlx, scene) != 0
+		|| load_color_textures(window->mlx, scene) != 0)
+	{
+		destroy_bump_maps(window->mlx, scene);
+		destroy_color_textures(window->mlx, scene);
+		mlx_window_destroy(window);
+		return (-1);
+	}
 
 	image = mlx_image_create(
 			window->mlx,
@@ -48,7 +56,9 @@ int	run_renderer(t_scene *scene)
 
 	mlx_loop(window->mlx);
 
+	destroy_bump_maps(window->mlx, scene);
+	destroy_color_textures(window->mlx, scene);
+	mlx_image_destroy(image);
+	mlx_window_destroy(window);
 	return (0);
 }
-
-
