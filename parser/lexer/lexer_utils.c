@@ -40,12 +40,12 @@ bool	is_blank_line(const char *line)
 	while (*line)
 	{
 		if (*line != ' ' && *line != '\t'
-			&& *line != '\n' && *line != '\r')
+			&& *line != '\n' && *line != '\r'
+			&& *line != '\v' && *line != '\f')
 			return (false);
 		line++;
 	}
 	return (true);
 }
-
 
 

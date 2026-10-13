@@ -6,9 +6,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stddef.h>
+#include <errno.h>
 
 #include "../../Libft/libft.h"
 #include "../../get_next_line/get_next_line.h"
+#include "../../utils/error.h"
 
 
 #include "./reader.h"

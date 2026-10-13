@@ -2,8 +2,8 @@
 
 #include "../mlx_engine/mlx_api.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 800
+#define WINDOW_WIDTH 1800
+#define WINDOW_HEIGHT 1000
 #define WINDOW_TITLE "miniRT"
 
 int	run_renderer(t_scene *scene)
@@ -52,9 +52,8 @@ int	run_renderer(t_scene *scene)
 
 	mlx_display_image(window, image);
 
-	/* Events */
-
-	mlx_loop(window->mlx);
+	mlx_event_init(window);
+	mlx_event_loop(window);
 
 	destroy_bump_maps(window->mlx, scene);
 	destroy_color_textures(window->mlx, scene);
