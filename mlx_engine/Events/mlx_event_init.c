@@ -1,5 +1,6 @@
 #include "mlx_event.h"
 #include "../Window/mlx_window.h"
+#include "../Display/mlx_display.h"
 
 void	mlx_event_init(t_window *window)
 {
@@ -10,5 +11,5 @@ void	mlx_event_init(t_window *window)
 		(int (*)())mlx_event_close, window);
 	mlx_hook(window->win, EVENT_KEY_PRESS, KEY_PRESS_MASK,
 		(int (*)())mlx_event_key, window);
+	mlx_expose_hook(window->win, mlx_event_expose, window);
 }
-

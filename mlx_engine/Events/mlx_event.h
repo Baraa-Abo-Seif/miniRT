@@ -13,6 +13,7 @@ typedef struct s_window	t_window;
 void	mlx_event_init(t_window *window);
 void	mlx_event_loop(t_window *window);
 int		mlx_event_close(void *param);
+int		mlx_event_expose(void *param);
 int		mlx_event_key(int keycode, void *param);
 
 #endif

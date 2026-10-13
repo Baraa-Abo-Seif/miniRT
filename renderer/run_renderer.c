@@ -48,6 +48,7 @@ int	run_renderer(t_scene *scene)
 		return (-1);
 	}
 
+	window->image = image;
 	render(scene, image); 
 
 	mlx_display_image(window, image);

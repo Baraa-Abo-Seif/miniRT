@@ -4,10 +4,13 @@
 # include "../../mlx/mlx.h"
 # include "../../Libft/libft.h"
 
+typedef struct s_image	t_image;
+
 typedef struct s_window
 {
 	void	*mlx; // Pointer to the MLX instance
 	void	*win; // Pointer to the window instance
+	t_image	*image; // Image currently displayed in the window
 	int		width; // Width of the window in pixels
 	int		height; // Height of the window in pixels
 }	t_window;

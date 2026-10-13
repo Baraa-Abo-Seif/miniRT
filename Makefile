@@ -166,6 +166,7 @@ RENDERER_SRC = \
 MLX_ENGINE_SRC = \
 	mlx_engine/Display/mlx_display_image.c \
 	mlx_engine/Events/mlx_event_close.c \
+	mlx_engine/Events/mlx_event_expose.c \
 	mlx_engine/Events/mlx_event_init.c \
 	mlx_engine/Events/mlx_event_key.c \
 	mlx_engine/Events/mlx_event_loop.c \
