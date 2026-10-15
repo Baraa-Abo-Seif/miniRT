@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/12 11:36:00 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/12 18:05:48 by bablo            ###   ########.fr       */
+/*   Updated: 2026/10/14 14:25:42 by ralhoura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TEXTURE_H
 
 # include <stdbool.h>
-# include "../math/math.h"
+# include "../lib_math/lib_math.h"
 # include "../intersector/hit/hit_record.h"
 
 # define DEFAULT_BUMP_INTENSITY 1.0

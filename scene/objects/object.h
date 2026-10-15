@@ -7,7 +7,7 @@
 #include "./cylinder.h"
 #include "./triangle.h"
 #include "./paraboloid.h"
-#include "../../math/math.h"
+#include "../../lib_math/lib_math.h"
 #include "../../pattern/pattern.h"
 #include "../../texture/texture.h"
 

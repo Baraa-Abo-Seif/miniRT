@@ -1,7 +1,7 @@
 #ifndef CYLINDER_H
 #define CYLINDER_H
 
-#include "../../math/math.h"
+#include "../../lib_math/lib_math.h"
 
 
 typedef struct s_cylinder

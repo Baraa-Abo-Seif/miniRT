@@ -1,7 +1,7 @@
 #ifndef PLANE_H
 #define PLANE_H
 
-#include "../../math/math.h"
+#include "../../lib_math/lib_math.h"
 
 
 

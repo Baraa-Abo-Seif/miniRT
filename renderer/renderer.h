@@ -3,7 +3,7 @@
 
 #include "../scene/scene.h"
 #include "../intersector/intersector.h"
-#include "../math/math.h"
+#include "../lib_math/lib_math.h"
 #include "../mlx_engine/Image/mlx_image.h"
 
 

@@ -1,7 +1,7 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include "../../math/math.h"
+#include "../../lib_math/lib_math.h"
 
 typedef struct s_triangle
 {

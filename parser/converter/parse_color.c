@@ -1,7 +1,7 @@
 
 #include "converter.h"
 #include "converter_internal.h"
-#include "../../math/color/color.h"
+#include "../../lib_math/color/color.h"
 #include "../check/check.h"
 
 t_color	parse_color(const char *str)

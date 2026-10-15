@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../../../math/matrix/matrix.h"
+#include "../../../lib_math/matrix/matrix.h"
 
 static void	print_submatrix(t_matrix matrix)
 {

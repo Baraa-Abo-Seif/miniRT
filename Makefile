@@ -49,37 +49,37 @@ GNL_SRC = \
 	get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c
 
-MATH_SRC = \
-	math/color/color_add.c \
-	math/color/color_clamp.c \
-	math/color/color_multiply.c \
-	math/color/color_scale.c \
-	math/color/color_to_hex.c \
-	math/vector/vec_reflect.c \
-	math/color/color_clamp_rgb.c \
-	math/point/point_add_vec.c \
-	math/point/point_sub_point.c \
-	math/point/point_sub_vec.c \
-	math/vector/vec_add.c \
-	math/vector/vec_cross.c \
-	math/vector/vec_distance.c \
-	math/vector/vec_dot.c \
-	math/vector/vec_length.c \
-	math/vector/vec_normalize.c \
-	math/vector/vec_scale.c \
-	math/vector/vec_sub.c	\
-	math/matrix/matrix_identity.c \
-	math/matrix/matrix_point.c \
-	math/matrix/matrix_vector.c \
-	math/matrix/matrix_multiply.c \
-	math/matrix/matrix_translation.c \
-	math/matrix/matrix_scaling.c \
-	math/matrix/matrix_rotation.c \
-	math/matrix/matrix_submatrix.c \
-	math/matrix/matrix_determinant_2x2.c \
-	math/matrix/matrix_determinant_3x3.c\
-	math/matrix/matrix_minor.c\
-	math/matrix/matrix_cofactor.c
+lib_math_SRC = \
+	lib_math/color/color_add.c \
+	lib_math/color/color_clamp.c \
+	lib_math/color/color_multiply.c \
+	lib_math/color/color_scale.c \
+	lib_math/color/color_to_hex.c \
+	lib_math/vector/vec_reflect.c \
+	lib_math/color/color_clamp_rgb.c \
+	lib_math/point/point_add_vec.c \
+	lib_math/point/point_sub_point.c \
+	lib_math/point/point_sub_vec.c \
+	lib_math/vector/vec_add.c \
+	lib_math/vector/vec_cross.c \
+	lib_math/vector/vec_distance.c \
+	lib_math/vector/vec_dot.c \
+	lib_math/vector/vec_length.c \
+	lib_math/vector/vec_normalize.c \
+	lib_math/vector/vec_scale.c \
+	lib_math/vector/vec_sub.c	\
+	lib_math/matrix/matrix_identity.c \
+	lib_math/matrix/matrix_point.c \
+	lib_math/matrix/matrix_vector.c \
+	lib_math/matrix/matrix_multiply.c \
+	lib_math/matrix/matrix_translation.c \
+	lib_math/matrix/matrix_scaling.c \
+	lib_math/matrix/matrix_rotation.c \
+	lib_math/matrix/matrix_submatrix.c \
+	lib_math/matrix/matrix_determinant_2x2.c \
+	lib_math/matrix/matrix_determinant_3x3.c\
+	lib_math/matrix/matrix_minor.c\
+	lib_math/matrix/matrix_cofactor.c
 
 
 
@@ -91,8 +91,7 @@ SCENE_SRC = \
 	scene/camera/camera_destroy.c \
 	scene/camera/camera_init.c \
 	scene/camera/camera_ray.c \
-	scene/ray/ray_at.c \
-	scene/ray/ray_create.c
+	scene/ray/ray_at.c 
 
 INTERSECTOR_SRC = \
 	intersector/hit/hit_record_set_face_normal.c \
@@ -192,7 +191,7 @@ SRC = \
 	$(MAIN_SRC) \
 	$(UTILS_SRC) \
 	$(GNL_SRC) \
-	$(MATH_SRC) \
+	$(lib_math_SRC) \
 	$(SCENE_SRC) \
 	$(INTERSECTOR_SRC) \
 	$(PARSER_SRC) \

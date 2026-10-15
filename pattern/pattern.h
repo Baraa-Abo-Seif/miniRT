@@ -1,7 +1,7 @@
 #ifndef PATTERN_H
 #define PATTERN_H
 
-#include "../math/math.h"
+#include "../lib_math/lib_math.h"
 
 typedef enum e_pattern_type
 {

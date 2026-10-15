@@ -3,8 +3,8 @@
 
 # include <stdbool.h>
 
-#include "../../math/vector/vector.h"
-#include "../../math/color/color.h"
+#include "../../lib_math/vector/vector.h"
+#include "../../lib_math/color/color.h"
 
 
 #include "../../utils/error.h"
