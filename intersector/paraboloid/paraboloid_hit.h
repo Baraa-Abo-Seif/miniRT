@@ -2,10 +2,10 @@
 # define PARABOLOID_HIT_H
 
 # include "../../scene/objects/paraboloid.h"
-# include "../../scene/ray/ray.h"
+# include "../../lib_math/lib_math.h"
 # include "../hit/hit_record.h"
 # include "../hit/interval.h"
-# include "../../scene/objects/object.h"
+# include "../../scene/scene.h"
 
 bool	paraboloid_hit(t_object *object, t_ray ray,
 		t_interval interval, t_hit_record *record);

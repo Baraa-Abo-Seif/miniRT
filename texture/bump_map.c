@@ -1,7 +1,7 @@
 
 
 #include "texture.h"
-#include "../scene/objects/object.h"
+#include "../scene/scene.h"
 
 double	bump_sample_height(const t_texture *tex, double u, double v)
 {

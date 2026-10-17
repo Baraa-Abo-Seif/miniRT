@@ -5,6 +5,8 @@ static void	parse_bump_map(t_object *object, const char *arg)
 {
 	char	**parts;
 
+	if (!arg)
+		return ;
 	if (ft_strncmp(arg, "bum:", 4) != 0 || !arg[4])
 		return ;
 	parts = ft_split(arg + 4, ',');
@@ -31,6 +33,8 @@ static void	parse_bump_map(t_object *object, const char *arg)
 
 static void	parse_color_texture(t_object *object, const char *arg)
 {
+	if (!arg)
+		return ;
 	if (ft_strncmp(arg, "txm:", 4) != 0 || !arg[4])
 		return ;
 	object->color_texture.filepath = ft_strdup(arg + 4);
@@ -43,6 +47,8 @@ void	parse_object_bonus(t_object *object,
 {
 	size_t	i;
 
+	if (!object || !token || !token->args)
+		return ;
 	i = color_index + 1;
 	while (token->args[i])
 	{
@@ -52,6 +58,8 @@ void	parse_object_bonus(t_object *object,
 			parse_color_texture(object, token->args[i]);
 		else if (ft_strncmp(token->args[i], "checker", 8) == 0)
 		{
+			if (!token->args[i + 1] || !token->args[i + 2])
+				break ;
 			object->pattern.type = PATTERN_CHECKER;
 			object->pattern.color_a = parse_color(token->args[i + 1]);
 			object->pattern.color_b = parse_color(token->args[i + 2]);
@@ -60,7 +68,7 @@ void	parse_object_bonus(t_object *object,
 				object->shininess = ft_atof(token->args[i + 3]);
 				check_positive(object->shininess);
 			}
-			i += 3;
+			i += 2;
 		}
 		else
 		{

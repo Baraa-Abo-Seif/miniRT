@@ -2,8 +2,8 @@
 
 #include "../mlx_engine/mlx_api.h"
 
-#define WINDOW_WIDTH 1800
-#define WINDOW_HEIGHT 1000
+#define WINDOW_WIDTH 600
+#define WINDOW_HEIGHT 600
 #define WINDOW_TITLE "miniRT"
 
 int	run_renderer(t_scene *scene)

@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_window.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/15 18:13:22 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/15 18:13:23 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_WINDOW_H
 # define MLX_WINDOW_H
 
 # include "../../mlx/mlx.h"
 # include "../../Libft/libft.h"
+# include "../../utils/utils.h"
 
 typedef struct s_image	t_image;
 

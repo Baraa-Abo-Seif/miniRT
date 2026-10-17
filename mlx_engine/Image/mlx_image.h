@@ -1,8 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_image.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/15 17:38:36 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/15 17:38:41 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MLX_IMAGE_H
 # define MLX_IMAGE_H
 
 # include "../../mlx/mlx.h"
 # include "../../Libft/libft.h"
+# include "../../utils/utils.h"
+
 
 
 typedef struct s_image
@@ -19,19 +33,8 @@ typedef struct s_image
 	int		endian;			// Endianness of the image buffer
 }	t_image;
 
-/*
-** Creates a new MLX image.
-*/
 t_image	*mlx_image_create(void *mlx, int width, int height);
-
-/*
-** Initializes the image buffer information.
-*/
 int		mlx_image_data(t_image *image);
-
-/*
-** Destroys the image and releases all allocated resources.
-*/
 void	mlx_image_destroy(t_image *image);
 
 #endif

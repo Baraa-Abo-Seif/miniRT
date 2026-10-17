@@ -1,16 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx_image_pixel_put.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/15 18:03:15 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/15 18:03:16 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mlx_pixel.h"
-#include "../Image/mlx_image.h"
 
 void	mlx_image_pixel_put(t_image *image, int x, int y, int color)
 {
 	int		offset;
 	char	*pixel;
-
-	if (!image || !image->addr
-		|| x < 0 || x >= image->width
+	
+	if (!image || !image->addr || x < 0 || x >= image->width
 		|| y < 0 || y >= image->height)
 		return ;
-
 	offset = (y * image->line_length)
 		+ (x * (image->bits_per_pixel / 8));
 	pixel = image->addr + offset;

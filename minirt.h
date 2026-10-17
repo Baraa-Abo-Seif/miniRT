@@ -15,7 +15,6 @@
 
 
 # include "./lib_math/lib_math.h"
-# include "./scene/ray/ray.h"
 
 # include "./scene/scene.h"
 

@@ -1,8 +1,8 @@
 #ifndef TRIANGLE_HIT_H
 # define TRIANGLE_HIT_H
 
-# include "../scene/objects/object.h"
-# include "../scene/ray/ray.h"
+# include "../scene/scene.h"
+# include "../../lib_math/lib_math.h"
 # include "../hit/hit_record.h"
 # include "../hit/interval.h"
 

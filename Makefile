@@ -67,31 +67,8 @@ lib_math_SRC = \
 	lib_math/vector/vec_length.c \
 	lib_math/vector/vec_normalize.c \
 	lib_math/vector/vec_scale.c \
-	lib_math/vector/vec_sub.c	\
-	lib_math/matrix/matrix_identity.c \
-	lib_math/matrix/matrix_point.c \
-	lib_math/matrix/matrix_vector.c \
-	lib_math/matrix/matrix_multiply.c \
-	lib_math/matrix/matrix_translation.c \
-	lib_math/matrix/matrix_scaling.c \
-	lib_math/matrix/matrix_rotation.c \
-	lib_math/matrix/matrix_submatrix.c \
-	lib_math/matrix/matrix_determinant_2x2.c \
-	lib_math/matrix/matrix_determinant_3x3.c\
-	lib_math/matrix/matrix_minor.c\
-	lib_math/matrix/matrix_cofactor.c
-
-
-
-SCENE_SRC = \
-	scene/camera/camera_build_basis.c \
-	scene/camera/camera_compute_pixel_delta.c \
-	scene/camera/camera_compute_viewport.c \
-	scene/camera/camera_create.c \
-	scene/camera/camera_destroy.c \
-	scene/camera/camera_init.c \
-	scene/camera/camera_ray.c \
-	scene/ray/ray_at.c 
+	lib_math/vector/vec_sub.c \
+	lib_math/ray/ray_at.c 
 
 INTERSECTOR_SRC = \
 	intersector/hit/hit_record_set_face_normal.c \
@@ -160,7 +137,12 @@ RENDERER_SRC = \
 	renderer/run_renderer.c \
 	renderer/is_in_shadow.c \
 	renderer/shade_hit.c \
-	renderer/specular_bonus.c 
+	renderer/specular_bonus.c \
+	renderer/camera/camera_build_basis.c \
+	renderer/camera/camera_compute_pixel_delta.c \
+	renderer/camera/camera_compute_viewport.c \
+	renderer/camera/camera_init.c \
+	renderer/camera/camera_ray.c 
 
 MLX_ENGINE_SRC = \
 	mlx_engine/Display/mlx_display_image.c \
@@ -192,7 +174,6 @@ SRC = \
 	$(UTILS_SRC) \
 	$(GNL_SRC) \
 	$(lib_math_SRC) \
-	$(SCENE_SRC) \
 	$(INTERSECTOR_SRC) \
 	$(PARSER_SRC) \
 	$(RENDERER_SRC) \

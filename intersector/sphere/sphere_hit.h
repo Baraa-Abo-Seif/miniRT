@@ -3,12 +3,11 @@
 
 #include "../../scene/objects/sphere.h"
 
-#include "../../scene/ray/ray.h"
+# include "../../lib_math/lib_math.h"
 
 #include "../hit/hit_record.h"
 #include "../hit/interval.h"
-#include "../../scene/objects/object.h"
-
+#include "../../scene/scene.h"
 
 void	calculate_equation(t_sphere *sphere,t_ray ray,t_quadratic_data *eq);
 bool	find_root(t_quadratic_data *eq,t_interval interval);

@@ -1,6 +1,5 @@
 #include "sphere_hit.h"
-#include "../../scene/objects/object.h"
-
+#include "../../scene/scene.h"
 void	calculate_equation(t_sphere *sphere,t_ray ray,t_quadratic_data *eq)
 {
 	t_vec	oc;

@@ -1,6 +1,5 @@
 #include "renderer.h"
-#include "../mlx_engine/Image/mlx_image.h"
-#include "../mlx_engine/Pixel/mlx_pixel.h"
+
 
 void	render(t_scene *scene, t_image *image)
 {
@@ -19,7 +18,7 @@ void	render(t_scene *scene, t_image *image)
 			
 			color = ray_color(ray, scene);
 			
-			mlx_image_pixel_put(image,x,y,color_to_hex(color));
+			mlx_image_pixel_put(image,x,y,color_to_hex(color));//fall if 
 			x++;
 		}
 		y++;

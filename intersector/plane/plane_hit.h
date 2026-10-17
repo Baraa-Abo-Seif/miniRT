@@ -1,12 +1,10 @@
 #ifndef PLANE_HIT_H
 # define PLANE_HIT_H
 
-#include "../../scene/objects/plane.h"
-# include "../../scene/ray/ray.h"
+# include "../../lib_math/lib_math.h"
 # include "../hit/hit_record.h"
 # include "../hit/interval.h"
-#include "../../scene/objects/object.h"
-
+#include "../../scene/scene.h"
 typedef struct s_plane_data
 {
 	double	denominator;

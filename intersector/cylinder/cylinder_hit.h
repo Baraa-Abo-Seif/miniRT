@@ -1,11 +1,9 @@
 #ifndef CYLINDER_HIT_H
 # define CYLINDER_HIT_H
 
-#include "../../scene/objects/cylinder.h"
-# include "../../scene/ray/ray.h"
 # include "../hit/hit_record.h"
 # include "../hit/interval.h"
-#include "../../scene/objects/object.h"
+#include "../../scene/object.h"
 
 
 typedef struct s_cap_context
