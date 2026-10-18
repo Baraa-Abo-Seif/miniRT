@@ -1,5 +1,5 @@
 #include "builder_internal.h"
-#include "../Cleanup/cleanup.h"
+#include "../../utils/Cleanup/cleanup.h"
 
 t_scene	*build_scene(t_token *tokens)
 {

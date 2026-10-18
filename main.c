@@ -1,6 +1,6 @@
 #include "scene/scene.h"
 #include "parser/parser.h"
-#include "parser/Cleanup/cleanup.h"
+#include "utils/Cleanup/cleanup.h"
 #include "renderer/renderer.h"
 #include <stdlib.h>
 #include "utils/error.h"

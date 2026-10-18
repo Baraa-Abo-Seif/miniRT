@@ -8,7 +8,7 @@
 # include "./objects/object_builder.h"
 # include "../../lib_math/vector/vector.h"
 # include "../../lib_math/color/color.h"
-# include "../check/check.h"
+#include "../utils/parsing_utils.h"
 #include <stdbool.h>
 
 
@@ -19,7 +19,6 @@ void	append_object(t_scene *scene, t_object *object);
 t_ambient	build_ambient(const t_token *token);
 t_camera	build_camera(const t_token *token);
 t_light	*build_light(const t_token *token);
-t_object	*create_object();
 t_object	*build_object(const t_token *token);
 bool	add_light_to_scene(t_scene *scene, const t_token *token);
 bool	add_object_to_scene(t_scene *scene, const t_token *token);

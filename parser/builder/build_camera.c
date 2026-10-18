@@ -11,8 +11,11 @@ t_camera	build_camera(const t_token *token)
 	check_normal(camera.forward);
 
 	camera.fov = ft_atof(token->args[2]);
-	check_fov(camera.fov);
-
+	if (camera.fov < 0.0 || camera.fov > 180.0)
+	{
+		error_msg("FOV must be between 0.0 and 180.0");
+		exit(EXIT_FAILURE);
+	}
 	return (camera);
 }
 

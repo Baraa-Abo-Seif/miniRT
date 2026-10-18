@@ -43,7 +43,10 @@ MAIN_SRC = \
 	main.c
 
 UTILS_SRC = \
-	utils/error.c
+	utils/error.c\
+	utils/Cleanup/destroy_light_list.c \
+	utils/Cleanup/destroy_object_list.c \
+	utils/Cleanup/destroy_scene.c 
 
 GNL_SRC = \
 	get_next_line/get_next_line.c \
@@ -89,7 +92,7 @@ PARSER_SRC = \
 	parser/builder/build_object.c \
 	parser/builder/build_scene.c \
 	parser/builder/builder_utils.c \
-	parser/builder/create_object.c \
+	parser/builder/objects/create_object.c \
 	parser/builder/objects/build_cylinder.c \
 	parser/builder/objects/build_plane.c \
 	parser/builder/objects/build_sphere.c \
@@ -119,15 +122,9 @@ PARSER_SRC = \
 	parser/validator/validate_token_types.c \
 	parser/validator/validator.c \
 	parser/validator/validator_utils.c \
-	parser/Cleanup/destroy_light_list.c \
-	parser/Cleanup/destroy_object_list.c \
-	parser/Cleanup/destroy_scene.c \
-	parser/check/check_ratio.c \
-	parser/check/check_positive.c \
-	parser/check/check_fov.c \
-	parser/check/check_normal.c \
-	parser/check/check_color.c
-
+	parser/utils/check_ratio.c \
+	parser/utils/check_positive.c \
+	parser/utils/check_normal.c 
 	
 RENDERER_SRC = \
 	renderer/ambient.c \
