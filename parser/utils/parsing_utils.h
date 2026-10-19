@@ -10,7 +10,6 @@
 #include "../../utils/error.h"
 
 void	free_string_array(char **array);
-char	**copy_args(char **words);
 
 void    check_ratio(double value);
 void	check_positive(double value);
