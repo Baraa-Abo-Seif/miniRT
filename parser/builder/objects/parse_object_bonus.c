@@ -1,5 +1,4 @@
 #include "object_builder.h"
-#include "../../utils/parsing_utils.h"
 
 static void	parse_bump_map(t_object *object, const char *arg)
 {

@@ -8,7 +8,7 @@
 # include "./objects/object_builder.h"
 # include "../../lib_math/vector/vector.h"
 # include "../../lib_math/color/color.h"
-#include "../utils/parsing_utils.h"
+#include "../parsering_utils/parsing_utils.h"
 #include <stdbool.h>
 
 

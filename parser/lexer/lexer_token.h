@@ -6,7 +6,7 @@
 /*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 17:29:01 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/19 17:29:02 by bablo            ###   ########.fr       */
+/*   Updated: 2026/10/19 19:23:34 by bablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 # define LEXER_H
 
 # include <stdbool.h>
-#include <stddef.h>
-# include <stdlib.h>
 # include "../../minirt.h"
-# include "../utils/parsing_utils.h"
+# include "../parsering_utils/parsing_utils.h"
 #include "../../Libft/libft.h"
 
 

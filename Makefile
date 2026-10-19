@@ -110,16 +110,16 @@ PARSER_SRC = \
 	parser/lexer/lexer_utils.c \
 	parser/lexer/tokenize.c \
 	parser/lexer/copy_args.c \
-	parser/utils/read_file.c \
-	parser/utils/free_string_array.c \
+	parser/parsering_utils/read_file.c \
+	parser/parsering_utils/free_string_array.c \
 	parser/validator/validate_arg_count.c \
 	parser/validator/validate_scene_rules.c \
 	parser/validator/validate_token_types.c \
 	parser/validator/validator.c \
 	parser/validator/validator_utils.c \
-	parser/utils/check_ratio.c \
-	parser/utils/check_positive.c \
-	parser/utils/check_normal.c 
+	parser/parsering_utils/check_ratio.c \
+	parser/parsering_utils/check_positive.c \
+	parser/parsering_utils/check_normal.c 
 	
 RENDERER_SRC = \
 	renderer/ambient.c \

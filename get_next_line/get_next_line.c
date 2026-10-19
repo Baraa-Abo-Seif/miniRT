@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/18 16:25:55 by ralhoura          #+#    #+#             */
-/*   Updated: 2025/10/07 18:51:47 by ralhoura         ###   ########.fr       */
+/*   Created: 2025/11/04 13:50:23 by babo-sai          #+#    #+#             */
+/*   Updated: 2025/11/09 10:50:25 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,92 +22,96 @@ char	*free_chunk(char **chunk)
 	return (NULL);
 }
 
-char	*extract_line(char **chunk)
-{
-	char	*line;
-	size_t	index;
-
-	if (!chunk || !*chunk || !**chunk)
-		return (NULL);
-	index = 0;
-	while ((*chunk)[index] && (*chunk)[index] != '\n')
-		index++;
-	if ((*chunk)[index] == '\n')
-		index++;
-	line = malloc(index + 1);
-	if (!line)
-		return (NULL);
-	ft_memcpy(line, *chunk, index);
-	line[index] = '\0';
-	return (line);
-}
-
 char	*update_chunk(char **chunk)
 {
 	char	*new_chunk;
-	char	*data_after_nl;
-	size_t	len;
+	size_t	i;
+	size_t	j;
 
-	if (!chunk || !*chunk || !**chunk)
-		return (NULL);
-	data_after_nl = ft_strchr(*chunk, '\n');
-	if (data_after_nl)
-		data_after_nl++;
-	else
+	i = 0;
+	j = 0;
+	while ((*chunk)[i] && (*chunk)[i] != '\n')
+		i++;
+	if (!(*chunk)[i])
 		return (free_chunk(chunk));
-	if (!*data_after_nl)
-		return (free_chunk(chunk));
-	len = ft_strlen(data_after_nl);
-	new_chunk = malloc(len + 1);
+	i++;
+	new_chunk = malloc(sizeof(char) * (ft_strlen(*chunk) - i + 1));
 	if (!new_chunk)
 		return (free_chunk(chunk));
-	ft_memcpy(new_chunk, data_after_nl, len);
-	new_chunk[len] = '\0';
+	while ((*chunk)[i])
+		new_chunk[j++] = (*chunk)[i++];
+	new_chunk[j] = '\0';
 	free(*chunk);
-	*chunk = NULL;
 	return (new_chunk);
 }
 
-int	read_and_store(char **chunk, int fd, char *buffer)
+char	*extract_line(char **chunk)
+{
+	char	*line;
+	size_t	i;
+
+	i = 0;
+	while ((*chunk)[i] && (*chunk)[i] != '\n')
+		i++;
+	line = malloc(sizeof(char) * (i + ((*chunk)[i] == '\n') + 1));
+	if (!line)
+		return (NULL);
+	i = 0;
+	while ((*chunk)[i] && (*chunk)[i] != '\n')
+	{
+		line[i] = (*chunk)[i];
+		i++;
+	}
+	if ((*chunk)[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (line);
+}
+
+int	read_and_save(int fd, char **chunk, char *buffer)
 {
 	char	*temp;
 	ssize_t	bytes;
 
+	if (!empty_beginning(chunk))
+		return (-1);
 	bytes = read(fd, buffer, BUFFER_SIZE);
 	while (bytes > 0)
 	{
 		buffer[bytes] = '\0';
-		temp = ft_strjoin(*chunk, buffer);
+		temp = malloc(sizeof(char) * (ft_strlen(*chunk) + bytes + 1));
 		if (!temp)
-		{
-			free(buffer);
 			return (-1);
-		}
+		ft_strcpy(temp, *chunk);
+		ft_strcat(temp, buffer);
 		free(*chunk);
 		*chunk = temp;
 		if (ft_strchr(*chunk, '\n'))
 			break ;
 		bytes = read(fd, buffer, BUFFER_SIZE);
 	}
-	free(buffer);
 	if (bytes < 0)
 		return (-1);
-	return (bytes > 0 || (*chunk && **chunk));
+	return (0);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*chunk;
-	char		*line;
 	char		*buffer;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (free_chunk(&chunk));
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
-	if (read_and_store(&chunk, fd, buffer) == -1)
 		return (free_chunk(&chunk));
+	if (read_and_save(fd, &chunk, buffer) == -1)
+	{
+		free(buffer);
+		return (free_chunk(&chunk));
+	}
+	free(buffer);
 	if (!chunk || *chunk == '\0')
 		return (free_chunk(&chunk));
 	line = extract_line(&chunk);

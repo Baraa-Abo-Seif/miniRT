@@ -2,7 +2,7 @@
 #include "lexer/lexer_token.h"
 #include "validator/validator.h"
 #include "builder/builder.h"
-#include "utils/parsing_utils.h"
+#include "parsering_utils/parsing_utils.h"
 
 t_scene	*parse_scene(const char *filename)
 {
@@ -13,7 +13,6 @@ t_scene	*parse_scene(const char *filename)
 	lines = read_file(filename);
 	if (!lines)
 		return (NULL);
-
 	tokens = tokenize(lines);
 	free_string_array(lines);
 	if (!tokens)

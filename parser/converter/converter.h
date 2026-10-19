@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   converter.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 14:31:37 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/18 14:55:32 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/10/19 19:23:59 by bablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define CONVERTER_H
 
 #include "../../scene/scene.h"
-#include "../../lib_math/color/color.h"
-#include "../utils/parsing_utils.h"
+#include "../../lib_math/lib_math.h"
+#include "../parsering_utils/parsing_utils.h"
 
 
 const char	*skip_spaces(const char *str);

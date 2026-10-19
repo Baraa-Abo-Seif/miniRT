@@ -3,48 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/18 16:26:55 by ralhoura          #+#    #+#             */
-/*   Updated: 2025/10/07 18:47:29 by ralhoura         ###   ########.fr       */
+/*   Created: 2025/11/04 15:30:14 by babo-sai          #+#    #+#             */
+/*   Updated: 2025/11/04 15:31:49 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+size_t	ft_strlen(const char *s)
 {
-	size_t	len_s1;
-	size_t	len_s2;
-	char	*strjoin;
+	size_t	len;
 
-	if (!s1 && !s2)
-		return (NULL);
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	strjoin = malloc(len_s1 + len_s2 + 1);
-	if (!strjoin)
-		return (NULL);
-	ft_memcpy(strjoin, s1, len_s1);
-	ft_memcpy(strjoin + len_s1, s2, len_s2);
-	strjoin[len_s1 + len_s2] = '\0';
-	return (strjoin);
-}
-
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	unsigned char		*d;
-	const unsigned char	*s;
-	size_t				index;
-
-	if (!dest || !src)
-		return (NULL);
-	d = dest;
-	s = src;
-	index = -1;
-	while (++index < n)
-		d[index] = s[index];
-	return (dest);
+	if (!s)
+		return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -57,22 +34,52 @@ char	*ft_strchr(const char *s, int c)
 	while (s[index])
 	{
 		if (s[index] == (char)c)
-			return ((char *)(s + index));
+			return ((char *)&s[index]);
 		index++;
 	}
-	if (s[index] == (char)c)
-		return ((char *)(s + index));
+	if (c == '\0')
+		return ((char *)&s[index]);
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *s)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	size_t	len;
+	size_t	index;
 
-	if (!s)
-		return (0);
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	index = 0;
+	while (src[index])
+	{
+		dest[index] = src[index];
+		index++;
+	}
+	dest[index] = '\0';
+	return (dest);
+}
+
+char	*ft_strcat(char *dest, const char *src)
+{
+	size_t	dest_len;
+	size_t	index;
+
+	dest_len = ft_strlen(dest);
+	index = 0;
+	while (src[index])
+	{
+		dest[dest_len + index] = src[index];
+		index++;
+	}
+	dest[dest_len + index] = '\0';
+	return (dest);
+}
+
+char	*empty_beginning(char **chunk)
+{
+	if (!*chunk)
+	{
+		*chunk = malloc(1);
+		if (!*chunk)
+			return (NULL);
+		(*chunk)[0] = '\0';
+	}
+	return (*chunk);
 }

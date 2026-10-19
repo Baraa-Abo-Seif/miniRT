@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/18 16:27:26 by ralhoura          #+#    #+#             */
-/*   Updated: 2025/10/07 19:19:33 by ralhoura         ###   ########.fr       */
+/*   Created: 2025/11/04 15:24:44 by babo-sai          #+#    #+#             */
+/*   Updated: 2025/11/09 10:05:08 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,21 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 42
 # endif
 
-# include <stddef.h>
-# include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <stdio.h>
+# include <unistd.h>
 
-char	*get_next_line(int fd);
 char	*free_chunk(char **chunk);
-char	*extract_line(char **chunk);
 char	*update_chunk(char **chunk);
-
-int		read_and_store(char **chunk, int fd, char *buffer);
-
+char	*extract_line(char **chunk);
+int		read_and_save(int fd, char **chunk, char *buffer);
+char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
-
 char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
-
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strcpy(char *dest, const char *src);
+char	*ft_strcat(char *dest, const char *src);
+char	*empty_beginning(char **chunk);
 
 #endif

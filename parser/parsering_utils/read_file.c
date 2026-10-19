@@ -1,4 +1,16 @@
-#include "./reader.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/19 20:28:20 by bablo             #+#    #+#             */
+/*   Updated: 2026/10/19 20:28:21 by bablo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parsing_utils.h"
 
 
 char	**read_file(const char *filename)
@@ -17,11 +29,18 @@ char	**read_file(const char *filename)
 			error_msg("Cannot open scene file.");
 		return (NULL);
 	}
-
 	array = read_lines(fd);
+	if (!array)
+		error_msg("Error reading scene file.");
 	close(fd);
-
 	return (array);
+}
+
+void free_new_node(t_line_node *list,char *line)
+{
+	get_next_line(-1);
+	free(line);
+	ft_lstclear(&list,free);
 }
 
 char	**read_lines(int fd)
@@ -31,18 +50,22 @@ char	**read_lines(int fd)
 	char			*line;
 	char			**array;
 
-
 	list = NULL;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	if (!line)
+		error_msg("Scene file is empty.");
+	while (line)
 	{
 		new_node = ft_lstnew(line);
 		if (!new_node)
 		{
-			free(line);
-			ft_lstclear(&list,free);
+			free_new_node(list,line);
 			return (NULL);
 		}
 		ft_lstadd_back(&list, new_node);
+		line = get_next_line(fd);
+		if (!line)
+			get_next_line(-1);
 	}
 	array = list_to_array(list);
 	ft_lstclear(&list,free);

@@ -1,6 +1,16 @@
-#include "validator_internal.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/19 18:47:03 by bablo             #+#    #+#             */
+/*   Updated: 2026/10/19 18:47:04 by bablo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
+#include "validator.h"
 
 int	get_expected_arg_count(t_token_type type)
 {
@@ -24,25 +34,26 @@ int	get_expected_arg_count(t_token_type type)
 }
 
 
-
-size_t	count_args(char **args)
+bool	is_valid_arg_count(t_token_type type, size_t actual_count)
 {
-    size_t	count;
-    
-    count = 0;
-    while (args && args[count])
-        count++;
+	int	expected_count;
 
-    return (count);
+	expected_count = get_expected_arg_count(type);
+	if (expected_count == -1)
+		return (false);
+	if (type == TOKEN_SPHERE
+		|| type == TOKEN_PLANE
+		|| type == TOKEN_CYLINDER
+        || type == TOKEN_TRIANGLE
+        || type == TOKEN_PARABOLOID)
+	{
+		if (actual_count >= (size_t)expected_count && actual_count <= (size_t)(expected_count +5))
+			return (true);
+		return (false);
+	}
+	return (actual_count == (size_t)expected_count);
 }
 
-
- void	init_scene_counts(t_scene_counts *counts)
-{
-    counts->ambient = 0;
-    counts->camera = 0;
-    counts->light = 0;
-}
 
 bool	update_scene_counts( t_scene_counts *counts, t_token *token)
 {
@@ -70,45 +81,14 @@ bool	update_scene_counts( t_scene_counts *counts, t_token *token)
     return (true);
 }
 
-
-
  bool	validate_required_scene_objects( t_scene_counts *counts)
 {
     if (counts->ambient == 0)
-        return error_msg("Scene must contain at least one ambient light.");
+        return (error_msg("Scene must contain at least one ambient light."));
     if (counts->camera == 0)
-        return error_msg("Scene must contain at least one camera.");
+        return (error_msg("Scene must contain at least one camera."));
     if (counts->light == 0)
-        return error_msg("Scene must contain at least one light.");
+        return (error_msg("Scene must contain at least one light."));
 
     return (true);
 }
-
-bool	is_valid_arg_count(t_token_type type, size_t actual_count)
-{
-	int	expected_count;
-
-	expected_count = get_expected_arg_count(type);
-	if (expected_count == -1)
-		return (false);
-	if (type == TOKEN_SPHERE
-		|| type == TOKEN_PLANE
-		|| type == TOKEN_CYLINDER
-        || type == TOKEN_TRIANGLE
-        || type == TOKEN_PARABOLOID)
-	{
-		if (actual_count == (size_t)expected_count
-            || actual_count == (size_t)(expected_count + 1)
-            || actual_count == (size_t)(expected_count + 2)
-            || actual_count == (size_t)(expected_count + 3)
-            || actual_count == (size_t)(expected_count + 4)
-            || actual_count == (size_t)(expected_count + 5))
-			return (true);
-		return (false);
-	}
-	return (actual_count == (size_t)expected_count);
-}
-
-
-
-
