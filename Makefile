@@ -109,13 +109,8 @@ PARSER_SRC = \
 	parser/lexer/get_token_type.c \
 	parser/lexer/lexer_utils.c \
 	parser/lexer/tokenize.c \
-	parser/lexer/tokenize_line.c \
-	parser/reader/destroy_lines.c \
-	parser/reader/list_to_array.c \
-	parser/reader/read_file.c \
-	parser/reader/read_lines.c \
-	parser/reader/reader_utils.c \
-	parser/utils/copy_args.c \
+	parser/lexer/copy_args.c \
+	parser/utils/read_file.c \
 	parser/utils/free_string_array.c \
 	parser/validator/validate_arg_count.c \
 	parser/validator/validate_scene_rules.c \
@@ -186,9 +181,10 @@ DEP = $(OBJ:.o=.d)
 # **************************************************************************** #
 
 all: $(LIBFT) $(MLX) $(NAME)
+bonus: $(LIBFT) $(MLX) $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR) bonus
 
 $(MLX):
 	$(MAKE) -C $(MLX_DIR)

@@ -2,7 +2,8 @@
 # define OBJECT_BUILDER_H
 
 
-#include "../../lexer/token.h"
+
+#include "../../lexer/lexer_token.h"
 #include "../../converter/converter.h"
 #include "../../../scene/scene.h"
 #include "../lib_math/vector/vector.h"

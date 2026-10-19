@@ -8,6 +8,7 @@
 #include "../../lib_math/vector/vector.h"
 #include "../../lib_math/color/color.h"
 #include "../../utils/error.h"
+#include "reader.h"
 
 void	free_string_array(char **array);
 

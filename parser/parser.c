@@ -1,6 +1,5 @@
 #include "parser.h"
-#include "reader/reader.h"
-#include "lexer/lexer.h"
+#include "lexer/lexer_token.h"
 #include "validator/validator.h"
 #include "builder/builder.h"
 #include "utils/parsing_utils.h"
