@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   object_builder.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/20 16:57:40 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/20 20:41:45 by babo-sai         ###   ########.fr       */
+/*   Created: 2026/10/21 15:11:06 by bablo             #+#    #+#             */
+/*   Updated: 2026/10/21 15:11:08 by bablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef OBJECT_BUILDER_H
 # define OBJECT_BUILDER_H

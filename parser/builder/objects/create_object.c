@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_object.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/20 19:56:37 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/20 19:56:38 by babo-sai         ###   ########.fr       */
+/*   Created: 2026/10/21 15:10:41 by bablo             #+#    #+#             */
+/*   Updated: 2026/10/21 15:10:46 by bablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "./object_builder.h"
-
 
 t_object	*create_object()
 {

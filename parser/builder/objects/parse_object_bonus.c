@@ -1,20 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_object_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/21 15:26:09 by bablo             #+#    #+#             */
+/*   Updated: 2026/10/21 15:26:36 by bablo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "./object_builder.h"
 
 void parse_checker_pattern(t_object *object, char *const *args, size_t *i)
 {
-	if (1)//!args[*i + 1] || !args[*i + 2])
-		return ;
-	object->pattern.type = PATTERN_CHECKER;
-	if (!parse_color(args[*i + 1], &object->pattern.color_a)
-		|| !parse_color(args[*i + 2], &object->pattern.color_b))
-		return ;
-	if (args[*i + 3])
+	t_color	color_a;
+	t_color	color_b;
+
+	if (!args[*i + 1] || !args[*i + 2])
 	{
-		object->shininess = ft_atof(args[*i + 3]);
-		if (!check_positive(object->shininess))
-			return ;
+		if (args[*i + 1])
+			(*i)++;
+		error_msg("Checker pattern requires two colors as arguments");
+		return;
 	}
+	if (!parse_color(args[*i + 1], &color_a)
+		 || !parse_color(args[*i + 2], &color_b))
+	{
+		error_msg("Failed to parse colors for checker pattern");
+		*i += 2;
+		return ;
+	}
+	object->pattern.color_a = color_a;
+	object->pattern.color_b = color_b;
+	object->pattern.type = PATTERN_CHECKER;
 	*i += 2;
 }
 
@@ -28,8 +47,6 @@ void	parse_color_texture(t_object *object, const char *arg)
 	else
 		error_msg("Failed to allocate memory for color texture filepath");
 }
-
-
 
 void	parse_bump_map(t_object *object, const char *arg)
 {
@@ -69,11 +86,7 @@ bool	parse_object_bonus(t_object *object,
 		else if (ft_strncmp(token->args[i], "txm:", 4) == 0)
 			parse_color_texture(object, token->args[i]);
 		else if (ft_strncmp(token->args[i], "checker", 8) == 0)
-		{
 			parse_checker_pattern(object, token->args, &i);
-			// if (!parse_checker_pattern(object, token->args, &i))
-			// 	return (false);
-		}
 		else
 		{
 			object->shininess = ft_atof(token->args[i]);
