@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   converter.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/18 14:31:37 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/19 19:23:59 by bablo            ###   ########.fr       */
+/*   Updated: 2026/10/20 19:38:31 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ double	parse_fraction(const char **str);
 double		ft_atof(const char *str);
 
 void	skip_comma(const char **str);
-void	normalize_color(t_color *color);
 double parse_double(const char **str);
 
-t_color		parse_color(const char *str);
+bool		parse_color(const char *str, t_color *color);
 
 t_point	    parse_point(const char *str);
 

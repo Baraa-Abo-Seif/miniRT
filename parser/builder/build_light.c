@@ -1,4 +1,4 @@
-#include "builder_internal.h"
+#include "./builder.h"
 
 t_light	*build_light(const t_token *token)
 {
@@ -13,9 +13,17 @@ t_light	*build_light(const t_token *token)
 	light->position = parse_point(token->args[0]);
 
 	light->brightness = ft_atof(token->args[1]);
-	check_ratio(light->brightness);
+	if (!check_ratio(light->brightness))
+	{
+		free(light);
+		return (NULL);
+	}
 
-	light->color = parse_color(token->args[2]);
+	if (!parse_color(token->args[2], &light->color))
+	{
+		free(light);
+		return (NULL);
+	}
 
 	return (light);
 }

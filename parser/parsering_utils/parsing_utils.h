@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 20:28:50 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/19 20:28:51 by bablo            ###   ########.fr       */
+/*   Updated: 2026/10/20 16:35:15 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 
 typedef t_list t_line_node;
 
-void	check_normal(t_vec normal);
+bool	check_normal(t_vec normal);
 
-void	check_positive(double value);
+bool	check_positive(double value);
 
-void    check_ratio(double value);
+bool	check_ratio(double value);
 
 void	free_string_array(char **array);
 

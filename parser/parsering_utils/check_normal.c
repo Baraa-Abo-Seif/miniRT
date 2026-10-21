@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_normal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 19:28:01 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/19 19:28:02 by bablo            ###   ########.fr       */
+/*   Updated: 2026/10/20 16:35:15 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_utils.h"
 
-void	check_normal(t_vec normal)
+bool	check_normal(t_vec normal)
 {
 	double	length;
 
@@ -20,6 +20,7 @@ void	check_normal(t_vec normal)
 	if (fabs(length - 1.0) > 1e-6)
 	{
 		error_msg("Normal vector must be normalized");
-		exit(EXIT_FAILURE);
+		return (false);
 	}
+	return (true);
 }

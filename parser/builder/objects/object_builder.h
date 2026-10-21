@@ -1,32 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object_builder.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/20 16:57:40 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/20 20:41:45 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+
 #ifndef OBJECT_BUILDER_H
 # define OBJECT_BUILDER_H
 
-
-
 #include "../../lexer/lexer_token.h"
-#include "../../converter/converter.h"
-#include "../../../scene/scene.h"
-#include "../lib_math/vector/vector.h"
-#include "../lib_math/color/color.h"
-#include "../../parsering_utils/parsing_utils.h"
+#include "../lib_math/lib_math.h"
 #include "../../../Libft/libft.h"
-# include "../../../utils/utils.h"
+#include "../../../utils/utils.h"
+#include "../builder.h"
 
 
 t_object	*create_object();
+
 t_object	*build_cylinder(const t_token *token);
 
-
-t_object	*create_object(void);
-t_object	*build_sphere(const t_token *token);
-t_object	*build_plane(const t_token *token);
-t_object	*build_triangle(const t_token *token);
 t_object	*build_paraboloid(const t_token *token);
 
-void	parse_object_bonus(t_object *object,
-			const t_token *token, size_t color_index);
+t_object	*build_plane(const t_token *token);
 
-            
+t_object	*build_sphere(const t_token *token);
+
+t_object	*build_triangle(const t_token *token);
+
+void parse_checker_pattern(t_object *object, char *const *args, size_t *i);
+void	parse_color_texture(t_object *object, const char *arg);
+void	parse_bump_map(t_object *object, const char *arg);
+bool	parse_object_bonus(t_object *object,
+			const t_token *token, size_t color_index);
+			
+t_object *failed_object (t_object *object );
+void object_setup(t_object *object,const t_token *token);
+void failled_massage(const char *msg, char **parts);
 
 #endif
-

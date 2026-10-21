@@ -99,6 +99,7 @@ PARSER_SRC = \
 	parser/builder/objects/build_triangle.c \
 	parser/builder/objects/build_paraboloid.c \
 	parser/builder/objects/parse_object_bonus.c \
+	parser/builder/objects/objects_utils.c\
 	parser/converter/parse_color.c \
 	parser/converter/parse_double.c \
 	parser/converter/parse_point.c \

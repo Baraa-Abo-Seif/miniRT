@@ -1,23 +1,36 @@
-#include "builder_internal.h"
-#include "../../utils/Cleanup/cleanup.h"
+#include "./builder.h"
+
 
 t_scene	*build_scene(t_token *tokens)
 {
 	t_scene	*scene;
 	t_token	*current;
 
-	scene = create_scene();
+	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
+	{
+		error_msg("Failed to allocate memory for scene");
 		return (NULL);
-
+	}
 	current = tokens;
 	while (current)
 	{
 		if (current->type == TOKEN_AMBIENT)
-			scene->ambient = build_ambient(current);
-		
+		{
+			if (!build_ambient(current, &scene->ambient))
+			{
+				destroy_scene(scene);
+				return (NULL);
+			}
+		}
 		else if (current->type == TOKEN_CAMERA)
-			scene->camera = build_camera(current);
+		{
+			if (!build_camera(current, &scene->camera))
+			{
+				destroy_scene(scene);
+				return (NULL);
+			}
+		}
 
 		else if (current->type == TOKEN_LIGHT ||current->type == TOKEN_MULTI_LIGHT )
 		{

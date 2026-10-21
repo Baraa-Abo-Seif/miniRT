@@ -1,19 +1,5 @@
-#include "builder_internal.h"
-
-
-
-
-t_scene	*create_scene(void)
-{
-    t_scene	*scene;
-
-    scene = malloc(sizeof(t_scene));
-    if (!scene)
-        return (NULL);
-    ft_bzero(scene, sizeof(t_scene));
-    return (scene);
-}
-
+#include "./builder.h"
+#include "../../texture/texture.h"
 
 void	append_light(t_scene *scene, t_light *light)
 {

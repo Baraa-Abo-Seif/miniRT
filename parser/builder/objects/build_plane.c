@@ -1,4 +1,16 @@
-#include "object_builder.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_plane.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/20 19:49:02 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/20 19:49:05 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "./object_builder.h"
 
 t_object	*build_plane(const t_token *token)
 {
@@ -7,16 +19,14 @@ t_object	*build_plane(const t_token *token)
 	object = create_object();
 	if (!object)
 		return (NULL);
-
 	object->type = PLANE;
-	object->data.plane.point = parse_point(token->args[0]);
-
-	object->data.plane.normal = parse_vector(token->args[1]);
-	check_normal(object->data.plane.normal);
-
-	object->color = parse_color(token->args[2]);
+	object_setup(object, token);
+	if (!check_normal(object->data.plane.normal))
+		return (failed_object(object));
+	if (!parse_color(token->args[2], &object->color))
+		return (failed_object(object));
 	object->bump_map.intensity = DEFAULT_BUMP_INTENSITY;
-	parse_object_bonus(object, token, 2);
-
+	if (!parse_object_bonus(object, token, 2))
+		return (failed_object(object));
 	return (object);
 }
