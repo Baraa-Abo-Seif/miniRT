@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_builder.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 15:11:06 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/21 15:11:08 by bablo            ###   ########.fr       */
+/*   Updated: 2026/10/22 19:14:43 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "../../../utils/utils.h"
 #include "../builder.h"
 
+typedef struct s_token t_token;
 
 t_object	*create_object();
 

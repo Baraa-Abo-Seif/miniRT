@@ -6,14 +6,13 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 16:25:14 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/15 16:36:04 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/10/22 18:44:06 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "../lib_math/lib_math.h"
 #include "../Libft/libft.h"
 
 typedef struct s_camera

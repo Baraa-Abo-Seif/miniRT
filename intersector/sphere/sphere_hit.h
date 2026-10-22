@@ -12,7 +12,9 @@
 void	calculate_equation(t_sphere *sphere,t_ray ray,t_quadratic_data *eq);
 bool	find_root(t_quadratic_data *eq,t_interval interval);
 
-void	fill_body_record_sphere(t_object *object,t_ray ray,t_quadratic_data *eq, t_hit_record *record);
-bool	sphere_hit(t_object *object, t_ray ray, t_interval interval, t_hit_record *record);
+void	fill_body_record_sphere(t_object *object,t_ray ray,
+    t_quadratic_data *eq, t_hit_record *record);
+bool	sphere_hit(t_object *object, t_ray ray, t_interval interval,
+     t_hit_record *record);
 
 #endif

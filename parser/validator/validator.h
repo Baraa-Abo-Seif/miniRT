@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validator.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 18:51:38 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/19 19:22:06 by bablo            ###   ########.fr       */
+/*   Updated: 2026/10/22 19:05:16 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_scene_counts
 	int	camera;
 	int	light;
 }	t_scene_counts;
+
+typedef enum e_token_type t_token_type;
 
 bool	validate_tokens(t_token *tokens);
 

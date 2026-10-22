@@ -1,55 +1,37 @@
-#include "./builder.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_scene.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/22 18:49:23 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/22 18:49:24 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "./builder.h"
 
 t_scene	*build_scene(t_token *tokens)
 {
 	t_scene	*scene;
 	t_token	*current;
 
+	current = tokens;
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 	{
 		error_msg("Failed to allocate memory for scene");
 		return (NULL);
 	}
-	current = tokens;
 	while (current)
 	{
-		if (current->type == TOKEN_AMBIENT)
+		if (!process_scene_token(scene, current))
 		{
-			if (!build_ambient(current, &scene->ambient))
-			{
-				destroy_scene(scene);
-				return (NULL);
-			}
-		}
-		else if (current->type == TOKEN_CAMERA)
-		{
-			if (!build_camera(current, &scene->camera))
-			{
-				destroy_scene(scene);
-				return (NULL);
-			}
-		}
-
-		else if (current->type == TOKEN_LIGHT ||current->type == TOKEN_MULTI_LIGHT )
-		{
-			if (!add_light_to_scene(scene, current))
-			{
-				destroy_scene(scene);
-				return (NULL);
-			}
-		}
-		else
-		{
-			if (!add_object_to_scene(scene, current))
-			{
-				destroy_scene(scene);
-				return (NULL);
-			}
+			destroy_scene(scene);
+			return (NULL);
 		}
 		current = current->next;
 	}
 	return (scene);
 }
-

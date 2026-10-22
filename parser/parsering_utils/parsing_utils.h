@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 20:28:50 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/20 16:35:15 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/10/22 19:06:03 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #include "../../utils/utils.h"
 
 typedef t_list t_line_node;
+typedef struct s_token t_token;
+
 
 bool	check_normal(t_vec normal);
 

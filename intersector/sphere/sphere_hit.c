@@ -1,5 +1,5 @@
 #include "sphere_hit.h"
-#include "../../scene/scene.h"
+
 void	calculate_equation(t_sphere *sphere,t_ray ray,t_quadratic_data *eq)
 {
 	t_vec	oc;
@@ -25,8 +25,6 @@ bool	find_root(t_quadratic_data *eq,t_interval interval)
 	}
 	return (true);
 }
-
-
 
 void fill_body_record_sphere(
     t_object *object,
@@ -60,7 +58,6 @@ bool	sphere_hit(t_object *object, t_ray ray, t_interval interval, t_hit_record *
 	return (true);
 }
 
-
 //! steps:
 /*
     1) Compute oc = ray.origin - sphere.center
@@ -91,10 +88,4 @@ bool	sphere_hit(t_object *object, t_ray ray, t_interval interval, t_hit_record *
     false
 
     note : The discriminant is computed first because it determines whether real roots exist. Only if Δ >= 0 does it make sense to compute sqrt(Δ) and continue solving for the intersection.
-
-
 */
-
-
-
-
