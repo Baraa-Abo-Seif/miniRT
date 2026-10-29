@@ -1,13 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane_hit.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/26 18:01:13 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/26 18:01:14 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "plane_hit.h"
-#include <math.h>
 
-#include <stdio.h>
 
-bool	plane_hit(
-t_object *object,
-t_ray ray,
-t_interval interval,
-t_hit_record *record)
+bool	plane_hit( t_object *object,t_ray ray,
+    t_interval interval, t_hit_record *record)
 {
     double	denominator;
 	double	t;
@@ -28,4 +35,19 @@ t_hit_record *record)
     record->object = object;
 	return (true);
 }
+
+//! steps:
+/*
+    1) The ray is P(t) = O + t*d and the plane satisfies:
+        (P - plane_point) . n = 0.
+    2) Substitute the ray into the plane equation:
+        (O + t*d - plane_point) . n = 0.
+    3) Compute the denominator:
+        denominator = d . n.
+        If |denominator| < EPSILON, then d . n = 0 and the ray is parallel.
+    4) Compute plane_to_ray = plane_point - O and solve for t:
+        t = (plane_to_ray . n) / (d . n).
+    5) Reject when t <= interval.min or t >= interval.max.
+    6) Compute P = O + t*d, orient n against d, store the object, and return true.
+*/
 

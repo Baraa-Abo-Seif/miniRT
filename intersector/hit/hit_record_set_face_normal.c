@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_record_set_face_normal.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/26 18:10:38 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/26 18:10:39 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "hit_record.h"
 
 void	hit_record_set_face_normal(t_hit_record *record,t_ray ray,t_vec outward_normal)
@@ -6,15 +18,24 @@ void	hit_record_set_face_normal(t_hit_record *record,t_ray ray,t_vec outward_nor
 
     if (!record)
         return;
-
     dot = vec_dot(ray.direction, outward_normal);
     record->front_face = (dot < 0.0);
-
     if (record->front_face)
         record->normal = outward_normal;
     else
         record->normal = vec_scale(outward_normal, -1.0);
 }
+
+//! steps:
+/*
+    1) Reject a null hit record.
+    2) Compute dot = d . outward_normal.
+    3) The hit is a front face when dot < 0:
+        front_face = (d . outward_normal < 0).
+    4) Choose the shading normal so it always opposes the ray:
+        normal = outward_normal       when front_face is true,
+        normal = -outward_normal      otherwise.
+*/
 
 /*
 Purpose

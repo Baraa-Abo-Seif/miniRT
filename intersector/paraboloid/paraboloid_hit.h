@@ -4,7 +4,7 @@
 # include "../../scene/objects/paraboloid.h"
 # include "../../lib_math/lib_math.h"
 # include "../hit/hit_record.h"
-# include "../hit/interval.h"
+# include "../hit/hit_record.h"
 # include "../../scene/scene.h"
 
 bool	paraboloid_hit(t_object *object, t_ray ray,

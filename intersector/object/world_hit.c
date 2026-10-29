@@ -25,3 +25,15 @@ bool	world_hit(t_scene *scene, t_ray ray,
 	}
 	return (hit_any);
 }
+
+//! steps:
+/*
+	1) Start with hit_any = false and current interval (min, max).
+	2) Test P(t) = O + t*d against every object through object_hit.
+	3) For a candidate hit with parameter t_hit, accept it only if:
+		t_hit < interval.max.
+	4) Keep the closest hit by updating:
+		interval.max = t_hit,	record = candidate.
+	5) Continue through every object; the decreasing max removes farther hits.
+	6) Return hit_any, which is true exactly when a valid minimum t was found.
+*/

@@ -4,7 +4,7 @@
 # include "../scene/scene.h"
 # include "../../lib_math/lib_math.h"
 # include "../hit/hit_record.h"
-# include "../hit/interval.h"
+# include "../hit/hit_record.h"
 
 #include "../sphere/sphere_hit.h"
 #include "../plane/plane_hit.h"

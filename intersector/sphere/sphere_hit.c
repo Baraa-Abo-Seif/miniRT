@@ -1,14 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere_hit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/26 15:20:21 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/26 15:20:25 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "sphere_hit.h"
 
-void	calculate_equation(t_sphere *sphere,t_ray ray,t_quadratic_data *eq)
+void	fill_body_record_sphere(t_object *object,t_ray ray,
+	t_quadratic_data *eq,t_hit_record *record)
 {
-	t_vec	oc;
+	t_vec	outward_normal;
 
-	oc = point_sub_point(ray.origin, sphere->center);
-	eq->a = vec_dot(ray.direction, ray.direction);
-	eq->b = 2.0 * vec_dot(oc, ray.direction);
-	eq->c = vec_dot(oc, oc) - (sphere->radius * sphere->radius);
-	eq->discriminant = (eq->b * eq->b) - (4.0 * eq->a * eq->c);
+	record->t = eq->root;
+	record->point = ray_at(ray, eq->root);
+	outward_normal = vec_scale(
+		point_sub_point(record->point, object->data.sphere.center),
+		1.0 / object->data.sphere.radius);
+	hit_record_set_face_normal(record, ray, outward_normal);
+	
 }
 
 bool	find_root(t_quadratic_data *eq,t_interval interval)
@@ -26,21 +41,15 @@ bool	find_root(t_quadratic_data *eq,t_interval interval)
 	return (true);
 }
 
-void fill_body_record_sphere(
-    t_object *object,
-    t_ray ray,
-    t_quadratic_data *eq,
-    t_hit_record *record)
+void	calculate_equation(t_sphere *sphere,t_ray ray,t_quadratic_data *eq)
 {
-	t_vec	outward_normal;
+	t_vec	oc;
 
-	record->t = eq->root;
-	record->point = ray_at(ray, eq->root);
-	outward_normal = vec_scale(
-		point_sub_point(record->point, object->data.sphere.center),
-		1.0 / object->data.sphere.radius);
-	hit_record_set_face_normal(record, ray, outward_normal);
-	
+	oc = point_sub_point(ray.origin, sphere->center);
+	eq->a = vec_dot(ray.direction, ray.direction);
+	eq->b = 2.0 * vec_dot(oc, ray.direction);
+	eq->c = vec_dot(oc, oc) - (sphere->radius * sphere->radius);
+	eq->discriminant = (eq->b * eq->b) - (4.0 * eq->a * eq->c);
 }
 
 bool	sphere_hit(t_object *object, t_ray ray, t_interval interval, t_hit_record *record)

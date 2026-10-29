@@ -108,3 +108,34 @@ bool	paraboloid_hit(t_object *object, t_ray ray,
 	record->object = object;
 	return (true);
 }
+
+//! steps:
+/*
+	Local coordinates:
+	1) Select reference q not parallel to axis a and build:
+		side = normalize(a x q), other_side = a x side.
+	2) Convert any vector v to local coordinates:
+		v_local = (v . side, v . other_side, v . a).
+	3) For k = radius^2 / (2*height), the local paraboloid is:
+		x^2 + y^2 = 2*k*z.
+
+	Root search:
+	4) Substitute O + t*d into the paraboloid equation:
+		A = dx^2 + dy^2,
+		B = 2(ox*dx + oy*dy) - 2*k*dz,
+		C = ox^2 + oy^2 - 2*k*oz.
+	5) Compute Delta = B^2 - 4AC.
+		If |A| < EPSILON, solve the linear equation t = -C/B.
+	6) Otherwise reject Delta < 0 and compute:
+		t1 = (-B - sqrt(Delta))/(2A),
+		t2 = (-B + sqrt(Delta))/(2A).
+	7) Accept a root only when interval.min < t < interval.max and:
+		0 <= (P(t) - vertex) . a <= height.
+
+	Hit record:
+	8) Compute P = O + t*d and its axial projection:
+		axis_point = vertex + ((P - vertex) . a)a.
+	9) The normal used by the implementation is:
+		normal = normalize((P - vertex) - axis_point - k*a).
+	10) Orient the normal against the ray, store the object, and return true.
+*/

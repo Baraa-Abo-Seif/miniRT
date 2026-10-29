@@ -3,7 +3,7 @@
 
 # include "../scene/scene.h"
 # include "../hit/hit_record.h"
-# include "../hit/interval.h"
+# include "../hit/hit_record.h"
 
 bool	world_hit(t_scene *scene, t_ray ray,
 			t_interval interval, t_hit_record *record);
