@@ -2,8 +2,6 @@
 # define UTILS_H
 
 # include "error.h"
-# include "Cleanup/cleanup.h"
 
-
-
+double	clamp_unit(double val);
 #endif

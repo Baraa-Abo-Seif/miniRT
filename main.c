@@ -1,9 +1,4 @@
-#include "scene/scene.h"
-#include "parser/parser.h"
-#include "utils/Cleanup/cleanup.h"
-#include "renderer/renderer.h"
-#include <stdlib.h>
-#include "utils/error.h"
+#include "minirt.h"
 
 static bool	has_rt_extension(const char *filename)
 {

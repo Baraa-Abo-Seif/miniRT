@@ -6,12 +6,12 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 16:33:01 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/15 16:33:02 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/01 12:22:04 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OJ_OBJECT_H
-#define OJ_OBJECT_H
+#ifndef OBJECT_H
+#define OBJECT_H
 
 
 #include "./objects/sphere.h"
@@ -21,7 +21,7 @@
 #include "./objects/paraboloid.h"
 #include "../lib_math/lib_math.h"
 #include "../pattern/pattern.h"
-#include "../texture/texture.h"
+#include "./texture_data.h"
 
 
 

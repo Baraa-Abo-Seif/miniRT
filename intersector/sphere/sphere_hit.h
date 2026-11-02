@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/26 15:24:28 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/26 18:12:13 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/10/29 17:21:12 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #define SPHERE_HIT_H
 
 #include "../../scene/object.h"
-
 #include "../hit/hit_record.h"
-
 
 void	fill_body_record_sphere(t_object *object,t_ray ray,
     t_quadratic_data *eq, t_hit_record *record);

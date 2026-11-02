@@ -1,5 +1,4 @@
 #include "pattern.h"
-#include <math.h>
 
 #define SPHERE_CHECKER_SIZE 8
 #define CYL_U_SIZE 8
@@ -8,14 +7,7 @@
 #define TRI_SCALE 2
 #define PARA_SCALE 5
 
-static double   clamp_unit(double value)
-{
-    if (value < -1.0)
-        return (-1.0);
-    if (value > 1.0)
-        return (1.0);
-    return (value);
-}
+
 
 static t_vec point_as_vec(t_point point)
 {

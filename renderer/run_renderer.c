@@ -1,7 +1,5 @@
 #include "renderer.h"
 
-#include "../mlx_engine/mlx_api.h"
-
 #define WINDOW_WIDTH 600
 #define WINDOW_HEIGHT 600
 #define WINDOW_TITLE "miniRT"

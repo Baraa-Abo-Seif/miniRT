@@ -1,72 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   texture.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 11:36:00 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/14 14:25:42 by ralhoura         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef TEXTURE_H
 # define TEXTURE_H
 
-# include <stdbool.h>
-# include "../lib_math/lib_math.h"
+# include "../scene/texture_data.h"
+# include "../mlx/mlx.h"
+# include "../scene/scene.h"
 # include "../intersector/hit/hit_record.h"
 
-# define DEFAULT_BUMP_INTENSITY 1.0
-# define BUMP_PLANE_SCALE 0.25
+typedef struct s_object t_object;
+typedef struct s_scene t_scene;
+typedef struct s_hit_record t_hit_record;
 
-/* Forward declaration of object structure to prevent circular dependencies */
-struct	s_object;
-struct	s_scene;
-
-/* UV Coordinates normalized to [0, 1] */
-typedef struct s_uv
-{
-	double	u;
-	double	v;
-}	t_uv;
-
-/* Orthonormal Tangent, Bitangent, Normal (TBN) coordinate frame */
-typedef struct s_tbn
-{
-	t_vec	tangent;
-	t_vec	bitangent;
-	t_vec	normal;
-}	t_tbn;
-
-/* Image texture buffer representation */
-typedef struct s_texture
-{
-	int		width;
-	int		height;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*img_ptr;
-	bool	is_loaded;
-}	t_texture;
-
-/* Bump map metadata and image container */
-typedef struct s_bump_map
-{
-	bool		is_active;
-	char		*filepath;
-	double		intensity;
-	t_texture	texture;
-}	t_bump_map;
-
-typedef struct s_color_texture
-{
-	bool		is_active;
-	char		*filepath;
-	t_texture	texture;
-}	t_color_texture;
 
 t_uv	sphere_uv(t_point point, t_point center, double radius);
 t_uv	plane_uv(t_point point, t_point plane_pt, t_vec normal);
@@ -94,4 +38,20 @@ void	destroy_bump_maps(void *mlx_ptr, struct s_scene *scene);
 int		load_color_textures(void *mlx_ptr, struct s_scene *scene);
 void	destroy_color_textures(void *mlx_ptr, struct s_scene *scene);
 
+
+
+t_uv	uv_range(t_uv uv,int only_v);
+
+
+void	compute_cylinder_tbn_uv(const t_object *obj,
+		t_hit_record *rec, t_tbn *tbn, t_uv *uv);
+void	compute_triangle_tbn_uv(const t_object *obj,
+		t_hit_record *rec, t_tbn *tbn, t_uv *uv);
+void	compute_paraboloid_tbn_uv(const t_object *obj,
+		t_hit_record *rec, t_tbn *tbn, t_uv *uv);
+void	compute_sphere_tbn_uv(const t_object *obj,
+		t_hit_record *rec, t_tbn *tbn, t_uv *uv);
+void	compute_plane_tbn_uv(const t_object *obj,
+		t_hit_record *rec, t_tbn *tbn, t_uv *uv);
+		
 #endif

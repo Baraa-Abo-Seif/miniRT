@@ -26,4 +26,7 @@
 
 # include "./texture/texture.h"
 
+# include "./utils/Cleanup/cleanup.h"
+# include "./utils/error.h"
+
 #endif

@@ -6,12 +6,12 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 17:29:01 by bablo             #+#    #+#             */
-/*   Updated: 2026/10/22 19:01:58 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/01 12:11:35 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef LEXER_TOKEN_H
+# define LEXER_TOKEN_H
 
 # include <stdbool.h>
 # include "../../minirt.h"

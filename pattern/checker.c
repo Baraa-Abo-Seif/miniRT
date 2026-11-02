@@ -1,7 +1,6 @@
 
 
 #include "pattern.h"
-#include <math.h>
 
 t_color	checker_at(t_pattern *pattern, t_point point)
 {

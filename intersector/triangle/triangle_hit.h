@@ -6,13 +6,14 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/26 19:56:37 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/26 19:56:38 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/10/29 16:53:01 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TRIANGLE_HIT_H
 # define TRIANGLE_HIT_H
 
+# include "../hit/hit_record.h"
 # include "../scene/object.h"
 
 typedef struct s_triangle_hit

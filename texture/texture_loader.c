@@ -1,10 +1,6 @@
 
 
 #include "texture.h"
-#include "../mlx/mlx.h"
-#include "../scene/scene.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 int	texture_load_xpm(void *mlx_ptr, const char *filepath, t_texture *tex)
 {
@@ -137,4 +133,24 @@ void	destroy_color_textures(void *mlx_ptr, t_scene *scene)
 		color_texture_destroy(mlx_ptr, &object->color_texture);
 		object = object->next;
 	}
+}
+//////////////////////////////////////////////
+void	texture_color_at(const t_texture *tex, t_uv uv, t_color *color)
+{
+	int				x;
+	int				y;
+	int				offset;
+	unsigned char	*pixel;
+
+	if (!tex || !tex->is_loaded || !tex->addr || !color)
+		return ;
+	uv.u -= floor(uv.u);
+	uv.v -= floor(uv.v);
+	x = (int)(uv.u * (tex->width - 1));
+	y = (int)(uv.v * (tex->height - 1));
+	offset = y * tex->line_length + x * (tex->bits_per_pixel / 8);
+	pixel = (unsigned char *)(tex->addr + offset);
+	color->r = pixel[2] / 255.0;
+	color->g = pixel[1] / 255.0;
+	color->b = pixel[0] / 255.0;
 }

@@ -8,6 +8,7 @@ CC			= cc
 CFLAGS = -Wall -Wextra -Werror 
 
 RM			= rm -f
+RMDIR		= rm -rf
 
 # **************************************************************************** #
 #                                  Libraries                                   #
@@ -46,7 +47,8 @@ UTILS_SRC = \
 	utils/error.c\
 	utils/Cleanup/destroy_light_list.c \
 	utils/Cleanup/destroy_object_list.c \
-	utils/Cleanup/destroy_scene.c 
+	utils/Cleanup/destroy_scene.c \
+	utils/helper.c 
 
 GNL_SRC = \
 	get_next_line/get_next_line.c \
@@ -75,8 +77,8 @@ lib_math_SRC = \
 
 INTERSECTOR_SRC = \
 	intersector/hit/hit_record_set_face_normal.c \
-	intersector/object/object_dispatch.c \
-	intersector/object/world_hit.c \
+	intersector/hit/world_hit.c \
+	intersector/hit/object_dispatch.c \
 	intersector/sphere/sphere_hit.c \
 	intersector/plane/plane_hit.c \
 	intersector/cylinder/cylinder_body.c \
@@ -160,7 +162,9 @@ TEXTURE_SRC = \
 	texture/uv_mapping.c \
 	texture/tbn_basis.c \
 	texture/bump_map.c \
-	texture/texture_loader.c
+	texture/compute_object_tbn_uv_for_each_object.c \
+	texture/texture_loader.c\
+	texture/helper_textuer.c 
 
 SRC = \
 	$(MAIN_SRC) \
@@ -174,8 +178,14 @@ SRC = \
 	$(PATTERN) \
 	$(TEXTURE_SRC)
 
-OBJ = $(SRC:.c=.o)
-DEP = $(OBJ:.o=.d)
+BUILD_DIR = .build
+OBJ_DIR = $(BUILD_DIR)/obj
+DEP_DIR = $(BUILD_DIR)/dep
+
+OBJ = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
+DEP = $(patsubst %.c,$(DEP_DIR)/%.d,$(SRC))
+LEGACY_OBJ = $(SRC:.c=.o)
+LEGACY_DEP = $(SRC:.c=.d)
 
 # **************************************************************************** #
 #                                    Rules                                     #
@@ -193,8 +203,9 @@ $(MLX):
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -MMD -MP $(INCLUDES) -c $< -o $@
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D) $(dir $(DEP_DIR)/$*.d)
+	$(CC) $(CFLAGS) -MMD -MP -MF $(DEP_DIR)/$*.d -MT $@ $(INCLUDES) -c $< -o $@
 
 -include $(DEP)
 
@@ -204,7 +215,8 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX)
 # **************************************************************************** #
 
 clean:
-	$(RM) $(OBJ) $(DEP)
+	$(RM) $(LEGACY_OBJ) $(LEGACY_DEP)
+	$(RMDIR) $(BUILD_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
 

@@ -1,4 +1,4 @@
-#include "../Cleanup/cleanup.h"
+#include "cleanup.h"
 
 void	destroy_scene(t_scene *scene)
 {

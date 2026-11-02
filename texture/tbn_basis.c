@@ -1,6 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tbn_basis.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/29 20:00:31 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/10/29 20:00:32 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 
 #include "texture.h"
+
+
+t_tbn	sphere_tbn(t_vec normal)
+{
+	t_tbn	tbn;
+	t_vec	up;
+
+	tbn.normal = vec_normalize(normal);
+	if (fabs(tbn.normal.y) > 0.999)
+		up = (t_vec){0.0, 0.0, 1.0};
+	else
+		up = (t_vec){0.0, 1.0, 0.0};
+	tbn.tangent = vec_normalize(vec_cross(up, tbn.normal));
+	tbn.bitangent = vec_normalize(vec_cross(tbn.normal, tbn.tangent));
+	return (tbn);
+}
 
 t_tbn	plane_tbn(t_vec normal)
 {
@@ -17,20 +45,7 @@ t_tbn	plane_tbn(t_vec normal)
 	return (tbn);
 }
 
-t_tbn	sphere_tbn(t_vec normal)
-{
-	t_tbn	tbn;
-	t_vec	up;
 
-	tbn.normal = vec_normalize(normal);
-	if (fabs(tbn.normal.y) > 0.999)
-		up = (t_vec){0.0, 0.0, 1.0};
-	else
-		up = (t_vec){0.0, 1.0, 0.0};
-	tbn.tangent = vec_normalize(vec_cross(up, tbn.normal));
-	tbn.bitangent = vec_normalize(vec_cross(tbn.normal, tbn.tangent));
-	return (tbn);
-}
 
 t_tbn	cylinder_tbn(t_vec axis, t_vec normal)
 {

@@ -6,12 +6,12 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:54:24 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/15 16:24:07 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/01 12:28:34 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIP_MATH_H
-# define LIP_MATH_H
+#ifndef LIB_MATH_H
+# define LIB_MATH_H
 
 #ifndef EPSILON
 # define EPSILON 1e-6
@@ -27,6 +27,14 @@
 
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
+#endif
+
+#ifndef DEFAULT_BUMP_INTENSITY
+# define DEFAULT_BUMP_INTENSITY 1.0
+#endif
+
+#ifndef BUMP_PLANE_SCALE
+# define BUMP_PLANE_SCALE 0.25
 #endif
 
 

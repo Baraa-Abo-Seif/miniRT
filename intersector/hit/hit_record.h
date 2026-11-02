@@ -1,23 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_record.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/29 16:55:28 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/11/01 12:11:35 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef HIT_RECORD_H
 # define HIT_RECORD_H
 
 # include <stdbool.h>
 # include "../../lib_math/lib_math.h"
+# include "../../scene/scene.h"
 
+typedef struct s_scene t_scene;
+typedef struct s_object t_object;
 typedef struct s_hit_record
 {
-	t_point	point; // Point of intersection
-	t_vec	normal; // Surface normal at the intersection point
-	double	t; // Parameter t along the ray where the intersection occurs
-	bool	front_face; // Indicates if the intersection is on the front face of the surface
-	void	*object; // Pointer to the object that was hit (can be used for material properties, etc.)
-}	t_hit_record;
+	t_point	point;
+	t_vec	normal;
+	double	t;
+	bool	front_face;
+	void	*object;
+}t_hit_record;
 
 typedef struct s_interval
 {
 	double	min;
 	double	max;
-}	t_interval;
+}t_interval;
 
 typedef struct s_quadratic
 {
@@ -27,8 +42,13 @@ typedef struct s_quadratic
 	double	discriminant;
 	double	sqrtd;
 	double	root;
-}	t_quadratic_data;
+}t_quadratic_data;
+
 
 void	hit_record_set_face_normal(t_hit_record *record,t_ray ray,t_vec outward_normal);
+bool	world_hit(t_scene *scene, t_ray ray,
+			t_interval interval, t_hit_record *record);
+bool object_hit(t_object *object, t_ray ray, t_interval interval,
+		t_hit_record *record);
 
 #endif
