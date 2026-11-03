@@ -25,7 +25,6 @@ typedef struct s_scene_counts
 	int	light;
 }	t_scene_counts;
 
-typedef enum e_token_type t_token_type;
 
 bool	validate_tokens(t_token *tokens);
 

@@ -14,7 +14,6 @@
 # define MLX_IMAGE_H
 
 # include "../../mlx/mlx.h"
-# include "../../Libft/libft.h"
 # include "../../utils/utils.h"
 
 typedef struct s_image

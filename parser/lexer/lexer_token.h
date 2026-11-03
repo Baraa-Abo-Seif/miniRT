@@ -16,7 +16,6 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include "../parsering_utils/parsing_utils.h"
-# include "../../Libft/libft.h"
 
 
 typedef enum e_token_type

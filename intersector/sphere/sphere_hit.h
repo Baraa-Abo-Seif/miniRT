@@ -13,7 +13,6 @@
 #ifndef SPHERE_HIT_H
 #define SPHERE_HIT_H
 
-#include "../../scene/object.h"
 #include "../hit/hit_record.h"
 
 void	fill_body_record_sphere(t_object *object,t_ray ray,

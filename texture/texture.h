@@ -18,9 +18,6 @@
 # include "../intersector/hit/hit_record.h"
 # include "../utils/utils.h"
 
-typedef struct s_object t_object;
-typedef struct s_scene t_scene;
-typedef struct s_hit_record t_hit_record;
 
 
 double	bump_sample_height(const t_texture *tex, double u, double v);

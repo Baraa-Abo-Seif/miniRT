@@ -18,7 +18,6 @@
 # include "../parsering_utils/parsing_utils.h"
 # include "./objects/object_builder.h"
 
-typedef struct s_token t_token;
 
 bool	build_ambient(const t_token *token, t_ambient *ambient);
 

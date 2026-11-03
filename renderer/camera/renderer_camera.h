@@ -13,7 +13,6 @@
 #ifndef RENDERER_CAMERA_H
 #define RENDERER_CAMERA_H
 
-#include "../../scene/scene.h"
 #include "../../utils/utils.h"
 
 int	camera_init(t_camera *camera,int image_width,int image_height);

@@ -17,11 +17,7 @@
 #include "../../../scene/object.h"
 #include "../../converter/converter.h"
 #include "../../parsering_utils/parsing_utils.h"
-#include "../../../lib_math/lib_math.h"
-#include "../../../Libft/libft.h"
 #include "../../../utils/utils.h"
-
-typedef struct s_token t_token;
 
 t_object	*create_object();
 

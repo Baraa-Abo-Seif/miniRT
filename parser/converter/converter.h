@@ -13,7 +13,6 @@
 #ifndef CONVERTER_H
 # define CONVERTER_H
 
-#include "../../scene/scene.h"
 #include "../../lib_math/lib_math.h"
 #include "../parsering_utils/parsing_utils.h"
 

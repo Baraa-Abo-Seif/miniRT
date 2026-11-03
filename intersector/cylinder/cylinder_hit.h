@@ -14,7 +14,6 @@
 # define CYLINDER_HIT_H
 
 #include "../hit/hit_record.h"
-#include "../../scene/object.h"
 
 typedef struct s_cap_context
 {

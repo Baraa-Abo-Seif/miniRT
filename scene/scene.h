@@ -17,7 +17,6 @@
 #include "./camera.h"
 #include "./ambient.h"
 #include "./light.h"
-#include "./texture_data.h"
 
 typedef struct s_scene
 {

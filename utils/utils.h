@@ -20,12 +20,6 @@
 # include <stddef.h>
 #include "../Libft/libft.h"
 
-typedef struct s_light t_light;
-typedef struct s_object t_object;
-typedef struct s_scene t_scene;
-typedef struct s_color_texture t_color_texture;
-typedef struct s_bump_map t_bump_map;
-typedef struct s_texture t_texture;
 
 void	destroy_object_list(t_object *objects);
 void	destroy_light_list(t_light *lights);

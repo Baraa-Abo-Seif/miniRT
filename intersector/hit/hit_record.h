@@ -17,8 +17,6 @@
 # include "../../lib_math/lib_math.h"
 # include "../../scene/scene.h"
 
-typedef struct s_scene t_scene;
-typedef struct s_object t_object;
 typedef struct s_hit_record
 {
 	t_point	point;

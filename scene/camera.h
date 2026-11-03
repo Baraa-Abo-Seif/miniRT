@@ -14,7 +14,6 @@
 #define CAMERA_H
 
 #include "../lib_math/lib_math.h"
-#include "../Libft/libft.h"
 
 typedef struct s_camera
 {

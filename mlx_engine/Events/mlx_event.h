@@ -34,7 +34,6 @@
 # define KEY_PRESS_MASK		(1L << 0)
 #endif
 
-typedef struct s_window	t_window;
 
 void	mlx_event_init(t_window *window);
 void	mlx_event_loop(t_window *window);

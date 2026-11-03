@@ -19,7 +19,6 @@
 #include "../intersector/hit/hit_record.h"
 #include "../texture/texture.h"
 
-typedef struct s_hit_record t_hit_record;
 
 t_color	render_ambient(t_color object_color, t_ambient ambient);
 bool	is_in_shadow(t_hit_record *record, t_scene *scene, t_light *light);
