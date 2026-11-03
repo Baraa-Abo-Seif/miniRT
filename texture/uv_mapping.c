@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   uv_mapping.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/29 19:58:27 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/29 19:59:14 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/03 23:23:28 by bablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ t_uv	sphere_uv(t_point point, t_point center, double radius)
 	t_vec	d;
 	t_uv	uv;
 	double	phi;
-
+	
 	d = point_sub_point(point, center);
 	if (radius > EPSILON)
 		d = vec_scale(d, 1.0 / radius);
 	uv.u = (atan2(d.x, d.z) + M_PI) / (2.0 * M_PI);
-	phi = acos(clamp_unit(d.y));
+	if (d.y < -1.0)
+		d.y = -1.0;
+	else if (d.y > 1.0)
+		d.y = 1.0;
+	phi = acos(d.y);
 	uv.v = phi / M_PI;
 	return (uv);
 }

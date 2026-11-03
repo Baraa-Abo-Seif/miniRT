@@ -1,7 +1,16 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_loader.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/03 17:58:01 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/11/03 17:58:02 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "texture.h"
-
 
 void	texture_color_at(const t_texture *tex, t_uv uv, t_color *color)
 {
@@ -23,8 +32,26 @@ void	texture_color_at(const t_texture *tex, t_uv uv, t_color *color)
 	color->b = pixel[0] / 255.0;
 }
 
+int	load_bump_maps(void *mlx_ptr, t_scene *scene)
+{
+	t_object	*object;
 
-/////////////////////////////////////////
+	if (!mlx_ptr || !scene)
+		return (-1);
+	object = scene->objects;
+	while (object)
+	{
+		if (object->bump_map.is_active
+			&& texture_load_xpm(mlx_ptr, object->bump_map.filepath,
+				&object->bump_map.texture))
+		{
+			error_msg("miniRT: failed to load bump map");
+			return (-1);
+		}
+		object = object->next;
+	}
+	return (0);
+}
 
 int	texture_load_xpm(void *mlx_ptr, const char *filepath, t_texture *tex)
 {
@@ -48,81 +75,6 @@ int	texture_load_xpm(void *mlx_ptr, const char *filepath, t_texture *tex)
 	return (0);
 }
 
-void	texture_destroy(void *mlx_ptr, t_texture *tex)
-{
-	if (!tex)
-		return ;
-	if (tex->img_ptr && mlx_ptr)
-		mlx_destroy_image(mlx_ptr, tex->img_ptr);
-	tex->img_ptr = NULL;
-	tex->addr = NULL;
-	tex->width = 0;
-	tex->height = 0;
-	tex->is_loaded = false;
-}
-
-void	bump_map_destroy(void *mlx_ptr, t_bump_map *bump)
-{
-	if (!bump)
-		return ;
-	if (bump->filepath)
-	{
-		free(bump->filepath);
-		bump->filepath = NULL;
-	}
-	texture_destroy(mlx_ptr, &bump->texture);
-	bump->is_active = false;
-}
-
-void	color_texture_destroy(void *mlx_ptr, t_color_texture *texture)
-{
-	if (!texture)
-		return ;
-	if (texture->filepath)
-	{
-		free(texture->filepath);
-		texture->filepath = NULL;
-	}
-	texture_destroy(mlx_ptr, &texture->texture);
-	texture->is_active = false;
-}
-
-int	load_bump_maps(void *mlx_ptr, t_scene *scene)
-{
-	t_object	*object;
-
-	if (!mlx_ptr || !scene)
-		return (-1);
-	object = scene->objects;
-	while (object)
-	{
-		if (object->bump_map.is_active
-			&& texture_load_xpm(mlx_ptr, object->bump_map.filepath,
-				&object->bump_map.texture) != 0)
-		{
-			fprintf(stderr, "miniRT: failed to load bump map: %s\n",
-				object->bump_map.filepath);
-			return (-1);
-		}
-		object = object->next;
-	}
-	return (0);
-}
-
-void	destroy_bump_maps(void *mlx_ptr, t_scene *scene)
-{
-	t_object	*object;
-
-	if (!scene)
-		return ;
-	object = scene->objects;
-	while (object)
-	{
-		bump_map_destroy(mlx_ptr, &object->bump_map);
-		object = object->next;
-	}
-}
-
 int	load_color_textures(void *mlx_ptr, t_scene *scene)
 {
 	t_object	*object;
@@ -134,28 +86,12 @@ int	load_color_textures(void *mlx_ptr, t_scene *scene)
 	{
 		if (object->color_texture.is_active
 			&& texture_load_xpm(mlx_ptr, object->color_texture.filepath,
-				&object->color_texture.texture) != 0)
+				&object->color_texture.texture) )
 		{
-			fprintf(stderr, "miniRT: failed to load color texture: %s\n",
-				object->color_texture.filepath);
+			error_msg("miniRT: failed to load color texture");
 			return (-1);
 		}
 		object = object->next;
 	}
 	return (0);
 }
-
-void	destroy_color_textures(void *mlx_ptr, t_scene *scene)
-{
-	t_object	*object;
-
-	if (!scene)
-		return ;
-	object = scene->objects;
-	while (object)
-	{
-		color_texture_destroy(mlx_ptr, &object->color_texture);
-		object = object->next;
-	}
-}
-//////////////////////////////////////////////

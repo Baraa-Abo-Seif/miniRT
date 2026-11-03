@@ -14,7 +14,7 @@
 # define PARABOLOID_HIT_H
 
 # include "../hit/hit_record.h"
-# include "../../scene/scene.h"
+# include "../../scene/object.h"
 
 
 

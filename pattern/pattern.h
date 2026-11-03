@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pattern.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/02 18:33:06 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/02 18:33:07 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/03 23:05:07 by bablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define PATTERN_H
 
 #include "../lib_math/lib_math.h"
-# include "../utils/utils.h"
 
 typedef enum e_pattern_type
 {

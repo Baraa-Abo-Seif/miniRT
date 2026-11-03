@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 16:35:22 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/01 12:35:10 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/03 19:46:40 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "./camera.h"
 #include "./ambient.h"
 #include "./light.h"
+#include "./texture_data.h"
 
 typedef struct s_scene
 {

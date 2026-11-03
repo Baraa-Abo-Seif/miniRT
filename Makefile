@@ -45,11 +45,9 @@ MAIN_SRC = \
 
 UTILS_SRC = \
 	utils/error.c\
-	utils/Cleanup/destroy_light_list.c \
-	utils/Cleanup/destroy_object_list.c \
-	utils/Cleanup/destroy_scene.c \
-	utils/helper.c 
-
+	utils/destroy_scene.c \
+	utils/destroy_texture.c
+	
 GNL_SRC = \
 	get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c

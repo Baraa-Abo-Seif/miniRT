@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 16:33:01 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/01 12:35:06 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/03 19:59:01 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,15 @@ typedef union u_object_data
 
 typedef struct s_object
 {
-    t_object_type      type; // object type
-    t_color            color; // object color
+    t_object_type      type;
+    t_color            color;
     double shininess;
-    t_object_data      data; // object data (union of sphere, plane, cylinder, cone)
-    struct s_object    *next; // pointer to the next object in the list
+    t_object_data      data;
+    struct s_object    *next;
     t_pattern            pattern;
     t_bump_map         bump_map;
     t_color_texture     color_texture;
 
 } t_object;
-
-
-
-
-
-
-
-
 
 #endif

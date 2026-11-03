@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 16:25:06 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/01 12:35:00 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/03 19:59:05 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ typedef struct s_light
     t_color color;
     struct s_light *next;
 } t_light;
-
-
 
 #endif
 

@@ -25,21 +25,18 @@ int	main(int argc, char **argv)
 		error_msg("Scene file must have a .rt extension.");
 		return (EXIT_FAILURE);
 	}
-
 	scene = parse_scene(argv[1]);
-	
 	if (!scene)
+	{
+		error_msg("Failed to parse scene file.");
 		return (EXIT_FAILURE);
-		
+	}
 	printf("PARSER OK\n");
-
 	if (run_renderer(scene) == -1)
 	{
 		destroy_scene(scene);
 		return (EXIT_FAILURE);
-
 	}
-
 	destroy_scene(scene);
 	return (EXIT_SUCCESS);
 }

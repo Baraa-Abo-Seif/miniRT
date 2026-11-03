@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/02 16:11:48 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/02 16:11:49 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/03 19:59:31 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ double	bump_sample_height(const t_texture *tex, double u, double v)
 	return ((0.299 * pixel[2] + 0.587 * pixel[1] + 0.114 * pixel[0]) / 255.0);
 }
 
-
-
 t_vec	bump_perturb_normal(const t_bump_map *bump, t_tbn tbn, t_uv uv)
 {
 	double	delta_u;
@@ -61,7 +59,7 @@ t_vec	bump_perturb_normal(const t_bump_map *bump, t_tbn tbn, t_uv uv)
 	return (vec_normalize(perturbed));
 }
 
-static bool	compute_object_tbn_uv(const t_object *obj, t_hit_record *rec,
+bool	compute_object_tbn_uv(const t_object *obj, t_hit_record *rec,
 		t_tbn *tbn, t_uv *uv)
 {
 	if (obj->type == SPHERE)

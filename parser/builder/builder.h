@@ -13,6 +13,9 @@
 #ifndef BUILDER_H
 # define BUILDER_H
 
+# include "../../scene/scene.h"
+# include "../converter/converter.h"
+# include "../parsering_utils/parsing_utils.h"
 # include "./objects/object_builder.h"
 
 typedef struct s_token t_token;

@@ -14,7 +14,7 @@
 # define TRIANGLE_HIT_H
 
 # include "../hit/hit_record.h"
-# include "../scene/object.h"
+# include "../../scene/object.h"
 
 typedef struct s_triangle_hit
 {

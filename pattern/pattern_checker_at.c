@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pattern_checker_at.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bablo <bablo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/02 18:04:21 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/02 18:12:01 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/03 23:04:54 by bablo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@
 t_color sphere_checker_at(t_pattern *pattern, t_point point)
 {
     double  radius;
+    double  val;
     long    latitude_cell;
     long    longitude_cell;
 
     radius = sqrt(point.x * point.x + point.y * point.y + point.z * point.z);
     if (radius < EPSILON)
         return (pattern->color_a);
-    latitude_cell = (long)floor((acos(clamp_unit(point.y / radius)) /
+    val = point.y / radius;
+    if (val < -1.0)
+        val = -1.0;
+    else if (val > 1.0)
+        val = 1.0;
+    latitude_cell = (long)floor((acos(val) /
      M_PI) * SPHERE_CHECKER_SIZE);
     longitude_cell = (long)floor(((atan2(point.x, point.z) + M_PI) /
      (2.0 * M_PI)) * (2 * SPHERE_CHECKER_SIZE));

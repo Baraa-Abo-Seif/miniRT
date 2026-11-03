@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 17:29:01 by bablo             #+#    #+#             */
-/*   Updated: 2026/11/01 12:11:35 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/03 19:55:24 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define LEXER_TOKEN_H
 
 # include <stdbool.h>
-# include "../../minirt.h"
+# include <stddef.h>
 # include "../parsering_utils/parsing_utils.h"
-#include "../../Libft/libft.h"
+# include "../../Libft/libft.h"
 
 
 typedef enum e_token_type
@@ -35,11 +35,11 @@ typedef enum e_token_type
 
 typedef struct s_token
 {
-	t_token_type	type;			// Token category.
-	char			*raw_line;		// Original line (for error reporting).
-	char			**args;			// Arguments extracted from the line.
-	size_t			line_number;	// Original line number.
-	struct s_token	*next;			// Next token in the list.
+	t_token_type	type;
+	char			*raw_line;
+	char			**args;
+	size_t			line_number;
+	struct s_token	*next;
 }	t_token;
 
 

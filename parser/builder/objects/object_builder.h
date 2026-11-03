@@ -14,10 +14,12 @@
 # define OBJECT_BUILDER_H
 
 #include "../../lexer/lexer_token.h"
-#include "../lib_math/lib_math.h"
+#include "../../../scene/object.h"
+#include "../../converter/converter.h"
+#include "../../parsering_utils/parsing_utils.h"
+#include "../../../lib_math/lib_math.h"
 #include "../../../Libft/libft.h"
 #include "../../../utils/utils.h"
-#include "../builder.h"
 
 typedef struct s_token t_token;
 

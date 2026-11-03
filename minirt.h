@@ -13,7 +13,6 @@
 
 /* Project */
 
-
 # include "./lib_math/lib_math.h"
 
 # include "./scene/scene.h"
@@ -26,7 +25,6 @@
 
 # include "./texture/texture.h"
 
-# include "./utils/Cleanup/cleanup.h"
-# include "./utils/error.h"
+# include "./utils/utils.h"
 
 #endif

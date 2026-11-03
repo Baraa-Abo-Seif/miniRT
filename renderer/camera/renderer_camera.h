@@ -14,7 +14,7 @@
 #define RENDERER_CAMERA_H
 
 #include "../../scene/scene.h"
-#include "../renderer.h"
+#include "../../utils/utils.h"
 
 int	camera_init(t_camera *camera,int image_width,int image_height);
 void	camera_build_basis(t_camera *camera);
