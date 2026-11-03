@@ -155,8 +155,8 @@ MLX_ENGINE_SRC = \
 
 
 PATTERN = \
-	pattern/checker.c \
-	pattern/pattern.c
+	pattern/helper.c \
+	pattern/pattern_checker_at.c
 
 TEXTURE_SRC = \
 	texture/uv_mapping.c \

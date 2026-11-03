@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pattern.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/02 18:33:06 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/11/02 18:33:07 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PATTERN_H
 #define PATTERN_H
 
-#include <math.h>
 #include "../lib_math/lib_math.h"
 # include "../utils/utils.h"
 
@@ -21,23 +32,15 @@ typedef struct s_pattern
 
 
 
-// t_color	pattern_at(t_pattern *pattern, t_point point);
-// t_color	checker_at(t_pattern *pattern, t_point point);
-// t_color	sphere_checker_at(t_pattern *pattern, t_point point);
-
+void radial_basis(t_vec axis, t_vec *radial_x, t_vec *radial_z);
 
 t_color sphere_checker_at(t_pattern *pattern, t_point point);
-t_color cylinder_checker_at(t_pattern *pattern, t_point point, double height);
 t_color cylinder_checker_at_axis(t_pattern *pattern, t_point point,
 				t_vec axis, double height);
-t_color plane_checker_at(t_pattern *pattern, t_point point, t_vec normal);
-t_color triangle_checker_at(t_pattern *pattern, t_point point);
-t_color triangle_checker_at_normal(t_pattern *pattern, t_point point,
-				t_vec normal);
-t_color paraboloid_checker_at(t_pattern *pattern, t_point point);
-t_color paraboloid_checker_at_axis(t_pattern *pattern, t_point point,
-				t_vec axis, double height);
-t_color pattern_at(t_pattern *pattern, t_point point);
-
+t_color	plane_checker_at(t_pattern *pattern, t_point point, t_vec normal);
+t_color	triangle_checker_at_normal(t_pattern *pattern, t_point point,
+		t_vec normal);
+t_color	paraboloid_checker_at_axis(t_pattern *pattern, t_point point,
+		t_vec axis, double height);
 
 #endif

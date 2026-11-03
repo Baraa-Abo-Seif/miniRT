@@ -17,3 +17,10 @@ void	destroy_object_list(t_object *objects)
         current = next;
     }
 }
+
+
+
+
+
+
+

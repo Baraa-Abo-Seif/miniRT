@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 16:19:40 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/01 12:11:35 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/01 12:34:55 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define AMBIENT_H
 
 #include "../lib_math/color/color.h"
-
 
 typedef struct s_ambient
 {

@@ -16,17 +16,23 @@ t_color	render_diffuse(t_color object_color,t_hit_record *record,
     t_scene *scene,t_light *light);
 t_color	ray_color(t_ray ray, t_scene *scene);
 
+t_color	shade_with_lights(t_object *object,
+		t_hit_record *record, t_scene *scene, t_color base_color);
+t_color	get_checker_color(t_object *object, t_point local_p);
+t_point	pattern_point(t_object *object, t_point point);
+t_uv	get_object_uv(t_object *object, t_point point);
+t_color	shade_hit(t_hit_record *record, t_scene *scene);
+
+t_color	render_specular(t_object *object,t_hit_record *record,
+			t_scene *scene,t_light *light);
+
+
 
 void	render(t_scene *scene, t_image *image);
 
-t_color	shade_hit(t_hit_record *record, t_scene *scene);
-
 int	run_renderer(t_scene *scene);
 
-t_color	render_specular(t_object *object,
-			t_hit_record *record,
-			t_scene *scene,
-			t_light *light);
+
 
 
 
