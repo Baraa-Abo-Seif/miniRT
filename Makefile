@@ -1,7 +1,3 @@
-# **************************************************************************** #
-#                                   Project                                    #
-# **************************************************************************** #
-
 NAME		= miniRT
 
 CC			= cc
@@ -10,50 +6,33 @@ CFLAGS = -Wall -Wextra -Werror
 RM			= rm -f
 RMDIR		= rm -rf
 
-# **************************************************************************** #
-#                                  Libraries                                   #
-# **************************************************************************** #
-
 LIBFT_DIR	= Libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 MLX_DIR		= mlx
 MLX			= $(MLX_DIR)/libmlx.a
 
-# **************************************************************************** #
-#                                   Includes                                   #
-# **************************************************************************** #
-
-INCLUDES	= \
-	-I. \
+INCLUDES	= -I. \
 	-I$(LIBFT_DIR) \
 	-I$(MLX_DIR) \
 	-Iget_next_line
 
-LIBS		= \
-	$(LIBFT) \
+LIBS		= $(LIBFT) \
 	$(MLX) \
 	-lXext \
 	-lX11 \
 	-lm
-# **************************************************************************** #
-#                                   Sources                                    #
-# **************************************************************************** #
 
-MAIN_SRC = \
-	main.c
+MAIN_SRC = main.c
 
-UTILS_SRC = \
-	utils/error.c\
+UTILS_SRC = utils/error.c\
 	utils/destroy_scene.c \
 	utils/destroy_texture.c
 	
-GNL_SRC = \
-	get_next_line/get_next_line.c \
+GNL_SRC = get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c
 
-lib_math_SRC = \
-	lib_math/color/color_add.c \
+lib_math_SRC = lib_math/color/color_add.c \
 	lib_math/color/color_clamp.c \
 	lib_math/color/color_multiply.c \
 	lib_math/color/color_scale.c \
@@ -73,8 +52,7 @@ lib_math_SRC = \
 	lib_math/vector/vec_sub.c \
 	lib_math/ray/ray_at.c 
 
-INTERSECTOR_SRC = \
-	intersector/hit/hit_record_set_face_normal.c \
+INTERSECTOR_SRC = intersector/hit/hit_record_set_face_normal.c \
 	intersector/hit/world_hit.c \
 	intersector/hit/object_dispatch.c \
 	intersector/sphere/sphere_hit.c \
@@ -84,8 +62,7 @@ INTERSECTOR_SRC = \
 	intersector/triangle/triangle_hit.c \
 	intersector/paraboloid/paraboloid_hit.c
 
-PARSER_SRC = \
-	parser/parser.c \
+PARSER_SRC = parser/parser.c \
 	parser/builder/build_ambient.c \
 	parser/builder/build_camera.c \
 	parser/builder/build_light.c \
@@ -122,8 +99,7 @@ PARSER_SRC = \
 	parser/parsering_utils/check_positive.c \
 	parser/parsering_utils/check_normal.c 
 	
-RENDERER_SRC = \
-	renderer/ambient.c \
+RENDERER_SRC = renderer/ambient.c \
 	renderer/diffuse.c \
 	renderer/render.c \
 	renderer/ray_color.c \
@@ -137,8 +113,7 @@ RENDERER_SRC = \
 	renderer/camera/camera_init.c \
 	renderer/camera/camera_ray.c 
 
-MLX_ENGINE_SRC = \
-	mlx_engine/Display/mlx_display_image.c \
+MLX_ENGINE_SRC = mlx_engine/Display/mlx_display_image.c \
 	mlx_engine/Events/mlx_event_close.c \
 	mlx_engine/Events/mlx_event_expose.c \
 	mlx_engine/Events/mlx_event_init.c \
@@ -152,20 +127,17 @@ MLX_ENGINE_SRC = \
 	mlx_engine/Window/mlx_window_destroy.c
 
 
-PATTERN = \
-	pattern/helper.c \
+PATTERN = pattern/helper.c \
 	pattern/pattern_checker_at.c
 
-TEXTURE_SRC = \
-	texture/uv_mapping.c \
+TEXTURE_SRC = texture/uv_mapping.c \
 	texture/tbn_basis.c \
 	texture/bump_map.c \
 	texture/compute_object_tbn_uv_for_each_object.c \
 	texture/texture_loader.c\
 	texture/helper_textuer.c 
 
-SRC = \
-	$(MAIN_SRC) \
+SRC = $(MAIN_SRC) \
 	$(UTILS_SRC) \
 	$(GNL_SRC) \
 	$(lib_math_SRC) \
@@ -185,10 +157,6 @@ DEP = $(patsubst %.c,$(DEP_DIR)/%.d,$(SRC))
 LEGACY_OBJ = $(SRC:.c=.o)
 LEGACY_DEP = $(SRC:.c=.d)
 
-# **************************************************************************** #
-#                                    Rules                                     #
-# **************************************************************************** #
-
 all: $(LIBFT) $(MLX) $(NAME)
 bonus: $(LIBFT) $(MLX) $(NAME)
 
@@ -206,11 +174,6 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -MMD -MP -MF $(DEP_DIR)/$*.d -MT $@ $(INCLUDES) -c $< -o $@
 
 -include $(DEP)
-
-
-# **************************************************************************** #
-#                                   Cleaning                                   #
-# **************************************************************************** #
 
 clean:
 	$(RM) $(LEGACY_OBJ) $(LEGACY_DEP)

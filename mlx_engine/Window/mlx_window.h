@@ -6,7 +6,7 @@
 /*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 18:13:22 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/15 18:13:23 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/05 14:22:30 by babo-sai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ typedef struct s_image	t_image;
 
 typedef struct s_window
 {
-	void	*mlx; // Pointer to the MLX instance
-	void	*win; // Pointer to the window instance
-	t_image	*image; // Image currently displayed in the window
-	int		width; // Width of the window in pixels
-	int		height; // Height of the window in pixels
+	void	*mlx;
+	void	*win;
+	t_image	*image;
+	int		width;
+	int		height;
 }	t_window;
 
 

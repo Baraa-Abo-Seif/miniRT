@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/05 15:02:43 by babo-sai          #+#    #+#             */
+/*   Updated: 2026/11/05 15:02:44 by babo-sai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static bool	has_rt_extension(const char *filename)
@@ -27,12 +39,8 @@ int	main(int argc, char **argv)
 	}
 	scene = parse_scene(argv[1]);
 	if (!scene)
-	{
-		error_msg("Failed to parse scene file.");
 		return (EXIT_FAILURE);
-	}
-	printf("PARSER OK\n");
-	if (run_renderer(scene) == -1)
+	if (run_renderer(scene))
 	{
 		destroy_scene(scene);
 		return (EXIT_FAILURE);
