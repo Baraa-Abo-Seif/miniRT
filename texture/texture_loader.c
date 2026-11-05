@@ -41,9 +41,8 @@ int	load_bump_maps(void *mlx_ptr, t_scene *scene)
 	object = scene->objects;
 	while (object)
 	{
-		if (object->bump_map.is_active
-			&& texture_load_xpm(mlx_ptr, object->bump_map.filepath,
-				&object->bump_map.texture))
+		if (object->bump_map.is_active && texture_load_xpm(mlx_ptr,
+				object->bump_map.filepath, &object->bump_map.texture))
 		{
 			error_msg("miniRT: failed to load bump map");
 			return (-1);
@@ -57,14 +56,12 @@ int	texture_load_xpm(void *mlx_ptr, const char *filepath, t_texture *tex)
 {
 	if (!mlx_ptr || !filepath || !tex)
 		return (-1);
-	tex->img_ptr = mlx_xpm_file_to_image(mlx_ptr, (char *)filepath,
-			&tex->width, &tex->height);
+	tex->img_ptr = mlx_xpm_file_to_image(mlx_ptr, (char *)filepath, &tex->width,
+			&tex->height);
 	if (!tex->img_ptr)
 		return (-1);
-	tex->addr = mlx_get_data_addr(tex->img_ptr,
-			&tex->bits_per_pixel,
-			&tex->line_length,
-			&tex->endian);
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bits_per_pixel,
+			&tex->line_length, &tex->endian);
 	if (!tex->addr)
 	{
 		mlx_destroy_image(mlx_ptr, tex->img_ptr);
@@ -84,9 +81,8 @@ int	load_color_textures(void *mlx_ptr, t_scene *scene)
 	object = scene->objects;
 	while (object)
 	{
-		if (object->color_texture.is_active
-			&& texture_load_xpm(mlx_ptr, object->color_texture.filepath,
-				&object->color_texture.texture) )
+		if (object->color_texture.is_active && texture_load_xpm(mlx_ptr,
+				object->color_texture.filepath, &object->color_texture.texture))
 		{
 			error_msg("miniRT: failed to load color texture");
 			return (-1);

@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "./builder.h"
-
 
 t_object	*build_object(const t_token *token)
 {

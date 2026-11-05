@@ -20,4 +20,3 @@ double	color_clamp(double value)
 		return (1.0);
 	return (value);
 }
-

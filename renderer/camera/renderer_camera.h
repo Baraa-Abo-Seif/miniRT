@@ -11,16 +11,16 @@
 /* ************************************************************************** */
 
 #ifndef RENDERER_CAMERA_H
-#define RENDERER_CAMERA_H
+# define RENDERER_CAMERA_H
 
-#include "../../utils/utils.h"
+# include "../../utils/utils.h"
 
-int	camera_init(t_camera *camera,int image_width,int image_height);
+int		camera_init(t_camera *camera, int image_width, int image_height);
 void	camera_build_basis(t_camera *camera);
-void	camera_compute_viewport(t_camera *camera,int image_width,
-    int image_height);
-void	camera_compute_pixel_delta(t_camera *camera,
-     int image_width, int image_height);
+void	camera_compute_viewport(t_camera *camera, int image_width,
+			int image_height);
+void	camera_compute_pixel_delta(t_camera *camera, int image_width,
+			int image_height);
 t_ray	camera_generate_ray(t_camera *camera, int x, int y);
 
 #endif

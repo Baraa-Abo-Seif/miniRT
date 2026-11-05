@@ -12,13 +12,12 @@
 
 #include "hit_record.h"
 
-
-bool	world_hit(t_scene *scene, t_ray ray,
-			t_interval interval, t_hit_record *record)
+bool	world_hit(t_scene *scene, t_ray ray, t_interval interval,
+		t_hit_record *record)
 {
-	t_object	*current;
+	t_object		*current;
 	t_hit_record	temp;
-	bool		hit_any;
+	bool			hit_any;
 
 	hit_any = false;
 	current = scene->objects;

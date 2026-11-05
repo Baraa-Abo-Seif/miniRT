@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "./object_builder.h"
 
 t_object	*build_paraboloid(const t_token *token)

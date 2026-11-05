@@ -23,5 +23,3 @@ int	color_to_hex(t_color color)
 	b = (int)(color_clamp(color.b) * 255.0);
 	return ((r << 16) | (g << 8) | b);
 }
-
-

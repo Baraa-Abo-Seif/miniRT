@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_body.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/26 18:42:22 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/26 18:42:23 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/05 16:28:34 by ralhoura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cylinder_hit.h"
 
-void	fill_body_record(t_cylinder *cylinder,t_ray ray,
-	t_quadratic_data *eq,t_hit_record *record)
+void	fill_body_record(t_cylinder *cylinder, t_ray ray, t_quadratic_data *eq,
+		t_hit_record *record)
 {
 	t_vec	center_to_hit;
 	t_point	axis_point;
@@ -21,17 +21,17 @@ void	fill_body_record(t_cylinder *cylinder,t_ray ray,
 
 	record->t = eq->root;
 	record->point = ray_at(ray, eq->root);
-	center_to_hit = point_sub_point(record->point,cylinder->center);
-	axis_point = point_add_vec(cylinder->center,vec_scale(cylinder->axis,
-		vec_dot(center_to_hit,cylinder->axis)));
-	outward_normal = point_sub_point(record->point,axis_point);
-	outward_normal = vec_scale(outward_normal,1.0 / cylinder->radius);
-	hit_record_set_face_normal(record,ray,outward_normal);
+	center_to_hit = point_sub_point(record->point, cylinder->center);
+	axis_point = point_add_vec(cylinder->center, vec_scale(cylinder->axis,
+				vec_dot(center_to_hit, cylinder->axis)));
+	outward_normal = point_sub_point(record->point, axis_point);
+	outward_normal = vec_scale(outward_normal, 1.0 / cylinder->radius);
+	hit_record_set_face_normal(record, ray, outward_normal);
 	record->object = cylinder;
 }
 
-bool	is_valid_body_root(t_cylinder *cylinder,t_ray ray,
-	double root,t_interval interval)
+bool	is_valid_body_root(t_cylinder *cylinder, t_ray ray, double root,
+		t_interval interval)
 {
 	t_point	hit_point;
 	double	height;
@@ -40,14 +40,14 @@ bool	is_valid_body_root(t_cylinder *cylinder,t_ray ray,
 		return (false);
 	hit_point = ray_at(ray, root);
 	height = vec_dot(point_sub_point(hit_point, cylinder->center),
-	 cylinder->axis);
+			cylinder->axis);
 	if (fabs(height) > cylinder->height / 2.0)
 		return (false);
 	return (true);
 }
 
-bool	find_body_root(t_cylinder *cylinder,t_ray ray,
-	t_quadratic_data *eq,t_interval interval)
+bool	find_body_root(t_cylinder *cylinder, t_ray ray, t_quadratic_data *eq,
+		t_interval interval)
 {
 	if (fabs(eq->a) < EPSILON || eq->discriminant < 0.0)
 		return (false);
@@ -61,8 +61,7 @@ bool	find_body_root(t_cylinder *cylinder,t_ray ray,
 	return (false);
 }
 
-void	compute_body_eq(t_quadratic_data *eq, t_cylinder *cylinder,
-	t_ray ray)
+void	compute_body_eq(t_quadratic_data *eq, t_cylinder *cylinder, t_ray ray)
 {
 	t_vec	w;
 	t_vec	m;
@@ -70,8 +69,8 @@ void	compute_body_eq(t_quadratic_data *eq, t_cylinder *cylinder,
 
 	w = point_sub_point(ray.origin, cylinder->center);
 	m = vec_sub(w, vec_scale(cylinder->axis, vec_dot(w, cylinder->axis)));
-	n = vec_sub(ray.direction, vec_scale(cylinder->axis,
-		 vec_dot(ray.direction, cylinder->axis)));
+	n = vec_sub(ray.direction, vec_scale(cylinder->axis, vec_dot(ray.direction,
+					cylinder->axis)));
 	eq->a = vec_dot(n, n);
 	eq->b = 2.0 * vec_dot(m, n);
 	eq->c = vec_dot(m, m) - cylinder->radius * cylinder->radius;
@@ -79,11 +78,11 @@ void	compute_body_eq(t_quadratic_data *eq, t_cylinder *cylinder,
 }
 
 bool	cylinder_hit(t_object *object, t_ray ray, t_interval interval,
-	t_hit_record *record)
+		t_hit_record *record)
 {
 	t_quadratic_data	eq;
 	t_cap_context		ctx;
-	bool	hit;
+	bool				hit;
 
 	hit = false;
 	ctx.ray = ray;
@@ -93,8 +92,8 @@ bool	cylinder_hit(t_object *object, t_ray ray, t_interval interval,
 	if (find_body_root(&object->data.cylinder, ray, &eq, interval))
 	{
 		fill_body_record(&object->data.cylinder, ray, &eq, record);
-    	hit = true;
-    	ctx.interval.max = record->t;
+		hit = true;
+		ctx.interval.max = record->t;
 	}
 	if (check_caps(&object->data.cylinder, &ctx))
 		hit = true;
@@ -129,9 +128,6 @@ bool	cylinder_hit(t_object *object, t_ray ray, t_interval interval,
 	Full cylinder:
 	8) Try the body intersection and set interval.max = t_body when it hits.
 	9) Check both caps using the reduced interval, keeping the closest hit.
-	10) Store the cylinder as the hit object when body or cap intersection succeeds.
+	10) Store the cylinder as the hit object when body or 
+	cap intersection succeeds.
 */
-
-
-
-

@@ -11,47 +11,46 @@
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
-#define OBJECT_H
+# define OBJECT_H
 
-#include "./objects/sphere.h"
-#include "./objects/plane.h"
-#include "./objects/cylinder.h"
-#include "./objects/triangle.h"
-#include "./objects/paraboloid.h"
-#include "../lib_math/lib_math.h"
-#include "../pattern/pattern.h"
-#include "./texture_data.h"
+# include "../lib_math/lib_math.h"
+# include "../pattern/pattern.h"
+# include "./objects/cylinder.h"
+# include "./objects/paraboloid.h"
+# include "./objects/plane.h"
+# include "./objects/sphere.h"
+# include "./objects/triangle.h"
+# include "./texture_data.h"
 
 typedef enum e_object_type
 {
-    SPHERE,
-    PLANE,
-    CYLINDER,
-    TRIANGLE,
-    PARABOLOID
-} t_object_type;
+	SPHERE,
+	PLANE,
+	CYLINDER,
+	TRIANGLE,
+	PARABOLOID
+}					t_object_type;
 
 typedef union u_object_data
 {
-    t_sphere    sphere;
-    t_plane     plane;
-    t_cylinder  cylinder;
-    t_triangle  triangle;
-    t_paraboloid paraboloid;
-}   t_object_data;
-
+	t_sphere		sphere;
+	t_plane			plane;
+	t_cylinder		cylinder;
+	t_triangle		triangle;
+	t_paraboloid	paraboloid;
+}					t_object_data;
 
 typedef struct s_object
 {
-    t_object_type      type;
-    t_color            color;
-    double shininess;
-    t_object_data      data;
-    struct s_object    *next;
-    t_pattern            pattern;
-    t_bump_map         bump_map;
-    t_color_texture     color_texture;
+	t_object_type	type;
+	t_color			color;
+	double			shininess;
+	t_object_data	data;
+	struct s_object	*next;
+	t_pattern		pattern;
+	t_bump_map		bump_map;
+	t_color_texture	color_texture;
 
-} t_object;
+}					t_object;
 
 #endif

@@ -18,21 +18,20 @@
 # include "../parsering_utils/parsing_utils.h"
 # include "./objects/object_builder.h"
 
+bool		build_ambient(const t_token *token, t_ambient *ambient);
 
-bool	build_ambient(const t_token *token, t_ambient *ambient);
+bool		build_camera(const t_token *token, t_camera *camera);
 
-bool	build_camera(const t_token *token, t_camera *camera);
+t_light		*build_light(const t_token *token);
 
-t_light *build_light(const t_token *token);
+t_object	*build_object(const t_token *token);
 
-t_object    *build_object(const t_token *token);
+t_scene		*build_scene(t_token *tokens);
 
-t_scene	*build_scene(t_token *tokens);
-
-void	append_object(t_scene *scene, t_object *object);
-bool	add_object_to_scene(t_scene *scene, const t_token *token);
-void	append_light(t_scene *scene, t_light *light);
-bool	add_light_to_scene(t_scene *scene, const t_token *token);
-int	process_scene_token(t_scene *scene, t_token *token);
+void		append_object(t_scene *scene, t_object *object);
+bool		add_object_to_scene(t_scene *scene, const t_token *token);
+void		append_light(t_scene *scene, t_light *light);
+bool		add_light_to_scene(t_scene *scene, const t_token *token);
+int			process_scene_token(t_scene *scene, t_token *token);
 
 #endif

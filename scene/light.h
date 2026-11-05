@@ -11,17 +11,16 @@
 /* ************************************************************************** */
 
 #ifndef LIGHT_H
-#define LIGHT_H
+# define LIGHT_H
 
-#include "../lib_math/lib_math.h"
+# include "../lib_math/lib_math.h"
 
 typedef struct s_light
 {
-    t_point position;
-    double  brightness;
-    t_color color;
-    struct s_light *next;
-} t_light;
+	t_point			position;
+	double			brightness;
+	t_color			color;
+	struct s_light	*next;
+}					t_light;
 
 #endif
-

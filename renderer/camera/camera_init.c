@@ -12,7 +12,7 @@
 
 #include "renderer_camera.h"
 
-int	camera_init(t_camera *camera,int image_width,int image_height)
+int	camera_init(t_camera *camera, int image_width, int image_height)
 {
 	if (!camera)
 	{

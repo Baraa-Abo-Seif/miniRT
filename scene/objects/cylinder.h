@@ -11,16 +11,16 @@
 /* ************************************************************************** */
 
 #ifndef CYLINDER_H
-#define CYLINDER_H
+# define CYLINDER_H
 
-#include "../../lib_math/lib_math.h"
+# include "../../lib_math/lib_math.h"
 
 typedef struct s_cylinder
 {
-    t_point center;
-    t_vec   axis;
-    double  radius;
-    double  height;
-} t_cylinder;
+	t_point	center;
+	t_vec	axis;
+	double	radius;
+	double	height;
+}			t_cylinder;
 
 #endif

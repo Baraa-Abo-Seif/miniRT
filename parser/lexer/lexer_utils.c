@@ -12,16 +12,16 @@
 
 #include "lexer_token.h"
 
-t_token *	cleanup_token(t_token *token)
+t_token	*cleanup_token(t_token *token)
 {
-    if (!token)
-        return  (NULL);
-    if (token->raw_line)
-        free(token->raw_line);
-    if (token->args)
-        free_string_array(token->args);
-    free(token);
-    return (NULL);
+	if (!token)
+		return (NULL);
+	if (token->raw_line)
+		free(token->raw_line);
+	if (token->args)
+		free_string_array(token->args);
+	free(token);
+	return (NULL);
 }
 
 bool	is_blank_line(const char *line)
@@ -68,19 +68,17 @@ t_token	*tokenize_line(const char *line, size_t line_number)
 
 void	append_token(t_token **list, t_token *new_token)
 {
+	t_token	*current;
 
-    t_token *current;
-
-    if (!list || !new_token)
-        return ;
-    if (!*list)
-    {
-        *list = new_token;
-        return ;
-    }
-    current = *list;
-    while (current->next)
-        current = current->next;
-    current->next = new_token;
-    
+	if (!list || !new_token)
+		return ;
+	if (!*list)
+	{
+		*list = new_token;
+		return ;
+	}
+	current = *list;
+	while (current->next)
+		current = current->next;
+	current->next = new_token;
 }

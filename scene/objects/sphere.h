@@ -11,17 +11,14 @@
 /* ************************************************************************** */
 
 #ifndef SPHERE_H
-#define SPHERE_H
+# define SPHERE_H
 
-#include "../../lib_math/lib_math.h"
-
+# include "../../lib_math/lib_math.h"
 
 typedef struct s_sphere
 {
-    t_point center;
-    double  radius;
-} t_sphere;
-
-
+	t_point	center;
+	double	radius;
+}			t_sphere;
 
 #endif

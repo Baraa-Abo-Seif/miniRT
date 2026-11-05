@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #ifndef INTERSECTOR_H
-#define INTERSECTOR_H
+# define INTERSECTOR_H
 
-#include "./cylinder/cylinder_hit.h"
-#include "./hit/hit_record.h"
-#include "./paraboloid/paraboloid_hit.h"
-#include "./plane/plane_hit.h"
-#include "./sphere/sphere_hit.h"
-#include "./triangle/triangle_hit.h"
+# include "./cylinder/cylinder_hit.h"
+# include "./hit/hit_record.h"
+# include "./paraboloid/paraboloid_hit.h"
+# include "./plane/plane_hit.h"
+# include "./sphere/sphere_hit.h"
+# include "./triangle/triangle_hit.h"
 
 #endif

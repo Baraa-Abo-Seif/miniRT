@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/02 18:28:25 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/02 18:28:26 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/05 17:08:03 by ralhoura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pattern.h"
 
-void radial_basis(t_vec axis, t_vec *radial_x, t_vec *radial_z)
+void	radial_basis(t_vec axis, t_vec *radial_x, t_vec *radial_z)
 {
-	t_vec reference;
+	t_vec	reference;
 
 	if (fabs(axis.x) < EPSILON && fabs(axis.z) < EPSILON)
 	{

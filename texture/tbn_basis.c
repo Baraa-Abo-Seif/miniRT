@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "texture.h"
-
 
 t_tbn	sphere_tbn(t_vec normal)
 {
@@ -44,8 +41,6 @@ t_tbn	plane_tbn(t_vec normal)
 	tbn.bitangent = vec_normalize(vec_cross(tbn.normal, tbn.tangent));
 	return (tbn);
 }
-
-
 
 t_tbn	cylinder_tbn(t_vec axis, t_vec normal)
 {

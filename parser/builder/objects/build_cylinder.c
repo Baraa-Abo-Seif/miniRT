@@ -40,4 +40,3 @@ t_object	*build_cylinder(const t_token *token)
 		return (failed_object(object));
 	return (object);
 }
-

@@ -12,9 +12,8 @@
 
 #include "../intersector.h"
 
-
-bool	object_hit(t_object *object, t_ray ray,
-			t_interval interval, t_hit_record *record)
+bool	object_hit(t_object *object, t_ray ray, t_interval interval,
+		t_hit_record *record)
 {
 	if (!object)
 		return (false);

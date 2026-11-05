@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM			= rm -f
 RMDIR		= rm -rf
 
-LIBFT_DIR	= Libft
+LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 MLX_DIR		= mlx
@@ -113,18 +113,18 @@ RENDERER_SRC = renderer/ambient.c \
 	renderer/camera/camera_init.c \
 	renderer/camera/camera_ray.c 
 
-MLX_ENGINE_SRC = mlx_engine/Display/mlx_display_image.c \
-	mlx_engine/Events/mlx_event_close.c \
-	mlx_engine/Events/mlx_event_expose.c \
-	mlx_engine/Events/mlx_event_init.c \
-	mlx_engine/Events/mlx_event_key.c \
-	mlx_engine/Events/mlx_event_loop.c \
-	mlx_engine/Image/mlx_image_create.c \
-	mlx_engine/Image/mlx_image_data.c \
-	mlx_engine/Image/mlx_image_destroy.c \
-	mlx_engine/Pixel/mlx_image_pixel_put.c \
-	mlx_engine/Window/mlx_window_create.c \
-	mlx_engine/Window/mlx_window_destroy.c
+MLX_ENGINE_SRC = mlx_engine/display/mlx_display_image.c \
+	mlx_engine/events/mlx_event_close.c \
+	mlx_engine/events/mlx_event_expose.c \
+	mlx_engine/events/mlx_event_init.c \
+	mlx_engine/events/mlx_event_key.c \
+	mlx_engine/events/mlx_event_loop.c \
+	mlx_engine/image/mlx_image_create.c \
+	mlx_engine/image/mlx_image_data.c \
+	mlx_engine/image/mlx_image_destroy.c \
+	mlx_engine/pixel/mlx_image_pixel_put.c \
+	mlx_engine/window/mlx_window_create.c \
+	mlx_engine/window/mlx_window_destroy.c
 
 
 PATTERN = pattern/helper.c \

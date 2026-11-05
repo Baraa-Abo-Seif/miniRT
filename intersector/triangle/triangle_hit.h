@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle_hit.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/26 19:56:37 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/10/29 16:53:01 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/05 16:33:09 by ralhoura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ typedef struct s_triangle_hit
 	double	u;
 	double	v;
 	double	t;
-}	t_triangle_hit;
+}			t_triangle_hit;
 
 bool	calculate_coordinates(t_ray ray, t_triangle_hit *data);
 bool	calculate_determinant(t_ray ray, t_triangle_hit *data);
-bool	triangle_hit(t_object *object, t_ray ray,
-			t_interval interval, t_hit_record *record);
-			
+bool	triangle_hit(t_object *object, t_ray ray, t_interval interval,
+			t_hit_record *record);
+
 #endif

@@ -11,23 +11,23 @@
 /* ************************************************************************** */
 
 #ifndef CAMERA_H
-#define CAMERA_H
+# define CAMERA_H
 
-#include "../lib_math/lib_math.h"
+# include "../lib_math/lib_math.h"
 
 typedef struct s_camera
 {
-    t_point position;
-    t_vec   forward;
-    double  fov;
-    t_vec   right;
-    t_vec   up;
-    double  viewport_width;
-    double  viewport_height;
-    t_point viewport_upper_left;
-    t_vec   pixel_delta_x;
-    t_vec   pixel_delta_y;
+	t_point	position;
+	t_vec	forward;
+	double	fov;
+	t_vec	right;
+	t_vec	up;
+	double	viewport_width;
+	double	viewport_height;
+	t_point	viewport_upper_left;
+	t_vec	pixel_delta_x;
+	t_vec	pixel_delta_y;
 
-} t_camera;
+}			t_camera;
 
 #endif

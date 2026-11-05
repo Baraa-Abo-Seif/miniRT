@@ -19,6 +19,3 @@ bool	build_ambient(const t_token *token, t_ambient *ambient)
 		return (false);
 	return (parse_color(token->args[1], &ambient->color));
 }
-
-
-

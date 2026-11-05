@@ -36,4 +36,3 @@ t_light	*build_light(const t_token *token)
 	}
 	return (light);
 }
-

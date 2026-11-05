@@ -10,17 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "vector.h"
 
-
-double vec_dot(t_vec a, t_vec b)
+double	vec_dot(t_vec a, t_vec b)
 {
-     double result;
+	double	result;
 
-    result = a.x * b.x + a.y * b.y + a.z * b.z;
-    return (result);
+	result = a.x * b.x + a.y * b.y + a.z * b.z;
+	return (result);
 }
-
-

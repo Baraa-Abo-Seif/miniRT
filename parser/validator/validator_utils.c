@@ -14,25 +14,24 @@
 
 int	get_expected_arg_count(t_token_type type)
 {
-    if (type == TOKEN_AMBIENT)
-        return (2);
-    if (type == TOKEN_CAMERA)
-        return (3);
-    if (type == TOKEN_LIGHT || type == TOKEN_MULTI_LIGHT)
-        return (3);
-    if (type == TOKEN_SPHERE)
-        return (3);
-    if (type == TOKEN_PLANE)
-        return (3);
-    if (type == TOKEN_CYLINDER)
-        return (5);
-    if (type == TOKEN_TRIANGLE)
-        return (4);
-    if (type == TOKEN_PARABOLOID)
-        return (5);
-    return (-1);
+	if (type == TOKEN_AMBIENT)
+		return (2);
+	if (type == TOKEN_CAMERA)
+		return (3);
+	if (type == TOKEN_LIGHT || type == TOKEN_MULTI_LIGHT)
+		return (3);
+	if (type == TOKEN_SPHERE)
+		return (3);
+	if (type == TOKEN_PLANE)
+		return (3);
+	if (type == TOKEN_CYLINDER)
+		return (5);
+	if (type == TOKEN_TRIANGLE)
+		return (4);
+	if (type == TOKEN_PARABOLOID)
+		return (5);
+	return (-1);
 }
-
 
 bool	is_valid_arg_count(t_token_type type, size_t actual_count)
 {
@@ -41,54 +40,50 @@ bool	is_valid_arg_count(t_token_type type, size_t actual_count)
 	expected_count = get_expected_arg_count(type);
 	if (expected_count == -1)
 		return (false);
-	if (type == TOKEN_SPHERE
-		|| type == TOKEN_PLANE
-		|| type == TOKEN_CYLINDER
-        || type == TOKEN_TRIANGLE
-        || type == TOKEN_PARABOLOID)
+	if (type == TOKEN_SPHERE || type == TOKEN_PLANE || type == TOKEN_CYLINDER
+		|| type == TOKEN_TRIANGLE || type == TOKEN_PARABOLOID)
 	{
-		if (actual_count >= (size_t)expected_count && actual_count <= (size_t)(expected_count +5))
+		if (actual_count >= (size_t)expected_count
+			&& actual_count <= (size_t)(expected_count + 5))
 			return (true);
 		return (false);
 	}
 	return (actual_count == (size_t)expected_count);
 }
 
-
-bool	update_scene_counts( t_scene_counts *counts, t_token *token)
+bool	update_scene_counts(t_scene_counts *counts, t_token *token)
 {
-    if (token->type == TOKEN_AMBIENT)
-    {
-        counts->ambient++;
-        if (counts->ambient > 1)
-            return (error_msg_line(token->line_number,
-	            "Multiple ambient lights are not allowed."));
-    }
-    if (token->type == TOKEN_CAMERA)
-    {
-        counts->camera++;
-        if (counts->camera > 1)
-            return (error_msg_line(token->line_number,
-	            "Multiple cameras are not allowed."));
-    }
-    if (token->type == TOKEN_LIGHT)
-    {
-        counts->light++;
-        if (counts->light > 1)
-            return (error_msg_line(token->line_number,
-	            "Multiple lights are not allowed."));
-    }
-    return (true);
+	if (token->type == TOKEN_AMBIENT)
+	{
+		counts->ambient++;
+		if (counts->ambient > 1)
+			return (error_msg_line(token->line_number,
+					"Multiple ambient lights are not allowed."));
+	}
+	if (token->type == TOKEN_CAMERA)
+	{
+		counts->camera++;
+		if (counts->camera > 1)
+			return (error_msg_line(token->line_number,
+					"Multiple cameras are not allowed."));
+	}
+	if (token->type == TOKEN_LIGHT)
+	{
+		counts->light++;
+		if (counts->light > 1)
+			return (error_msg_line(token->line_number,
+					"Multiple lights are not allowed."));
+	}
+	return (true);
 }
 
- bool	validate_required_scene_objects( t_scene_counts *counts)
+bool	validate_required_scene_objects(t_scene_counts *counts)
 {
-    if (counts->ambient == 0)
-        return (error_msg("Scene must contain at least one ambient light."));
-    if (counts->camera == 0)
-        return (error_msg("Scene must contain at least one camera."));
-    if (counts->light == 0)
-        return (error_msg("Scene must contain at least one light."));
-
-    return (true);
+	if (counts->ambient == 0)
+		return (error_msg("Scene must contain at least one ambient light."));
+	if (counts->camera == 0)
+		return (error_msg("Scene must contain at least one camera."));
+	if (counts->light == 0)
+		return (error_msg("Scene must contain at least one light."));
+	return (true);
 }

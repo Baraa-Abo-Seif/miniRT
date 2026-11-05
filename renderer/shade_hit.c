@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   shade_hit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: babo-sai <babo-sai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ralhoura <ralhoura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/02 18:41:21 by babo-sai          #+#    #+#             */
-/*   Updated: 2026/11/02 18:41:22 by babo-sai         ###   ########.fr       */
+/*   Updated: 2026/11/05 15:58:32 by ralhoura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "renderer.h"
 
-t_color	shade_with_lights(t_object *object,
-		t_hit_record *record, t_scene *scene, t_color base_color)
+t_color	shade_with_lights(t_object *object, t_hit_record *record,
+		t_scene *scene, t_color base_color)
 {
 	t_light	*light;
 	t_color	final_color;
@@ -39,23 +39,24 @@ t_color	get_checker_color(t_object *object, t_point local_p)
 		return (sphere_checker_at(&object->pattern, local_p));
 	if (object->type == CYLINDER)
 		return (cylinder_checker_at_axis(&object->pattern, local_p,
-				object->data.cylinder.axis,object->data.cylinder.height));
+				object->data.cylinder.axis, object->data.cylinder.height));
 	if (object->type == PLANE)
 		return (plane_checker_at(&object->pattern, local_p,
 				object->data.plane.normal));
 	if (object->type == TRIANGLE)
 		return (triangle_checker_at_normal(&object->pattern, local_p,
-			vec_normalize(vec_cross(point_sub_point(
-				object->data.triangle.point_b,object->data.triangle.point_a),
-				 point_sub_point(object->data.triangle.point_c,
-					object->data.triangle.point_a)))));
+				vec_normalize(vec_cross(
+						point_sub_point(object->data.triangle.point_b,
+							object->data.triangle.point_a),
+						point_sub_point(object->data.triangle.point_c,
+							object->data.triangle.point_a)))));
 	if (object->type == PARABOLOID)
 		return (paraboloid_checker_at_axis(&object->pattern, local_p,
-				object->data.paraboloid.axis,
-				object->data.paraboloid.height));
+				object->data.paraboloid.axis, object->data.paraboloid.height));
 	if (object->pattern.type == PATTERN_CHECKER)
-        return (plane_checker_at(&object->pattern, local_p, (t_vec){0.0, 1.0, 0.0}));
-    return (object->pattern.color_a);
+		return (plane_checker_at(&object->pattern, local_p, (t_vec){0.0, 1.0,
+				0.0}));
+	return (object->pattern.color_a);
 }
 
 t_point	pattern_point(t_object *object, t_point point)
@@ -87,28 +88,25 @@ t_uv	get_object_uv(t_object *object, t_point point)
 				object->data.plane.normal));
 	if (object->type == CYLINDER)
 		return (cylinder_uv(point, object->data.cylinder.center,
-				object->data.cylinder.axis,
-				object->data.cylinder.height));
+				object->data.cylinder.axis, object->data.cylinder.height));
 	if (object->type == TRIANGLE)
 		return (triangle_uv(point, object->data.triangle.point_a,
-				object->data.triangle.point_b,
-				object->data.triangle.point_c));
+				object->data.triangle.point_b, object->data.triangle.point_c));
 	return (paraboloid_uv(point, object->data.paraboloid.vertex,
-			object->data.paraboloid.axis,
-			object->data.paraboloid.height));
+			object->data.paraboloid.axis, object->data.paraboloid.height));
 }
 
 t_color	shade_hit(t_hit_record *record, t_scene *scene)
 {
 	t_object	*object;
 	t_color		base_color;
-	t_point	local_p;
+	t_point		local_p;
 
 	object = (t_object *)record->object;
 	base_color = object->color;
 	if (object->color_texture.is_active)
-		texture_color_at(&object->color_texture.texture,
-			get_object_uv(object, record->point), &base_color);
+		texture_color_at(&object->color_texture.texture, get_object_uv(object,
+				record->point), &base_color);
 	if (object->pattern.type == PATTERN_CHECKER)
 	{
 		local_p = pattern_point(object, record->point);

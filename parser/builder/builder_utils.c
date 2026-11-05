@@ -14,19 +14,19 @@
 
 void	append_object(t_scene *scene, t_object *object)
 {
-    t_object	*current;
+	t_object	*current;
 
-    if (!scene || !object)
-        return ;
-    if (!scene->objects)
-    {
-        scene->objects = object;
-        return ;
-    }
-    current = scene->objects;
-    while (current->next)
-        current = current->next;
-    current->next = object;
+	if (!scene || !object)
+		return ;
+	if (!scene->objects)
+	{
+		scene->objects = object;
+		return ;
+	}
+	current = scene->objects;
+	while (current->next)
+		current = current->next;
+	current->next = object;
 }
 
 bool	add_object_to_scene(t_scene *scene, const t_token *token)
@@ -44,19 +44,19 @@ bool	add_object_to_scene(t_scene *scene, const t_token *token)
 
 void	append_light(t_scene *scene, t_light *light)
 {
-    t_light	*current;
+	t_light	*current;
 
-    if (!scene || !light)
-        return ;
-    if (!scene->lights)
-    {
-        scene->lights = light;
-        return ;
-    }
-    current = scene->lights;
-    while (current->next)
-        current = current->next;
-    current->next = light;
+	if (!scene || !light)
+		return ;
+	if (!scene->lights)
+	{
+		scene->lights = light;
+		return ;
+	}
+	current = scene->lights;
+	while (current->next)
+		current = current->next;
+	current->next = light;
 }
 
 bool	add_light_to_scene(t_scene *scene, const t_token *token)
@@ -78,8 +78,7 @@ int	process_scene_token(t_scene *scene, t_token *token)
 		return (build_ambient(token, &scene->ambient));
 	else if (token->type == TOKEN_CAMERA)
 		return (build_camera(token, &scene->camera));
-	else if (token->type == TOKEN_LIGHT
-		|| token->type == TOKEN_MULTI_LIGHT)
+	else if (token->type == TOKEN_LIGHT || token->type == TOKEN_MULTI_LIGHT)
 		return (add_light_to_scene(scene, token));
 	return (add_object_to_scene(scene, token));
 }

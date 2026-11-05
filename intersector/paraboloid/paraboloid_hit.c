@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "paraboloid_hit.h"
+#include "paraboloid_hit.h"
 
-bool	valid_root(t_paraboloid *paraboloid, t_ray ray,
-		t_interval interval, double root)
+bool	valid_root(t_paraboloid *paraboloid, t_ray ray, t_interval interval,
+		double root)
 {
 	t_vec	from_vertex;
 	double	axis_distance;
@@ -25,8 +25,7 @@ bool	valid_root(t_paraboloid *paraboloid, t_ray ray,
 	return (axis_distance >= 0.0 && axis_distance <= paraboloid->height);
 }
 
-t_vec	to_local(t_vec value, t_vec axis,
-		t_vec side, t_vec other_side)
+t_vec	to_local(t_vec value, t_vec axis, t_vec side, t_vec other_side)
 {
 	return ((t_vec){vec_dot(value, side), vec_dot(value, other_side),
 		vec_dot(value, axis)});
@@ -47,18 +46,17 @@ void	calculate_equation_paraboloid(t_paraboloid_data data,
 		reference = (t_vec){0.0, 1.0, 0.0};
 	side = vec_normalize(vec_cross(data.paraboloid->axis, reference));
 	other_side = vec_cross(data.paraboloid->axis, side);
-	origin = to_local(point_sub_point(data.ray.origin,
-				data.paraboloid->vertex), data.paraboloid->axis,
-			side, other_side);
-	direction = to_local(data.ray.direction, data.paraboloid->axis,
-			side, other_side);
+	origin = to_local(point_sub_point(data.ray.origin, data.paraboloid->vertex),
+			data.paraboloid->axis, side, other_side);
+	direction = to_local(data.ray.direction, data.paraboloid->axis, side,
+			other_side);
 	equation->a = direction.x * direction.x + direction.y * direction.y;
-	equation->b = 2.0 * (origin.x * direction.x + origin.y * direction.y)
-		- 2.0 * data.coefficient * direction.z;
-	equation->c = origin.x * origin.x + origin.y * origin.y
-		- 2.0 * data.coefficient * origin.z;
-	equation->discriminant = equation->b * equation->b
-		- 4.0 * equation->a * equation->c;
+	equation->b = 2.0 * (origin.x * direction.x + origin.y * direction.y) - 2.0
+		* data.coefficient * direction.z;
+	equation->c = origin.x * origin.x + origin.y * origin.y - 2.0
+		* data.coefficient * origin.z;
+	equation->discriminant = equation->b * equation->b - 4.0 * equation->a
+		* equation->c;
 }
 
 bool	paraboloid_find_root(t_paraboloid_data data, double *root)
@@ -71,8 +69,7 @@ bool	paraboloid_find_root(t_paraboloid_data data, double *root)
 		if (fabs(equation.b) < EPSILON)
 			return (false);
 		*root = -equation.c / equation.b;
-		return (valid_root(data.paraboloid, data.ray,
-				data.interval, *root));
+		return (valid_root(data.paraboloid, data.ray, data.interval, *root));
 	}
 	if (equation.discriminant < 0.0)
 		return (false);
@@ -84,18 +81,18 @@ bool	paraboloid_find_root(t_paraboloid_data data, double *root)
 	return (valid_root(data.paraboloid, data.ray, data.interval, *root));
 }
 
-bool	paraboloid_hit(t_object *object, t_ray ray,
-		t_interval interval, t_hit_record *record)
+bool	paraboloid_hit(t_object *object, t_ray ray, t_interval interval,
+		t_hit_record *record)
 {
 	t_paraboloid		*paraboloid;
 	t_paraboloid_data	data;
-	t_vec	from_vertex;
+	t_vec				from_vertex;
 	double				coefficient;
 	double				root;
 
 	paraboloid = &object->data.paraboloid;
-	coefficient = (paraboloid->radius * paraboloid->radius)
-		/ (2.0 * paraboloid->height);
+	coefficient = (paraboloid->radius * paraboloid->radius) / (2.0
+			* paraboloid->height);
 	data.paraboloid = paraboloid;
 	data.ray = ray;
 	data.interval = interval;
@@ -105,9 +102,10 @@ bool	paraboloid_hit(t_object *object, t_ray ray,
 	record->t = root;
 	record->point = ray_at(ray, root);
 	from_vertex = point_sub_point(record->point, paraboloid->vertex);
-	record->normal = (vec_normalize(vec_sub(vec_sub(from_vertex, 
-		vec_scale(paraboloid->axis, vec_dot(from_vertex, paraboloid->axis))),
-		vec_scale(paraboloid->axis, coefficient))));
+	record->normal = (vec_normalize(vec_sub(vec_sub(from_vertex,
+						vec_scale(paraboloid->axis, vec_dot(from_vertex,
+								paraboloid->axis))), vec_scale(paraboloid->axis,
+						coefficient))));
 	hit_record_set_face_normal(record, ray, record->normal);
 	record->object = object;
 	return (true);

@@ -13,11 +13,11 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "./builder/builder.h"
-#include "./converter/converter.h"
-#include "./lexer/lexer_token.h"
-#include "./parsering_utils/parsing_utils.h"
-#include "./validator/validator.h"
+# include "./builder/builder.h"
+# include "./converter/converter.h"
+# include "./lexer/lexer_token.h"
+# include "./parsering_utils/parsing_utils.h"
+# include "./validator/validator.h"
 
 t_scene	*parse_scene(const char *filename);
 

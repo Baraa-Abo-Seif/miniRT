@@ -52,10 +52,10 @@ t_vec	bump_perturb_normal(const t_bump_map *bump, t_tbn tbn, t_uv uv)
 			- bump_sample_height(&bump->texture, uv.u - delta_u, uv.v));
 	grad_v = (bump_sample_height(&bump->texture, uv.u, uv.v + delta_v)
 			- bump_sample_height(&bump->texture, uv.u, uv.v - delta_v));
-	perturbed = vec_sub(tbn.normal,
-			vec_scale(tbn.tangent, grad_u * bump->intensity * 2.0));
-	perturbed = vec_sub(perturbed,
-			vec_scale(tbn.bitangent, grad_v * bump->intensity * 2.0));
+	perturbed = vec_sub(tbn.normal, vec_scale(tbn.tangent, grad_u
+				* bump->intensity * 2.0));
+	perturbed = vec_sub(perturbed, vec_scale(tbn.bitangent, grad_v
+				* bump->intensity * 2.0));
 	return (vec_normalize(perturbed));
 }
 

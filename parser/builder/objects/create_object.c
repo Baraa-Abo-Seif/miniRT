@@ -12,15 +12,15 @@
 
 #include "./object_builder.h"
 
-t_object	*create_object()
+t_object	*create_object(void)
 {
-    t_object	*object;
+	t_object	*object;
 
-    object =  ft_calloc(sizeof(t_object),1);
-    if (!object)
-    {
-        error_msg("Failed to create object");
-        return (NULL);
-    }
-    return (object);
+	object = ft_calloc(sizeof(t_object), 1);
+	if (!object)
+	{
+		error_msg("Failed to create object");
+		return (NULL);
+	}
+	return (object);
 }

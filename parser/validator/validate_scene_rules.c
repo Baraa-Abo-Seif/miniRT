@@ -14,22 +14,20 @@
 
 bool	validate_scene_rules(t_token *tokens)
 {
-    t_scene_counts	counts;
-    t_token		*current;
+	t_scene_counts	counts;
+	t_token			*current;
 
-    counts.ambient = 0;
-    counts.camera = 0;
-    counts.light = 0;
-    current = tokens;
-    while (current)
-    {
-        if (!update_scene_counts(&counts, current))
-            return (false);
-        current = current->next;
-    }
-    if (!validate_required_scene_objects(&counts))
-        return (false);
-    return (true);
+	counts.ambient = 0;
+	counts.camera = 0;
+	counts.light = 0;
+	current = tokens;
+	while (current)
+	{
+		if (!update_scene_counts(&counts, current))
+			return (false);
+		current = current->next;
+	}
+	if (!validate_required_scene_objects(&counts))
+		return (false);
+	return (true);
 }
-
-

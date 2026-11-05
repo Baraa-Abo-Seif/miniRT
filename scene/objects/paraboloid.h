@@ -21,6 +21,6 @@ typedef struct s_paraboloid
 	t_vec	axis;
 	double	radius;
 	double	height;
-}	t_paraboloid;
+}			t_paraboloid;
 
 #endif

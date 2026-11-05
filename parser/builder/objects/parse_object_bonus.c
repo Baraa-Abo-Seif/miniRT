@@ -12,7 +12,7 @@
 
 #include "./object_builder.h"
 
-void parse_checker_pattern(t_object *object, char *const *args, size_t *i)
+void	parse_checker_pattern(t_object *object, char *const *args, size_t *i)
 {
 	t_color	color_a;
 	t_color	color_b;
@@ -22,10 +22,10 @@ void parse_checker_pattern(t_object *object, char *const *args, size_t *i)
 		if (args[*i + 1])
 			(*i)++;
 		error_msg("Checker pattern requires two colors as arguments");
-		return;
+		return ;
 	}
-	if (!parse_color(args[*i + 1], &color_a)
-		 || !parse_color(args[*i + 2], &color_b))
+	if (!parse_color(args[*i + 1], &color_a) || !parse_color(args[*i + 2],
+			&color_b))
 	{
 		error_msg("Failed to parse colors for checker pattern");
 		*i += 2;
@@ -57,28 +57,28 @@ void	parse_bump_map(t_object *object, const char *arg)
 	parts = ft_split(arg + 4, ',');
 	if (!parts || !parts[0] || !parts[0][0])
 		return (failled_massage("Failed to parse bump map: missing filepath",
-			 parts));
+				parts));
 	object->bump_map.filepath = ft_strdup(parts[0]);
 	if (!object->bump_map.filepath)
 		return (failled_massage("Failed to allocate for bump map filepath",
-			 parts));
+				parts));
 	object->bump_map.is_active = true;
 	object->bump_map.intensity = DEFAULT_BUMP_INTENSITY;
 	if (parts[1])
 	{
 		object->bump_map.intensity = ft_atof(parts[1]);
 		if (!check_positive(object->bump_map.intensity))
-			return (failled_massage(NULL,parts));
+			return (failled_massage(NULL, parts));
 	}
 	free_string_array(parts);
 }
 
-bool	parse_object_bonus(t_object *object,
-			const t_token *token, size_t color_index)
+bool	parse_object_bonus(t_object *object, const t_token *token,
+		size_t color_index)
 {
 	size_t	i;
 
-	i = color_index ;
+	i = color_index;
 	while (token->args[++i])
 	{
 		if (ft_strncmp(token->args[i], "bum:", 4) == 0)

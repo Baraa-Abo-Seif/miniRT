@@ -14,8 +14,8 @@
 
 void	render(t_scene *scene, t_image *image)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < image->height)
@@ -23,8 +23,9 @@ void	render(t_scene *scene, t_image *image)
 		x = 0;
 		while (x < image->width)
 		{
-			mlx_image_pixel_put(image,x,y,color_to_hex(ray_color(
-				camera_generate_ray(&scene->camera, x, y), scene)));
+			mlx_image_pixel_put(image, x, y,
+				color_to_hex(ray_color(camera_generate_ray(&scene->camera, x,
+							y), scene)));
 			x++;
 		}
 		y++;

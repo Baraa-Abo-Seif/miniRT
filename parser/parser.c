@@ -34,4 +34,3 @@ t_scene	*parse_scene(const char *filename)
 	destroy_token_list(tokens);
 	return (scene);
 }
-

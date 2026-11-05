@@ -14,39 +14,39 @@
 
 void	destroy_object_list(t_object *objects)
 {
-    t_object	*current;
-    t_object	*next;
+	t_object	*current;
+	t_object	*next;
 
-    current = objects;
-    while (current)
-    {
-        next = current->next;
-        bump_map_destroy(NULL, &current->bump_map);
-        color_texture_destroy(NULL, &current->color_texture);
-        free(current);
-        current = next;
-    }
+	current = objects;
+	while (current)
+	{
+		next = current->next;
+		bump_map_destroy(NULL, &current->bump_map);
+		color_texture_destroy(NULL, &current->color_texture);
+		free(current);
+		current = next;
+	}
 }
 
 void	destroy_light_list(t_light *lights)
 {
-    t_light	*current;
-    t_light	*next;
+	t_light	*current;
+	t_light	*next;
 
-    current = lights;
-    while (current)
-    {
-        next = current->next;
-        free(current);
-        current = next;
-    }
+	current = lights;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
 }
 
 void	destroy_scene(t_scene *scene)
 {
-    if (!scene)
-        return ;
-    destroy_light_list(scene->lights);
-    destroy_object_list(scene->objects);
-    free(scene);
+	if (!scene)
+		return ;
+	destroy_light_list(scene->lights);
+	destroy_object_list(scene->objects);
+	free(scene);
 }
